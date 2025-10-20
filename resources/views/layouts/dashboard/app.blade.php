@@ -12,9 +12,10 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 
 
 
-
 {{-- content --}}
+ 
 
+  @yield('content')
 
 
 
