@@ -18,9 +18,16 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+      'first_name',
+        'last_name',
         'email',
         'password',
+        'phone',
+        'address',
+        'city',
+        'image',
+        'is_verified',
+        'user_type',
     ];
 
     /**
@@ -45,4 +52,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+ public function otps() { return $this->hasMany(Otp::class); }
+    public function carts() { return $this->hasMany(Cart::class); }
+    public function orders() { return $this->hasMany(Order::class); }
+    public function favourites() { return $this->hasMany(Favourite::class); }
+    public function reviews() { return $this->hasMany(Review::class); }
+    public function contacts() { return $this->hasMany(Contact::class); }
+
 }
