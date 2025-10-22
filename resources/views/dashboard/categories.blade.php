@@ -1,7 +1,7 @@
 @extends('layouts.dashboard.app')
 
 @section('title')
-table title
+Categories
 
 @endsection
 

@@ -1,7 +1,7 @@
 @extends('layouts.dashboard.app')
 
 @section('title')
-table title
+SubCategories
 
 @endsection
 
@@ -39,7 +39,7 @@ table title
 
                                     </tr>
                                 </thead>
-                               <tbody>
+                                <tbody>
                                     <tr>
                                         <td>Tiger Nixon</td>
                                         <td>System Architect</td>

@@ -48,3 +48,24 @@ Route::get('form', function () {
 Route::get('table', function () {
     return view('dashboard.table');
 });
+
+
+
+//show allcategories
+Route::get('categories', function () {
+    return view('dashboard.categories');
+});
+
+
+//show all subcategories
+Route::get('subCategories', function () {
+    return view('dashboard.subCategories');
+});
+
+
+
+//show all products
+Route::get('products', function () {
+    return view('dashboard.products');
+});
+    
