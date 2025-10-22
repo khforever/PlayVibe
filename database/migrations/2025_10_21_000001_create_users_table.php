@@ -15,8 +15,9 @@ return new class extends Migration {
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->boolean('is_verified')->default(false);
-            $table->string('user_type')->default('user');
+            $table->integer('user_type');
             $table->string('image')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
