@@ -68,4 +68,35 @@ Route::get('subCategories', function () {
 Route::get('products', function () {
     return view('dashboard.products');
 });
-    
+
+
+//add new category  addSubCategory
+Route::get('addSubCategory', function () {
+    return view('dashboard.addSubCategory');
+});
+//add new user
+Route::get('addUser', function () {
+    return view('dashboard.addUser');
+});
+
+//add new attributes
+Route::get('addAttribute', function () {
+    return view('dashboard.addAttribute');
+});
+
+
+//add new category  addCategory
+Route::get('addCategory', function () {
+    return view('dashboard.addCategory');
+});
+
+//add new product
+Route::get('addProduct', function () {
+    return view('dashboard.addProduct');
+});
+
+
+//add new review
+Route::get('addReview', function () {
+    return view('dashboard.addReview');
+}); 
