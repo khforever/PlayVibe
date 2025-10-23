@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Models;
-
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -10,7 +8,6 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
-
 class User extends Authenticatable implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -18,7 +15,6 @@ class User extends Authenticatable implements HasMedia
     use InteractsWithMedia;
      use SoftDeletes;
      
-
     /**
      * The attributes that are mass assignable.
      *
@@ -37,7 +33,6 @@ class User extends Authenticatable implements HasMedia
         'user_type',
         
     ];
-
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -47,7 +42,6 @@ class User extends Authenticatable implements HasMedia
         'password',
         'remember_token',
     ];
-
     /**
      * Get the attributes that should be cast.
      *
@@ -60,7 +54,6 @@ class User extends Authenticatable implements HasMedia
             'password' => 'hashed',
         ];
     }
-
  public function otps() 
  { return $this->hasMany(Otp::class); 
   }
@@ -68,7 +61,6 @@ class User extends Authenticatable implements HasMedia
     { 
         return $this->hasMany(Cart::class); 
     }
-
     public function orders()
      { 
         return $this->hasMany(Order::class); 
@@ -85,5 +77,4 @@ class User extends Authenticatable implements HasMedia
     {
          return $this->hasMany(Contact::class);
          }
-
 }
