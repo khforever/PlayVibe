@@ -88,7 +88,8 @@ Route::get('addAttribute', function () {
 //add new category  addCategory
 Route::get('addCategory', function () {
     return view('dashboard.addCategory');
-});
+})->name('dashboard.addCategory');
+
 
 //add new product
 Route::get('addProduct', function () {
@@ -99,4 +100,4 @@ Route::get('addProduct', function () {
 //add new review
 Route::get('addReview', function () {
     return view('dashboard.addReview');
-}); 
+});

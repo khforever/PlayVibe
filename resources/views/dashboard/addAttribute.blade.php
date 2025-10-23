@@ -29,7 +29,7 @@ form
           <p><h2>Product Attributes Form</h2></p>
         </div>
 
-        <form class="form" action="" method="POST" enctype="multipart/form-data" style="direction: ltr; text-align: left;">
+        <form class="form" action="  " method="POST" enctype="multipart/form-data" style="direction: ltr; text-align: left;">
           @csrf
           <div class="form-body">
             <h4 class="form-section"><i class="la la-cube"></i> Attribute Details</h4>
