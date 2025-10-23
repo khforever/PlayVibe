@@ -157,7 +157,7 @@ public function verifyEmailOtp(VerifyEmailOtp $request)
      
 }
 
-
+//ok
 //reset password
 public function resetpassword(ResetPassword $request)
 {
