@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->boolean('is_verified')->default(false);
             $table->string('user_type')->default('user');
             $table->string('image')->nullable();
+             $table->softDeletes(); // Adds deleted_at column
             $table->timestamps();
         });
     }
