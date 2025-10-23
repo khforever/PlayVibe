@@ -7,17 +7,41 @@ use League\Fractal\TransformerAbstract;
 
 class UserTransform extends TransformerAbstract
 {
-    public function transform(User $user)
+    /**
+     * List of resources to automatically include
+     *
+     * @var array
+     */
+    protected array $defaultIncludes = [
+        //
+    ];
+    
+    /**
+     * List of resources possible to include
+     *
+     * @var array
+     */
+    protected array $availableIncludes = [
+        //
+    ];
+    
+    /**
+     * A Fractal transformer.
+     *
+     * @return array
+     */
+    public function transform(User $user):array
     {
         return [
             'id' => $user->id,
-            'name' => $user->name,
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
             'email' => $user->email,
-            'image' => $user->image ? asset($user->image) : null,
-            'phone' => $user->phone ?? null,
-            'is_verified' => $user->is_verified,
-            'created_at' => $user->created_at ? $user->created_at->toDateTimeString() : null,
-            'updated_at' => $user->updated_at ? $user->updated_at->toDateTimeString() : null,
+            'phone' => $user->phone,
+            'address' => $user->address,
+            'city'=>$user->city,
+            'image' => $user->getFirstMediaUrl('image') ?: asset('storage/default.png'),
+            'user_type' => $user->user_type,
         ];
     }
 }

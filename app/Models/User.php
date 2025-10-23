@@ -4,14 +4,20 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
-// use SoftDeletes;
-class User extends Authenticatable
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\HasMedia;
+
+class User extends Authenticatable implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable,SoftDeletes;
+    use HasFactory, Notifiable,HasApiTokens;
+    use InteractsWithMedia;
+     use SoftDeletes;
+     
 
     /**
      * The attributes that are mass assignable.
@@ -28,7 +34,8 @@ class User extends Authenticatable
         'city',
         'image',
         'is_verified',
-        // 'user_type',
+        'user_type',
+        
     ];
 
     /**
@@ -54,11 +61,29 @@ class User extends Authenticatable
         ];
     }
 
- public function otps() { return $this->hasMany(Otp::class); }
-    public function carts() { return $this->hasMany(Cart::class); }
-    public function orders() { return $this->hasMany(Order::class); }
-    public function favourites() { return $this->hasMany(Favourite::class); }
-    public function reviews() { return $this->hasMany(Review::class); }
-    public function contacts() { return $this->hasMany(Contact::class); }
+ public function otps() 
+ { return $this->hasMany(Otp::class); 
+  }
+    public function carts() 
+    { 
+        return $this->hasMany(Cart::class); 
+    }
+
+    public function orders()
+     { 
+        return $this->hasMany(Order::class); 
+    }
+    public function favourites() 
+    { 
+        return $this->hasMany(Favourite::class);
+     }
+    public function reviews() 
+    {
+         return $this->hasMany(Review::class); 
+        }
+    public function contacts() 
+    {
+         return $this->hasMany(Contact::class);
+         }
 
 }

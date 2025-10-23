@@ -33,7 +33,7 @@ class RegisterRequest extends FormRequest
         'address'      => ['nullable', 'string'],
         'city'         => ['nullable', 'string'],
         'image'        => ['nullable', 'image', 'max:2048'],
-        // 'user_type' => ['required', 'integer', Rule::in(array_column(UserType::cases(), 'value'))],
+        'user_type' => ['required', 'integer', Rule::in(array_column(UserType::cases(), 'value'))],
         ];
     }
 }
