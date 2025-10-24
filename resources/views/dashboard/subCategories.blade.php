@@ -26,9 +26,23 @@ SubCategories
                             </ul>
                         </div>
                     </div>
+
+
+
+<div class="card-header d-flex justify-content-between align-items-center">
+    <h4 class="card-title mb-0">subcategory</h4>
+    <a href=" " class="btn btn-primary">
+        <i class="la la-plus"></i> Add subcategory
+    </a>
+</div>
+
+
+
+
+
                     <div class="card-content collapse show">
                         <div class="card-body card-dashboard">
-                            <p class="card-text">Each column has categories</p>
+                            <p class="card-text">Each column has subcategory</p>
                             <table class="table table-striped table-bordered column-rendering">
                                 <thead>
                                     <tr>

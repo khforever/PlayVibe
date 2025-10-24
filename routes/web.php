@@ -101,3 +101,22 @@ Route::get('addProduct', function () {
 Route::get('addReview', function () {
     return view('dashboard.addReview');
 });
+
+//show all users
+Route::get('users', function () {
+    return view('dashboard.users');
+});
+
+Route::get('editUser', function () {
+    return view('dashboard.editUser');
+});
+
+// edit category
+Route::get('editCategory', function () {
+    return view('dashboard.editCategory');
+});
+
+// edit subcategory
+Route::get('editSubCategory', function (){
+    return view('dashboard.editSubCategory');
+});

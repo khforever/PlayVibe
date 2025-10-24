@@ -9,6 +9,14 @@ Categories
 @section('content')
 <div class="app-content content">
 
+
+
+
+ 
+
+
+
+
     <!-- Column rendering table -->
     <section id="column">
         <div class="row">
@@ -26,6 +34,22 @@ Categories
                             </ul>
                         </div>
                     </div>
+
+
+
+
+<div class="card-header d-flex justify-content-between align-items-center">
+    <h4 class="card-title mb-0">Categories</h4>
+    <a href=" " class="btn btn-primary">
+        <i class="la la-plus"></i> Add Category
+    </a>
+</div>
+
+
+
+
+
+
                     <div class="card-content collapse show">
                         <div class="card-body card-dashboard">
                             <p class="card-text">Each column has categories</p>

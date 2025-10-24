@@ -1,18 +1,17 @@
 @extends('layouts.dashboard.app')
 
 @section('title')
-Add New Subcategory
+Edit Subcategory
 @endsection
 
 @section('content')
 <div class="app-content content">
-    <section id="add-subcategory">
+    <section id="edit-subcategory">
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Add New Subcategory</h4>
-                        <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
+                        <h4 class="card-title">Edit Subcategory Information</h4>
                         <div class="heading-elements">
                             <ul class="list-inline mb-0">
                                 <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
@@ -25,46 +24,58 @@ Add New Subcategory
 
                     <div class="card-content collapse show">
                         <div class="card-body">
+                            <div class="card-text mb-2">
+                                <h2>Subcategory Details</h2>
+                                <p>Update the details of the selected subcategory below.</p>
+                            </div>
+
                             <form class="form" method="POST" action="#" enctype="multipart/form-data">
                                 @csrf
+                                @method('PUT')
+
                                 <div class="form-body">
-                                    <h4 class="form-section"><i class="la la-sitemap"></i> Subcategory Information</h4>
+                                    <h4 class="form-section"><i class="la la-tags"></i> Subcategory Information</h4>
 
                                     {{-- Category Selection --}}
                                     <div class="form-group">
-                                        <label for="category">Parent Category</label>
-                                        <select id="category" name="category_id" class="form-control" required>
+                                        <label for="category_id">Main Category</label>
+                                        <select id="category_id" name="category_id" class="form-control border-primary" required>
                                             <option value="">-- Select Category --</option>
-                                            <option value="1">Electronics</option>
-                                            <option value="2">Clothing</option>
-                                            <option value="3">Home & Furniture</option>
-                                            {{-- Replace with dynamic data from controller --}}
+                                            {{-- Example static options --}}
+                                            <option value="1" selected>Bags</option>
+                                            <option value="2">Shoes</option>
                                         </select>
                                     </div>
 
                                     {{-- Subcategory Name --}}
                                     <div class="form-group">
-                                        <label for="subcategoryName">Subcategory Name</label>
-                                        <input type="text" id="subcategoryName" class="form-control" name="name" placeholder="Enter subcategory name" required>
+                                        <label for="name">Subcategory Name</label>
+                                        <input type="text" id="name" name="name" class="form-control border-primary"
+                                            placeholder="Enter subcategory name" value="Handbags" required>
                                     </div>
 
                                     {{-- Subcategory Image --}}
                                     <div class="form-group">
-                                        <label for="subcategoryImage">Subcategory Image</label>
-                                        <input type="file" id="subcategoryImage" class="form-control-file" name="image" accept="image/*">
-                                        <small class="text-muted">Optional — upload an image for this subcategory.</small>
+                                        <label for="image">Subcategory Image</label>
+                                        <input type="file" id="image" name="image" class="form-control border-primary">
+                                        <small class="form-text text-muted">Leave blank to keep current image.</small>
+
+                                        <div class="mt-1">
+                                            <img src="/images/subcategories/handbags.jpg" alt="Current Image" width="100" class="rounded">
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-actions">
-                                    <button type="reset" class="btn btn-warning mr-1">
+                                    <button type="button" class="btn btn-warning mr-1">
                                         <i class="ft-x"></i> Cancel
                                     </button>
                                     <button type="submit" class="btn btn-primary">
-                                        <i class="la la-check-square-o"></i> Save
+                                        <i class="la la-check-square-o"></i> Update
                                     </button>
                                 </div>
                             </form>
+
                         </div>
                     </div>
                 </div>

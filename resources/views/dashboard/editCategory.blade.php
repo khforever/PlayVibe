@@ -1,17 +1,17 @@
 @extends('layouts.dashboard.app')
 
 @section('title')
-Add New Category
+Edit Category
 @endsection
 
 @section('content')
 <div class="app-content content">
-    <section id="add-category">
+    <section id="edit-category">
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Add New Category</h4>
+                        <h4 class="card-title">Edit Category Information</h4>
                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                         <div class="heading-elements">
                             <ul class="list-inline mb-0">
@@ -27,28 +27,31 @@ Add New Category
                         <div class="card-body">
                             <form class="form" method="POST" action="#" enctype="multipart/form-data">
                                 <div class="form-body">
-                                    <h4 class="form-section"><i class="la la-list"></i> Category Information</h4>
+                                    <h4 class="form-section"><i class="la la-list"></i> Category Details</h4>
 
                                     {{-- Category Name --}}
                                     <div class="form-group">
                                         <label for="categoryName">Category Name</label>
-                                        <input type="text" id="categoryName" class="form-control" placeholder="Enter category name" name="name" required>
+                                        <input type="text" id="categoryName" class="form-control" name="name" placeholder="Enter category name" value="Electronics">
                                     </div>
 
                                     {{-- Category Image --}}
                                     <div class="form-group">
                                         <label for="categoryImage">Category Image</label>
-                                        <input type="file" id="categoryImage" class="form-control-file" name="image" accept="image/*">
-                                        <small class="text-muted">Optional — upload an image for this category.</small>
+                                        <input type="file" id="categoryImage" class="form-control-file" name="image">
+                                        <div class="mt-2">
+                                            <p>Current Image:</p>
+                                            <img src="{{ asset('images/categories/electronics.jpg') }}" alt="Category Image" width="120" class="rounded border shadow-sm">
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="form-actions">
-                                    <button type="reset" class="btn btn-warning mr-1">
+                                    <button type="button" class="btn btn-warning mr-1">
                                         <i class="ft-x"></i> Cancel
                                     </button>
                                     <button type="submit" class="btn btn-primary">
-                                        <i class="la la-check-square-o"></i> Save
+                                        <i class="la la-check-square-o"></i> Update
                                     </button>
                                 </div>
                             </form>
