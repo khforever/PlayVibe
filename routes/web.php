@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CategoryController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -77,21 +78,16 @@ Route::get('editUser', function () {
 ////////////////////////////////////////categories/////////////////////////////////////////////
 
 
-//show allcategories
-Route::get('categories', function () {
-    return view('dashboard.categories');
+Route::controller(CategoryController::class)->prefix('categories')->name('categories.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/edit/{category_id}', 'edit')->name('edit');
+    Route::put('/update/{category_id}', 'update')->name('update');
+    Route::delete('/delete/{category_id}', 'destroy')->name('destroy');
+
 });
 
-
-//add new category  addCategory
-Route::get('addCategory', function () {
-    return view('dashboard.addCategory');
-})->name('dashboard.addCategory');
-
-// edit category
-Route::get('editCategory', function () {
-    return view('dashboard.editCategory');
-});
 
 
 /////////////////////////////////////////subcategories////////////////////////////////////////////
