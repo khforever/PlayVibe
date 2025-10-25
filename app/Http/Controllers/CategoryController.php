@@ -33,13 +33,16 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
-        $imagePath = 'assets/dashboard/categories';
-        $imageName = UploadImageTrait::uploadImage($request, $imagePath);
+        $categoryData=$request->validated();
+        if ($request->hasFile('image')) {
+            $imagePath = 'assets/dashboard/categories';
+            $imageName = UploadImageTrait::uploadImage($request, $imagePath);
+            $categoryData['image'] = $imageName;
+        }
         Category::create([
             'name'=>$request->name,
-            'image'=>$imageName
+            'image'=>$categoryData['image']
         ]);
-
         return redirect()->route('categories.index')->with('success', 'Category Created Successfully!');
     }
 
@@ -67,28 +70,32 @@ class CategoryController extends Controller
      */
     public function update(UpdateCategoryRequest $request, $id)
     {
+        $category = Category::findOrFail($id);
+        $categoryData=$request->validated();
     //if selected new image
         if ($request->hasFile('image')) {
             //upload image
             $imagePath = 'assets/dashboard/categories';
             $imageName = UploadImageTrait::uploadImage($request, $imagePath);
             //remove old image
-            $category = Category::findOrFail($id);
+
             $oldFile = $category->image;
             $Path = "assets/dashboard/categories/{$oldFile}";
             $deletedFile = UploadImageTrait::DeleteImage($Path);
             if ($deletedFile) {
 
-                $category->update([
-                    'name'=>$request->name,
-                    'image'=>$imageName
-                ]);
+                $categoryData['image'] = $imageName;
+
 
             }
         }
+            $categoryData['name'] = $request->name;
+            $category->update($categoryData);
 
         return redirect()->route('categories.index')->with('success', 'Category Updated Successfully!');
     }
+
+
 
     /**
      * Remove the specified resource from storage.

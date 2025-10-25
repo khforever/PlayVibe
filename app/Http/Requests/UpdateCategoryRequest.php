@@ -22,8 +22,22 @@ class UpdateCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>'required|string|max:255|unique:categories,name,'.$this->route('category_id'),
-            'image'=>'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'name'=>'sometimes|string|max:255|unique:categories,name,'.$this->route('category_id'),
+            'image'=>'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ];
+    }
+
+
+    public function messages()
+    {
+        return [
+
+            'name.string' => 'The name must be a string.',
+            'name.max' => 'The name may not be greater than 255 characters.',
+            'name.unique' => 'The name has already been taken.',
+            'image.image' => 'The file must be an image.',
+            'image.mimes' => 'The image must be a file of type: jpeg, png, jpg, gif, webp.',
+            'image.max' => 'The image may not be greater than 5MB.',
         ];
     }
 }

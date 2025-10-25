@@ -23,7 +23,23 @@ class StoreCategoryRequest extends FormRequest
     {
         return [
             'name'=>'required|string|max:255|unique:categories,name',
-            'image'=>'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+            'image'=>'required|image|mimes:jpg,png,jpeg,gif,svg|max:5120',
+        ];
+    }
+
+
+
+    public function messages()
+    {
+          return [
+            'name.required' => 'The name field is required.',
+            'name.string' => 'The name must be a string.',
+            'name.max' => 'The name may not be greater than 255 characters.',
+            'name.unique' => 'The name has already been taken.',
+            'image.required' => 'The image of category is required.',
+            'image.image' => 'The file must be an image.',
+            'image.mimes' => 'The image must be a file of type: jpeg, png, jpg, gif, webp.',
+            'image.max' => 'The image may not be greater than 5MB.',
         ];
     }
 }

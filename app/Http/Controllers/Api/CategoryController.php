@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\Api\UpdateCategoryRequest;
 use App\Traits\UploadImageTrait;
 
 class CategoryController extends Controller
@@ -16,7 +17,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::all();
+        $categories = Category::latest()->get();
         return response()->json($categories);
     }
 
@@ -48,16 +49,64 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+       $category = Category::find($id);
+       if(!$category){
+        return response()->json([
+            'success' => false,
+            'message' => 'Category not found',
+        ], 404);
+       }
+       else{
+        return response()->json([
+        'success' => true,
+        'data'=>['id'=>$category->id,
+        'name'=>$category->name,
+        'image'=>$category->image]
+
+       ], 200);
+       }
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+
+
+    public function update(UpdateCategoryRequest $request, Category $category)
     {
-        //
+
+        $data = ['name' => $request->name];
+            if ($request->hasFile('image')) {
+            //upload image
+            $imagePath = 'assets/dashboard/categories';
+            $imageName = UploadImageTrait::uploadImage($request, $imagePath);
+            //remove old image
+
+            $oldFile = $request->image;
+            $Path = "assets/dashboard/categories/{$oldFile}";
+            $deletedFile = UploadImageTrait::DeleteImage($Path);
+            if ($deletedFile) {
+                $data['image'] = $imageName;
+            }
+        }
+
+        $category->update($data);
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Category updated successfully',
+            'data' => [
+                'id' => $category->id,
+                'name' => $category->name,
+                'image_url' => asset($category->image),
+            ]
+        ], 200);
     }
+
+
+
+
 
     /**
      * Remove the specified resource from storage.
