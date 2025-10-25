@@ -2,13 +2,14 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard.users');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -22,14 +23,14 @@ require __DIR__.'/auth.php';
 
 //////////////////////////////////////dashboard auth///////////////////////////////////////////////
 
-Route::get('register', function () {
-    return view('dashboard.auth.register');
-});
+// Route::get('register', function () {
+//     return view('dashboard.auth.register');
+// });
 
 
-Route::get('login', function () {
-    return view('dashboard.auth.login');
-});
+// Route::get('login', function () {
+//     return view('dashboard.auth.login');
+// });
 
 Route::get('recover', function () {
     return view('dashboard.auth.recoverPassword');
@@ -169,4 +170,4 @@ Route::get('addReview', function () {
 
 
 
-
+require __DIR__.'/auth.php';

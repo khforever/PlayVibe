@@ -16,7 +16,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view('dashboard.auth.login');
     }
 
     /**
@@ -28,8 +28,17 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+            $user = Auth::user();
+
+    if ($user->user_type !== 1) {
+        Auth::logout();
+
+        return redirect()->route('login')->withErrors([
+            'email' => 'You are not authorized to access the admin dashboard.',
+        ]);
     }
+       return redirect()->intended(route('dashboard'));
+}
 
     /**
      * Destroy an authenticated session.
@@ -42,6 +51,6 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('login');
     }
 }

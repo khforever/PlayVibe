@@ -38,19 +38,30 @@ class LoginRequest extends FormRequest
      * @throws \Illuminate\Validation\ValidationException
      */
     public function authenticate(): void
-    {
-        $this->ensureIsNotRateLimited();
+{
+    $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
+    if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        RateLimiter::hit($this->throttleKey());
 
-            throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
-            ]);
-        }
-
-        RateLimiter::clear($this->throttleKey());
+        throw ValidationException::withMessages([
+            'email' => trans('auth.failed'),
+        ]);
     }
+
+    RateLimiter::clear($this->throttleKey());
+
+    // التأكد أن المستخدم Admin فقط
+    $user = Auth::user();
+
+    if ($user->user_type !== 1) {
+        Auth::logout();
+
+        throw ValidationException::withMessages([
+            'email' => "You're not authorized to access the dashboard.",
+        ]);
+    }
+}
 
     /**
      * Ensure the login request is not rate limited.

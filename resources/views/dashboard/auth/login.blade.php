@@ -26,18 +26,25 @@ table title
                 </div>
                 <div class="card-content">
                   <div class="card-body">
-                    <form class="form-horizontal" action="index.html" novalidate>
+                    <form class="form-horizontal" method="POST" action="{{ route('login') }}">
+                      @csrf
                       <fieldset class="form-group position-relative has-icon-left">
-                        <input type="text" class="form-control input-lg" id="user-name" placeholder="Your Username"
-                        tabindex="1" required data-validation-required-message="Please enter your username.">
+                        <input type="email" class="form-control input-lg" id="email" placeholder="Your Email"
+                        tabindex="1" required data-validation-required-message="Please enter your Email." name="email">
+                        @error('email')
+                          <small class="text-danger">{{ $message }}</small>
+                        @enderror
                         <div class="form-control-position">
-                          <i class="ft-user"></i>
+                           <i class="ft-mail"></i>
                         </div>
                         <div class="help-block font-small-3"></div>
                       </fieldset>
                       <fieldset class="form-group position-relative has-icon-left">
                         <input type="password" class="form-control input-lg" id="password" placeholder="Enter Password"
-                        tabindex="2" required data-validation-required-message="Please enter valid passwords.">
+                        tabindex="2" required data-validation-required-message="Please enter valid passwords." name="password">
+                          @error('password')
+                          <small class="text-danger">{{ $message }}</small>
+                        @enderror
                         <div class="form-control-position">
                           <i class="la la-key"></i>
                         </div>
@@ -46,7 +53,7 @@ table title
                       <div class="form-group row">
                         <div class="col-md-6 col-12 text-center text-md-left">
                           <fieldset>
-                            <input type="checkbox" id="remember-me" class="chk-remember">
+                            <input type="checkbox" id="remember-me" class="chk-remember" name="remember">
                             <label for="remember-me"> Remember Me</label>
                           </fieldset>
                         </div>
@@ -60,7 +67,7 @@ table title
                   <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1">
                     <span>New to Modern ?</span>
                   </p>
-                  <a href="register-advanced.html" class="btn btn-info btn-block btn-lg mt-3"><i class="ft-user"></i> Register</a>
+                  <a href="{{ route('register') }}" class="btn btn-info btn-block btn-lg mt-3"><i class="ft-user"></i> Register</a>
                 </div>
               </div>
             </div>
