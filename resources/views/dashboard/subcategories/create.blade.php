@@ -30,7 +30,7 @@ form
           <p>Fill out the details below to create a new subcategory.</p>
         </div>
 
-        <form class="form" action="" method="POST" enctype="multipart/form-data" style="direction: ltr; text-align: left;">
+        <form class="form" action="{{route('subcategory.store')}}" method="POST" enctype="multipart/form-data" style="direction: ltr; text-align: left;">
           @csrf
 
           <div class="form-body">
@@ -43,9 +43,9 @@ form
                   <label for="category_id">Select Category</label>
                   <select class="form-control border-primary" id="category_id" name="category_id" required>
                     <option value="">-- Choose Category --</option>
-                     <!-- @foreach ($categories as $category) -->
-                      <option value="{{category->id}}"></option>
-                    <!-- @endforeach  -->
+                     @foreach ($categories as $category)
+                      <option value="{{$category->id}}">{{$category->name}}</option>
+                    @endforeach 
                   </select>
                 </div>
               </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -71,9 +72,28 @@ Route::get('products', function () {
 
 
 //add new category  addSubCategory
-Route::get('addSubCategory', function () {
-    return view('dashboard.addSubCategory');
-});
+// Route::get('addSubCategory', function () {
+//     return view('dashboard.addSubCategory');
+// });
+
+
+
+//subcategories
+Route::group([
+    'prefix'=>'subcategories',
+    'as'=>'subcategory.',
+    'controller'=>SubCategoryController::class,
+],function(){
+    Route::get('create','create')->name('create');
+    Route::post('store','store')->name('store');
+    Route::get('index','index')->name('index');
+    Route::get('edit/{id}','edit')->name('edit');
+    Route::put('update/{id}','update')->name('update');
+    Route::get('delete/{id}','destroy')->name('delete');
+   
+ });
+ 
+
 //add new user
 Route::get('addUser', function () {
     return view('dashboard.addUser');

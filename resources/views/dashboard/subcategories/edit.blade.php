@@ -13,7 +13,7 @@ form
  <div class="col-md-6">
   <div class="card">
     <div class="card-header">
-      <h4 class="card-title" id="basic-layout-colored-form-control">Add Subcategory</h4>
+      <h4 class="card-title" id="basic-layout-colored-form-control">Edit Subcategory</h4>
       <div class="heading-elements">
         <ul class="list-inline mb-0">
           <li><a data-action="collapse"><i class="ft-minus"></i></a></li>
@@ -27,11 +27,12 @@ form
       <div class="card-body">
         <div class="card-text">
           <h2>Subcategory Form</h2>
-          <p>Fill out the details below to create a new subcategory.</p>
+          <p>Fill out the details below to edit subcategory.</p>
         </div>
 
-        <form class="form" action="" method="POST" enctype="multipart/form-data" style="direction: ltr; text-align: left;">
+        <form class="form" action="{{route('subcategory.update',$subcategory->id)}}" method="POST" enctype="multipart/form-data" style="direction: ltr; text-align: left;">
           @csrf
+         @Method('put')
 
           <div class="form-body">
             <h4 class="form-section"><i class="la la-list"></i> Subcategory Information</h4>
@@ -43,9 +44,9 @@ form
                   <label for="category_id">Select Category</label>
                   <select class="form-control border-primary" id="category_id" name="category_id" required>
                     <option value="">-- Choose Category --</option>
-                     <!-- @foreach ($categories as $category) -->
-                      <option value="{{category->id}}"></option>
-                    <!-- @endforeach  -->
+                     @foreach ($categories as $category)
+                      <option value="{{$category->id}}"@selected(old('category_id', $subcategory->category_id) == $category->id)>{{$category->name}}</option>
+                    @endforeach 
                   </select>
                 </div>
               </div>
@@ -54,7 +55,7 @@ form
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="name">Subcategory Name</label>
-                  <input type="text" id="name" class="form-control border-primary" name="name"  value = "{{old('name')}}"placeholder="Enter subcategory name" required>
+                  <input type="text" id="name" class="form-control border-primary" name="name"  value = "{{old('name',$subcategory->name)}}"placeholder="Enter subcategory name" required>
                @error('name')
                 <div class="alert alert-warning">{{$message}}</div>
             @enderror
@@ -79,7 +80,7 @@ form
               <i class="ft-x"></i> Cancel
             </button>
             <button type="submit" class="btn btn-primary">
-              <i class="la la-check-square-o"></i> Add Subcategory
+              <i class="la la-check-square-o"></i> edit Subcategory
             </button>
           </div>
         </form>

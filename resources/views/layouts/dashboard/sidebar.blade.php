@@ -23,7 +23,17 @@
           </ul>
 
 
+<ul class="menu-content">
+            <li class="active"><a class="menu-item" href="dashboard-ecommerce.html" data-i18n="nav.dash.ecommerce">sub Category</a>
+            </li>
+            <li><a class="menu-item" href="{{route('subcategory.create')}}" data-i18n="nav.dash.crypto">addsubCategory</a>
+            </li>
 
+            <li><a class="menu-item" href="{{route('subcategory.index')}}" data-i18n="nav.dash.crypto">subCategories</a>
+            </li>
+            <li><a class="menu-item" href="dashboard-sales.html" data-i18n="nav.dash.sales">Sales</a>
+            </li>
+          </ul>
 
 
 

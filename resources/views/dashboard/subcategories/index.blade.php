@@ -40,16 +40,15 @@ SubCategories
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach($subcategories as $subcategory)
                                     <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
+                                        <td>{{$subcategory->name}}</td>
+                                       <td>
+                                     <img src="{{asset('assets/dashboard/subcategory/'.$subcategory->image)}}" width="50px" height="50px"/>
+                                       </td>
                                         <td>
-
-
-
-
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                            <a href="{{route('subcategory.edit',$subcategory->id)}}">
+                                          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
                                                 viewBox="0 0 32 32">
                                                 <g fill="none">
                                                     <path fill="url(#SVGU1eE1b5T)"
@@ -138,15 +137,14 @@ SubCategories
                                                 </g>
                                             </svg>
 
+                                            </a>
 
                                         </td>
 
 
                                         <td colspan="2">
 
-
-
-
+                                        <a  href="{{route('subcategory.delete',$subcategory->id)}}">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
                                                 viewBox="0 0 48 48">
                                                 <g fill="none" stroke-linejoin="round" stroke-width="4">
@@ -158,16 +156,18 @@ SubCategories
                                                         d="M16 10L19.289 4H28.7771L32 10H16Z" />
                                                 </g>
                                             </svg>
+                                        </a>
                                         </td>
+                                        @endforeach
                                 </tbody>
                                 <tfoot>
-                                    <tr>
+                                    <!-- <tr>
                                         <th>Name</th>
                                         <th>Image</th>
                                         <th>Update</th>
                                         <th>Delete</th>
 
-                                    </tr>
+                                    </tr> -->
                                 </tfoot>
                             </table>
                         </div>
