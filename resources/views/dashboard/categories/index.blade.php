@@ -12,7 +12,7 @@ Categories
 
 
 
- 
+
 
 
 
@@ -54,6 +54,7 @@ Categories
                         <div class="card-body card-dashboard">
                             <p class="card-text">Each column has categories</p>
                             <table class="table table-striped table-bordered column-rendering">
+                                 @include('dashboard.includes.messages')
                                 <thead>
                                     <tr>
                                         <th>Name</th>
@@ -64,16 +65,20 @@ Categories
                                     </tr>
                                 </thead>
                                <tbody>
+                                @foreach ($categories as  $category)
+
+
                                     <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
+                                        <td>{{$category->name}}</td>
+                                        <td><img src="{{asset('assets/dashboard/categories/'.$category->image)}}" alt="Category Image" width="50" ></td>
                                         <td>
 
 
 
 
 
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                            <a href="{{route('categories.edit', $category->id)}} ">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
                                                 viewBox="0 0 32 32">
                                                 <g fill="none">
                                                     <path fill="url(#SVGU1eE1b5T)"
@@ -161,6 +166,7 @@ Categories
                                                     </defs>
                                                 </g>
                                             </svg>
+                                            </a>
 
 
                                         </td>
@@ -171,7 +177,13 @@ Categories
 
 
 
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+
+                                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button  type="submit" class="bg-transparent cursor-pointer ">
+
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
                                                 viewBox="0 0 48 48">
                                                 <g fill="none" stroke-linejoin="round" stroke-width="4">
                                                     <path fill="#ff2f51" stroke="#000" d="M9 10V44H39V10H9Z" />
@@ -182,7 +194,11 @@ Categories
                                                         d="M16 10L19.289 4H28.7771L32 10H16Z" />
                                                 </g>
                                             </svg>
+                                        </button>
+                                            </form>
+
                                         </td>
+                                        @endforeach
                                 </tbody>
                                 <tfoot>
                                     <tr>

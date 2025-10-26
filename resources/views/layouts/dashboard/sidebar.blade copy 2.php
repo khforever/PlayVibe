@@ -16,7 +16,7 @@
               <ul class="menu-content">
             <li class="active"><a class="menu-item" href="dashboard-ecommerce.html" data-i18n="nav.dash.ecommerce">Category</a>
             </li>
-            <li><a class="menu-item" href="{{ route('dashboard.addCategory') }}" data-i18n="nav.dash.crypto">addCategory</a>
+            <li><a class="menu-item" href="{{ route('categories.create') }}" data-i18n="nav.dash.crypto">addCategory</a>
             </li>
             <li><a class="menu-item" href="dashboard-sales.html" data-i18n="nav.dash.sales">Sales</a>
             </li>
@@ -54,7 +54,7 @@
         </li>
         <li class=" nav-item"><a href="#"><i class="la la-columns"></i><span class="menu-title" data-i18n="nav.page_layouts.main">Page layouts</span><span class="badge badge badge-pill badge-danger float-right mr-2">New</span></a>
           <ul class="menu-content">
-            <li><a class="menu-item" href="{{ route('dashboard.addCategory') }}" data-i18n="nav.page_layouts.1_column">addCategory</a>
+            <li><a class="menu-item" href="{{ route('categories.create') }}" data-i18n="nav.page_layouts.1_column">addCategory</a>
             </li>
             <li><a class="menu-item" href="layout-2-columns.html" data-i18n="nav.page_layouts.2_columns">2 columns</a>
             </li>
@@ -93,7 +93,7 @@
 
         {{--  --}}
 
- 
+
 
 
 

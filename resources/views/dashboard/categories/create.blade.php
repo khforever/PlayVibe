@@ -25,14 +25,18 @@ Add New Category
 
                     <div class="card-content collapse show">
                         <div class="card-body">
-                            <form class="form" method="POST" action="#" enctype="multipart/form-data">
+                            <form class="form" method="POST" action="{{ route('categories.store') }}" enctype="multipart/form-data">
+                                @csrf
                                 <div class="form-body">
                                     <h4 class="form-section"><i class="la la-list"></i> Category Information</h4>
 
                                     {{-- Category Name --}}
                                     <div class="form-group">
                                         <label for="categoryName">Category Name</label>
-                                        <input type="text" id="categoryName" class="form-control" placeholder="Enter category name" name="name" required>
+                                        <input type="text" id="categoryName" value="{{ old('name') }}" class="form-control" placeholder="Enter category name" name="name" >
+                                         @error('name')
+                                         <span class="text-danger">{{ $message }}</span>
+                                         @enderror
                                     </div>
 
                                     {{-- Category Image --}}
@@ -40,6 +44,11 @@ Add New Category
                                         <label for="categoryImage">Category Image</label>
                                         <input type="file" id="categoryImage" class="form-control-file" name="image" accept="image/*">
                                         <small class="text-muted">Optional — upload an image for this category.</small>
+                                        @error('image')
+
+                                        <span class="text-danger">{{ $message }}</span>
+
+                                        @enderror
                                     </div>
                                 </div>
 
@@ -48,7 +57,7 @@ Add New Category
                                         <i class="ft-x"></i> Cancel
                                     </button>
                                     <button type="submit" class="btn btn-primary">
-                                        <i class="la la-check-square-o"></i> Save
+                                        <i class="la la-check-square-o"></i> Create
                                     </button>
                                 </div>
                             </form>

@@ -25,14 +25,19 @@ Edit Category
 
                     <div class="card-content collapse show">
                         <div class="card-body">
-                            <form class="form" method="POST" action="#" enctype="multipart/form-data">
+                            <form class="form" method="POST" action="{{route('categories.update',$category->id)}}" enctype="multipart/form-data">
+                               @csrf
+                               @method('PUT')
                                 <div class="form-body">
                                     <h4 class="form-section"><i class="la la-list"></i> Category Details</h4>
 
                                     {{-- Category Name --}}
                                     <div class="form-group">
                                         <label for="categoryName">Category Name</label>
-                                        <input type="text" id="categoryName" class="form-control" name="name" placeholder="Enter category name" value="Electronics">
+                                        <input type="text" id="categoryName" value="{{$category->name}}" class="form-control" name="name" placeholder="Enter category name" value="Electronics">
+                                        @error('name')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     {{-- Category Image --}}
@@ -41,8 +46,11 @@ Edit Category
                                         <input type="file" id="categoryImage" class="form-control-file" name="image">
                                         <div class="mt-2">
                                             <p>Current Image:</p>
-                                            <img src="{{ asset('images/categories/electronics.jpg') }}" alt="Category Image" width="120" class="rounded border shadow-sm">
+                                            <img src="{{ asset('assets/dashboard/categories/'.$category->image.'') }}" alt="Category Image" width="120" class="rounded border shadow-sm">
                                         </div>
+                                        @error('image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
 
