@@ -58,7 +58,7 @@ SubCategories
                                     <tr>
                                         <td>{{$subcategory->name}}</td>
                                        <td>
-                                     <img src="{{asset('assets/dashboard/subcategory/'.$subcategory->image)}}" width="50px" height="50px"/>
+                                     <img src="{{asset($subcategory->image)}}" width="50px" height="50px"/>
                                        </td>
                                         <td>
                                             <a href="{{route('subcategory.edit',$subcategory->id)}}">
