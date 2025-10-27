@@ -119,10 +119,11 @@ Route::controller(CategoryController::class)->prefix('categories')->name('catego
 //     return view('dashboard.products');
 // });
 
+
 // //add new product
-// Route::get('addProduct', function () {
-//     return view('dashboard.addProduct');
-// });
+//   Route::get('addProduct', function () {
+//       return view('dashboard.addProduct');
+//   });
 
 
 // // edit product
