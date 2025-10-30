@@ -101,9 +101,9 @@ Route::controller(CategoryController::class)->prefix('categories')->name('catego
 // });
 
 // //add new category  addSubCategory
-// Route::get('addSubCategory', function () {
+//   Route::get('addSubCategory', function () {
 //     return view('dashboard.addSubCategory');
-// });
+//   });
 
 
 
@@ -151,9 +151,9 @@ Route::controller(CategoryController::class)->prefix('categories')->name('catego
 
 
 //add new category  addSubCategory
-// Route::get('addSubCategory', function () {
+//  Route::get('addSubCategory', function () {
 //     return view('dashboard.addSubCategory');
-// });
+//  });
 
 
 

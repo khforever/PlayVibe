@@ -30,14 +30,14 @@ class AuthController extends Controller
     if($request->hasfile('image'))
         {
         $data['image'] = $this->uploadFile($request->image,'assets/images');
-        
+
         }
- 
-     $data['password'] = Hash::make($data['password']);  
+
+     $data['password'] = Hash::make($data['password']);
 
      $user = User::create($data);
 
-     return $this->responseApi(__('register successfully'),$user,201);
+     return $this->responseApi(__('register successfully'),201);
 
     }
 
@@ -54,12 +54,12 @@ public function login(LoginRequest $request)
    {
     return $this->responseApi(__('invalid credintials'));
    }
-   if ($user->trashed()) 
+   if ($user->trashed())
    {
     return $this->responseApi(__('account is deleted'));
    }
 
-if ($user->is_verified !== 1) 
+if ($user->is_verified !== 1)
 {
     return $this->responseApi(__('user must be verify'));
 }
@@ -78,19 +78,11 @@ if ($user->is_verified !== 1)
 //logout
 public function logout(Request $request)
 {
-    $logout = $request->input('logout');
 
-    if($logout == 'one device' || !$logout)
-    {
-        $request->user()->currentAccessToken()->delete();
-        return $this->responseApi(__('logout one device'));
-    }
-    elseif($logout == 'all devices')
-    {
         $request->user()->tokens()->delete();
-        return $this->responseApi(__(' logout from all devices'));
-    }  
-      
+        return $this->responseApi(__(' logout  successfully'));
+    
+
 }
 
 
@@ -103,24 +95,24 @@ public function logout(Request $request)
 
         $user = User::where('email', $request->email)->first();
 
-        if (!$user) 
+        if (!$user)
         {
             return $this->responseApi(__('user not_found'),404);
         }
- 
+
         $otp = rand(1000, 9999);
 
         $otp = Otp::create([
            'user_id'=> $user->id,
            'otp'=> $otp,
-           'expires_at'=> Carbon::now()->addMinutes(3),
+           'expired_at'=> Carbon::now()->addMinutes(3),
            'usage'=>$usage,
         ]);
-  
+
         return $this->responseApi(__('sendotp send'), 200);
     }
 
-    
+
 public function verifyEmailOtp(VerifyEmailOtp $request)
 {
    $request->validated();
@@ -129,7 +121,7 @@ public function verifyEmailOtp(VerifyEmailOtp $request)
                   ->where('email', $request->email)
                   ->first();
 
-    if (!$user) 
+    if (!$user)
     {
         return $this->responseApi(__('account not found'), 404);
     }
@@ -146,15 +138,15 @@ public function verifyEmailOtp(VerifyEmailOtp $request)
 
     if(!$otp)
     {
-        return $this->responseApi(__('invalid otp'),400);   
+        return $this->responseApi(__('invalid otp'),400);
     }
 
         $user->update(['is_verified'=>true]);
-       
+
         $otp->update(['usage' => 'verify']);
-     
+
      return $this->responseApi(__('verify email successfully'), 200);
-     
+
 }
 
 
@@ -167,12 +159,12 @@ public function resetpassword(ResetPassword $request)
                  ->where('email', $request->email)
                  ->first();
 
-    if (!$user) 
+    if (!$user)
     {
         return $this->responseApi(__('user not found'),404);
     }
 
-    if ($user->trashed()) 
+    if ($user->trashed())
     {
         return $this->responseApi(__('account is deleted'), 403);
     }
@@ -182,18 +174,12 @@ public function resetpassword(ResetPassword $request)
               ->where('expired_at', '>=', now())
               ->first();
 
-    if (!$otp) 
+    if (!$otp)
     {
         return $this->responseApi(__('invalid otp'), 404);
     }
 
-    if (!Hash::check($request->old_password, $user->password)) {
-        return $this->responseApi(__('messages.old_password'), 422);
-    }
 
-    if (Hash::check($request->new_password, $user->password)) {
-        return $this->responseApi(__('messages.current_password'));
-    }
 
     $user->update([
         'password' => Hash::make($request->new_password),
