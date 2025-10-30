@@ -23,5 +23,6 @@ data-open="click" data-menu="vertical-menu-modern" data-col="2-columns">
 @include('layouts.dashboard._footer')
 
   @include('layouts.dashboard._scripts')
+<script src="https://chir.ag/projects/ntc/ntc.js"></script>
 </body>
 </html>

@@ -20,6 +20,8 @@ class Product extends Model
 
     public function images() { return $this->hasMany(ProductImage::class); }
 
+    public function mainImage() { return $this->hasOne(ProductImage::class)->where('is_main', true); }
+
     public function variants() { return $this->hasMany(ProductVariant::class); }
 
     public function attributes() { return $this->hasOne(Attribute::class); }

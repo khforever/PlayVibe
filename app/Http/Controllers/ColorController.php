@@ -12,7 +12,8 @@ class ColorController extends Controller
      */
     public function index()
     {
-        //
+        $colors = Color::all();
+        return view('dashboard.colors.index', compact('colors'));
     }
 
     /**
@@ -20,7 +21,7 @@ class ColorController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.colors.create');
     }
 
     /**
@@ -28,8 +29,17 @@ class ColorController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+
+        //validation
+        $validated = $request->validate([
+            'color' => 'required|string|max:50',
+            'code' => 'required|string|max:7|unique:colors,code',
+        ]);
+
+        Color::create($validated);
+
+        return redirect()->route('colors.index')->with('success', 'Color created successfully');
+     }
 
     /**
      * Display the specified resource.
@@ -58,8 +68,10 @@ class ColorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Color $color)
+    public function destroy(Color $color , $id)
     {
-        //
+        $color = Color::find($id);
+        $color->delete();
+        return redirect()->route('colors.index')->with('success', 'Color deleted successfully');
     }
 }

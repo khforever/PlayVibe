@@ -12,7 +12,10 @@ class SizeController extends Controller
      */
     public function index()
     {
-        //
+        $sizes = Size::all();
+        return view('dashboard.sizes.index', compact('sizes'));
+
+
     }
 
     /**
@@ -20,7 +23,7 @@ class SizeController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.sizes.create');
     }
 
     /**
@@ -28,7 +31,13 @@ class SizeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    $validated = $request->validate([
+    'size' => 'required|string|max:50',
+
+    ]);
+
+    Size::create($validated);
+    return redirect()->route('sizes.index')->with('success', 'Size created successfully');
     }
 
     /**
@@ -58,8 +67,10 @@ class SizeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Size $size)
+    public function destroy(Size $size, $id)
     {
-        //
+        $size=Size::find($id);
+        $size->delete();
+        return redirect()->route('sizes.index')->with('success', 'Size deleted successfully');
     }
 }

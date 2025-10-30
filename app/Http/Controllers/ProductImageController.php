@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use App\Traits\UploadImageTrait;
 
 class ProductImageController extends Controller
 {
+    use UploadImageTrait;
     /**
      * Display a listing of the resource.
      */

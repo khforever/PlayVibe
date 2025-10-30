@@ -5,6 +5,10 @@ use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ColorController;
+use App\Http\Controllers\SizeController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductVariantController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -87,6 +91,47 @@ Route::controller(CategoryController::class)->prefix('categories')->name('catego
     Route::get('/edit/{category_id}', 'edit')->name('edit');
     Route::put('/update/{category_id}', 'update')->name('update');
     Route::delete('/delete/{category_id}', 'destroy')->name('destroy');
+
+});
+
+// ////////////////////////////////////////colors/////////////////////////////////////////////
+Route::controller(ColorController::class)->prefix('colors')->name('colors.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::delete('/destroy/{color_id}', 'destroy')->name('destroy');
+
+
+
+
+});
+// ////////////////////////////////////////sizes  /////////////////////////////////////////////
+Route::controller(SizeController::class)->prefix('sizes')->name('sizes.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::delete('/destroy/{size_id}', 'destroy')->name('destroy');
+
+
+
+
+});
+
+// ////////////////////////////////////////products  /////////////////////////////////////////////
+Route::controller(ProductController::class)->prefix('products')->name('products.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::get('/create', 'create')->name('create');
+    Route::post('/store', 'store')->name('store');
+    Route::get('/edit/{product_id}', 'edit')->name('edit');
+    Route::put('/update/{product_id}', 'update')->name('update');
+    Route::delete('/destroy/{product_id}', 'destroy')->name('destroy');
+});
+
+// ////////////////////////////////////////Product variants  /////////////////////////////////////////////
+Route::controller(ProductVariantController::class)->prefix('productVariants')->name('productVariants.')->group(function () {
+    Route::get('/{product_id}', 'index')->name('index');
+    Route::post('/store', 'store')->name('store');
+    Route::delete('/destroy/{variant_id}', 'destroy')->name('destroy');
 
 });
 
