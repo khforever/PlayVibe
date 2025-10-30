@@ -76,20 +76,23 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, Category $category)
     {
 
-        $data = ['name' => $request->name];
+        $data = $request->validated();
             if ($request->hasFile('image')) {
             //upload image
             $imagePath = 'assets/dashboard/categories';
-            $imageName = UploadImageTrait::uploadImage($request, $imagePath);
+            $newImageName = UploadImageTrait::uploadImage($request, $imagePath);
             //remove old image
 
-            $oldFile = $request->image;
-            $Path = "assets/dashboard/categories/{$oldFile}";
+            $oldImage = $category->image;
+            $Path = "assets/dashboard/categories/{$oldImage}";
             $deletedFile = UploadImageTrait::DeleteImage($Path);
-            if ($deletedFile) {
-                $data['image'] = $imageName;
+            if ($oldImage ) {
+                    $data['image'] = $newImageName;
             }
+
+
         }
+
 
         $category->update($data);
 
@@ -99,7 +102,7 @@ class CategoryController extends Controller
             'data' => [
                 'id' => $category->id,
                 'name' => $category->name,
-                'image_url' => asset($category->image),
+                'image_url' => $category->image ? asset($category->image) : null,
             ]
         ], 200);
     }
@@ -111,8 +114,21 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category )
     {
-        //
+
+        $oldCategoryImage = $category->image;
+        $Path = "assets/dashboard/categories/{$oldCategoryImage}";
+        $deletedCategoryImage = UploadImageTrait::DeleteImage($Path);
+        if ($deletedCategoryImage) {
+
+
+        $category->delete();
+        }
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Category deleted successfully'
+        ], 200);
     }
 }

@@ -30,7 +30,7 @@ Products
 
 <div class="card-header d-flex justify-content-between align-items-center">
     <h4 class="card-title mb-0">Products</h4>
-    <a href=" " class="btn btn-primary">
+    <a href="{{ route('products.create') }} " class="btn btn-primary">
         <i class="la la-plus"></i> Add Products
     </a>
 </div>
@@ -44,23 +44,27 @@ Products
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Image</th>
+                                        <th>Price</th>
+                                        <th>Description</th>
+                                        <th>Category/Sub_Category</th>
                                         <th>Update</th>
                                         <th>Delete</th>
+                                        <th>Add Variants</th>
 
                                     </tr>
                                 </thead>
                                <tbody>
+                                @foreach ($products as $product)
+
+
                                     <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>System Architect</td>
+                                        <td>{{$product->name}}</td>
+                                        <td>{{$product->price}}</td>
+                                        <td>{{$product->description}}</td>
+                                        <td>{{$product->subCategory->category->name}}/{{$product->subCategory->name}}</td>
                                         <td>
-
-
-
-
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                            <a href="{{ route('products.edit', $product->id)}}">
+                                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
                                                 viewBox="0 0 32 32">
                                                 <g fill="none">
                                                     <path fill="url(#SVGU1eE1b5T)"
@@ -148,17 +152,18 @@ Products
                                                     </defs>
                                                 </g>
                                             </svg>
-
-
+                                            </a>
                                         </td>
 
 
-                                        <td colspan="2">
 
+                                        <td colspan="1">
+                                            <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button  type="submit" class="bg-transparent cursor-pointer border-0 ">
 
-
-
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
                                                 viewBox="0 0 48 48">
                                                 <g fill="none" stroke-linejoin="round" stroke-width="4">
                                                     <path fill="#ff2f51" stroke="#000" d="M9 10V44H39V10H9Z" />
@@ -169,14 +174,28 @@ Products
                                                         d="M16 10L19.289 4H28.7771L32 10H16Z" />
                                                 </g>
                                             </svg>
+                                        </button>
+                                            </form>
+
                                         </td>
+
+                                        <td>
+                                             <a href="{{ route('productVariants.index', $product->id) }} " class="btn btn-primary">
+                                              <i class="la la-plus"></i> Add Variant
+                                                                  </a>
+                                        </td>
+                                        @endforeach
+                                    </tr>
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Image</th>
+                                        <th>Price</th>
+                                        <th>Description</th>
+                                        <th>Sub_Category</th>
                                         <th>Update</th>
                                         <th>Delete</th>
+                                        <th>Add Variants</th>
 
                                     </tr>
                                 </tfoot>

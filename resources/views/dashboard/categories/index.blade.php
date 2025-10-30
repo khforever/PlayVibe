@@ -173,15 +173,10 @@ Categories
 
 
                                         <td colspan="2">
-
-
-
-
-
                                             <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button  type="submit" class="bg-transparent cursor-pointer ">
+                                                <button  type="submit" class="bg-transparent cursor-pointer border-0 ">
 
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
                                                 viewBox="0 0 48 48">
