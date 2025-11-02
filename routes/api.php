@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AttributeController;
 use App\Http\Controllers\Api\front\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -54,3 +55,11 @@ Route::apiResource('users', UserController::class);
 // Route::post('users/{id}/restore', [UserController::class, 'restore']);
 
 
+//attribute
+Route::prefix('attributes')->controller(AttributeController::class)->group(function () {
+    Route::post('/', 'store');
+    Route::get('/', 'index');
+    Route::get('/{id}', 'show');
+    Route::put('/{id}', 'update');
+    Route::delete('/{id}', 'destroy');
+});

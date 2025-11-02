@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\SubCategory;
+use App\Models\Attribute;
+
+
+
 class ProductController extends Controller
 {
     /**
@@ -15,7 +19,8 @@ class ProductController extends Controller
     public function index()
     {
        $products = Product::all();
-        return view('dashboard.products.index',compact('products'));
+       $attributes = Attribute::with('product')->get();
+        return view('dashboard.products.index',compact('products','attributes'));
     }
 
     /**

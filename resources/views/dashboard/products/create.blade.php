@@ -73,6 +73,9 @@ Add Product
                                         <input type="file" id="image" name="image" class="form-control border-primary">
                                     </div> --}}
 
+                               
+
+
                                 </div>
 
                                 <div class="form-actions">

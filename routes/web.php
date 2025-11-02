@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AttributeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SubCategoryController;
 use Illuminate\Support\Facades\Route;
@@ -271,6 +272,18 @@ Route::group([
 
  });
 
+Route::group([
+    'prefix'=>'attributes',
+    'as'=>'attribute.',
+    'controller'=>AttributeController::class,
+],function(){
+    Route::get('create','create')->name('create');
+    Route::post('store','store')->name('store');
+    Route::get('edit/{id}','edit')->name('edit');
+    Route::put('update/{id}','update')->name('update');
+
+ });
+ 
 
 // //add new user
 // Route::get('addUser', function () {
