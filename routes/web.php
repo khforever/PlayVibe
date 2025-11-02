@@ -26,62 +26,8 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-
-//////////////////////////////////////dashboard auth///////////////////////////////////////////////
-
-// Route::get('register', function () {
-//     return view('dashboard.auth.register');
-// });
-
-
-// Route::get('login', function () {
-//     return view('dashboard.auth.login');
-// });
-
-// Route::get('recover', function () {
-//     return view('dashboard.auth.recoverPassword');
-
-// });
-
-
-
-// ////////////////////////////////////////users/////////////////////////////////////////////
-
-
-// //show all users
-// Route::get('users', function () {
-//     return view('dashboard.users');
-// });
-
-
-
-
-// //add new user
-// Route::get('addUser', function () {
-//     return view('dashboard.addUser');
-// });
-
-
-
-
-
-
-
-// //edit user
-// Route::get('editUser', function () {
-//     return view('dashboard.editUser');
-// });
-
-
-
-
-
-
-
-
-
-
 // ////////////////////////////////////////categories/////////////////////////////////////////////
+
 
 
 Route::controller(CategoryController::class)->prefix('categories')->name('categories.')->group(function () {
@@ -136,72 +82,6 @@ Route::controller(ProductVariantController::class)->prefix('productVariants')->n
 });
 
 
-
-// /////////////////////////////////////////subcategories////////////////////////////////////////////
-
-
-// //show all subcategories
-// Route::get('subCategories', function () {
-//     return view('dashboard.subCategories');
-// });
-
-// //add new category  addSubCategory
-//   Route::get('addSubCategory', function () {
-//     return view('dashboard.addSubCategory');
-//   });
-
-
-
-// // edit subcategory
-// Route::get('editSubCategory', function (){
-//     return view('dashboard.editSubCategory');
-// });
-
-
-// ///////////////////////////////////////products//////////////////////////////////////////////
-// //show all products
-// Route::get('products', function () {
-//     return view('dashboard.products');
-// });
-
-
-// //add new product
-//   Route::get('addProduct', function () {
-//       return view('dashboard.addProduct');
-//   });
-
-
-// // edit product
-// Route::get('editProduct', function () {
-//     return view('dashboard.editProduct');
-// });
-
-
-
-// /////////////////////////////////////////just test////////////////////////////////////////////
-
-// Route::get('test', function () {
-//     return view('dashboard.welcome');
-// });
-
-// Route::get('form', function () {
-//     return view('dashboard.form');
-// });
-
-// Route::get('table', function () {
-//     return view('dashboard.table');
-// });
-
-// /////////////////////////////////////////////////////////////////////////////////////
-
-
-//add new category  addSubCategory
-//  Route::get('addSubCategory', function () {
-//     return view('dashboard.addSubCategory');
-//  });
-
-
-
 //subcategories
 Route::group([
     'prefix'=>'subcategories',
@@ -216,33 +96,6 @@ Route::group([
     Route::get('delete/{id}','destroy')->name('delete');
 
  });
-
-
-// //add new user
-// Route::get('addUser', function () {
-//     return view('dashboard.addUser');
-// });
-
-// //add new attributes
-// Route::get('addAttribute', function () {
-//     return view('dashboard.addAttribute');
-// });
-
-
-// //add new attributes
-// Route::get('addAttribute', function () {
-//     return view('dashboard.addAttribute');
-// });
-
-
-
-
-
-// //add new review
-// Route::get('addReview', function () {
-//     return view('dashboard.addReview');
-// });
-
 
 
 require __DIR__.'/auth.php';
