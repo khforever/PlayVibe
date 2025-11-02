@@ -33,14 +33,18 @@ Edit User
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="firstName">First Name</label>
-                                                <input type="text" id="firstName" class="form-control" placeholder="Enter first name" name="first_name" value="Kholoud">
+                                                <input type="text" id="firstName" class="form-control" placeholder="Enter first name" name="first_name"
+
+
+                                                value="{{ $user->first_name }}" readonly>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="lastName">Last Name</label>
-                                                <input type="text" id="lastName" class="form-control" placeholder="Enter last name" name="last_name" value="Mohamed">
+                                                <input type="text" id="lastName" class="form-control"
+                                                 placeholder="Enter last name" name="last_name" value="{{ $user->last_name }}" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -49,14 +53,16 @@ Edit User
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="email">Email</label>
-                                                <input type="email" id="email" class="form-control" placeholder="Enter email" name="email" value="kholoud@example.com">
+                                                <input type="email" id="email" class="form-control" placeholder="Enter email"
+                                                 name="email" value="{{ $user->email }}" readonly>
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="phone">Phone Number</label>
-                                                <input type="text" id="phone" class="form-control" placeholder="Enter phone number" name="phone" value="01012345678">
+                                                <input type="text" id="phone" class="form-control" placeholder="Enter phone number"
+                                                name="phone" value="{{ $user->phone}}" readonly>
                                             </div>
                                         </div>
                                     </div>
@@ -65,7 +71,8 @@ Edit User
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="city">City</label>
-                                                <input type="text" id="city" class="form-control" placeholder="Enter city" name="city" value="Cairo">
+                                                <input type="text" id="city" class="form-control"
+                                                placeholder="Enter city" name="city" value="{{ $user->city }}" readonly>
                                             </div>
                                         </div>
 

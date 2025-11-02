@@ -28,9 +28,25 @@
             @endisset
 
             <!-- Page Content -->
-            <main>
+
+{{--
+<main class="py-4">
+    @yield('content')
+</main> --}}
+
+
+<main>
+    @yield('content')
+</main>
+
+
+            {{-- <main>
                 {{ $slot }}
-            </main>
+            </main> --}}
+
+
+
+
         </div>
     </body>
 </html>

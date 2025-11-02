@@ -5,7 +5,24 @@ Users
 @endsection
 
 @section('content')
+
+
+
+  @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+
+
+
+
+
 <div class="app-content content">
+
+
+
+
+
 
     <!-- Users Table -->
     <section id="users-table">
@@ -28,7 +45,12 @@ Users
                     <div class="card-content collapse show">
                         <div class="card-body card-dashboard">
                             <p class="card-text">All registered users in the system</p>
+ <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Add User</a>
 
+
+     <a href="{{ route('users.trash') }}" class="btn btn-warning mb-3">
+        <i class="fa fa-trash"></i> View Deleted Users
+    </a>
                             <table class="table table-striped table-bordered column-rendering">
                                 <thead>
                                     <tr>
@@ -39,21 +61,42 @@ Users
                                         <th>City</th>
                                         <th>Verified</th>
                                         <th>User Type</th>
+ <th>Show</th>
                                         <th>Update</th>
                                         <th>Delete</th>
+                                        <th>Restore Delete</th>
                                     </tr>
                                 </thead>
 
                                 <tbody>
+
+ @foreach ($users as $user)
+
+
+
+
+
                                     <tr>
                                         <td><img src="images/user1.jpg" alt="User Image" width="50" class="rounded-circle"></td>
-                                        <td>Kholoud Mohamed</td>
-                                        <td>kholoud@example.com</td>
+                                            <td>{{ $user->first_name }} {{ $user->last_name }}</td>
+                                           <td>{{ $user->email }}</td>
                                         <td>01012345678</td>
                                         <td>Cairo</td>
                                         <td><span class="badge badge-success">Yes</span></td>
-                                        <td>Admin</td>
+                                        <td>{{ $user->user_type == 1 ? 'Admin' : 'User' }}</td>
+
+<td>
+   <a href="{{ route('users.show', $user->id) }}"> Show</a>
+  </td>
+
                                         <td>
+   <a href="{{ route('users.edit', $user->id) }}">
+
+
+
+    Edit</a>
+
+
                                             <!-- Update SVG -->
                                             <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 32 32">
                                                 <g fill="none">
@@ -62,47 +105,69 @@ Users
                                                 </g>
                                             </svg>
                                         </td>
-                                        <td>
-                                            <!-- Delete SVG -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 48 48">
-                                                <g fill="none" stroke-linejoin="round" stroke-width="4">
-                                                    <path fill="#ff2f51" stroke="#000" d="M9 10V44H39V10H9Z"/>
-                                                    <path stroke="#fff" stroke-linecap="round" d="M20 20V33"/>
-                                                    <path stroke="#fff" stroke-linecap="round" d="M28 20V33"/>
-                                                    <path stroke="#000" stroke-linecap="round" d="M4 10H44"/>
-                                                    <path fill="#ff2f51" stroke="#000" d="M16 10L19.289 4H28.7771L32 10H16Z"/>
-                                                </g>
-                                            </svg>
-                                        </td>
-                                    </tr>
 
-                                    <!-- Example Second Row -->
-                                    <tr>
-                                        <td><img src="images/user2.jpg" alt="User Image" width="50" class="rounded-circle"></td>
-                                        <td>Ahmed Ali</td>
-                                        <td>ahmed@gmail.com</td>
-                                        <td>01122334455</td>
-                                        <td>Giza</td>
-                                        <td><span class="badge badge-danger">No</span></td>
-                                        <td>User</td>
-                                        <td>🖊️</td>
-                                        <td>🗑️</td>
+
+
+<td>
+    <a href="{{ route('users.destroy', $user->id) }}"
+       class="btn btn-danger btn-sm"
+       onclick="event.preventDefault();
+                if(confirm('Are you sure?')) {
+                    document.getElementById('delete-form-{{ $user->id }}').submit();
+                }">
+        <i class="ft-trash-2"></i>
+    </a>
+
+    <form id="delete-form-{{ $user->id }}"
+          action="{{ route('users.destroy', $user->id) }}"
+          method="POST"
+          style="display: none;">
+        @csrf
+        @method('DELETE')
+    </form>
+</td>
+
+
+<td>
+
+
+
+@if($user->deleted_at)
+     <form action="{{ route('users.restore', $user->id) }}" method="POST" style="display: inline;">
+        @csrf
+        <button type="submit" class="btn btn-success btn-sm">
+            <i class="fa fa-undo"></i> Restore
+        </button>
+    </form>
+@else
+     <a href="{{ route('users.destroy', $user->id) }}"
+       class="btn btn-danger btn-sm"
+       onclick="event.preventDefault();
+                if(confirm('Are you sure?')) {
+                    document.getElementById('delete-form-{{ $user->id }}').submit();
+                }">
+        <i class="ft-trash-2"></i>
+    </a>
+@endif
+
+
+</td>
+
+
+
+
+
+
+
+
+
+
                                     </tr>
+ @endforeach
+
                                 </tbody>
 
-                                <tfoot>
-                                    <tr>
-                                        <th>Image</th>
-                                        <th>Full Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>City</th>
-                                        <th>Verified</th>
-                                        <th>User Type</th>
-                                        <th>Update</th>
-                                        <th>Delete</th>
-                                    </tr>
-                                </tfoot>
+
                             </table>
                         </div>
                     </div>

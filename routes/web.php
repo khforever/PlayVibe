@@ -9,13 +9,14 @@ use App\Http\Controllers\ColorController;
 use App\Http\Controllers\SizeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductVariantController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard.users');
+    return view('dashboard.auth.login');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -50,15 +51,15 @@ require __DIR__.'/auth.php';
 
 // //show all users
 // Route::get('users', function () {
-//     return view('dashboard.users');
+//     return view('dashboard.users.index');
 // });
 
 
 
 
 // //add new user
-// Route::get('addUser', function () {
-//     return view('dashboard.addUser');
+// Route::get('create', function () {
+//     return view('dashboard.users.create');
 // });
 
 
@@ -68,8 +69,8 @@ require __DIR__.'/auth.php';
 
 
 // //edit user
-// Route::get('editUser', function () {
-//     return view('dashboard.editUser');
+// Route::get('edit', function () {
+//     return view('dashboard.users.edit');
 // });
 
 
@@ -134,6 +135,59 @@ Route::controller(ProductVariantController::class)->prefix('productVariants')->n
     Route::delete('/destroy/{variant_id}', 'destroy')->name('destroy');
 
 });
+
+
+
+
+
+
+// ////////////////////////////////////////users  /////////////////////////////////////////////
+
+   Route::controller(UserController::class)
+        ->prefix('users')
+        ->name('users.')
+        ->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('/create', 'create')->name('create');
+            Route::get('/trash', 'trash')->name('trash');
+            Route::get('/show/{id}', 'show')->name('show');
+            Route::post('/store', 'store')->name('store');
+            Route::get('/edit/{id}', 'edit')->name('edit');
+            Route::get('/show/{id}', 'show')->name('show');
+            Route::put('/update/{id}', 'update')->name('update');
+            Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+            Route::post('/restore/{id}', 'restore')->name('restore');
+        });
+
+
+
+// Route::get('/users/trash', [UserController::class, 'trash'])->name('users.trash');
+
+//    Route::post('users/restore/{id}', [UserController::class, 'restore'])->name('users.restore');
+
+
+
+// Route::controller(UserController::class)
+// ->prefix('users')->name('users.')->group(function ()
+// {
+
+//      Route::get('/', 'index')->name('index');
+//     Route::get('/create', 'create')->name('create');
+//      Route::get('/show/{id}', 'show')->name('show');
+//     Route::post('/store', 'store')->name('store');
+//     Route::get('/edit/{id}', 'edit')->name('edit');
+//     Route::put('/update/{id}', 'update')->name('update');
+//     Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+
+
+
+// });
+
+
+// 'dashboard.users.trashUsers'
+
+//  Route::resource('users', UserController::class);
+
 
 
 

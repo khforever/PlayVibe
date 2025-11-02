@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\SubCategoryController;
 use App\Http\Controllers\Api\SizeController;
 use App\Http\Controllers\Api\ColorController;
+use App\Http\Controllers\Api\UserController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -45,3 +46,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 Route::apiResource('sizes',SizeController::class);
 Route::apiResource('colors',ColorController::class);
+
+
+
+//
+Route::apiResource('users', UserController::class);
+// Route::post('users/{id}/restore', [UserController::class, 'restore']);
+
+

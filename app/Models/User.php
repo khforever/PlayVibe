@@ -8,13 +8,16 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\HasMedia;
+
+use Illuminate\Database\Eloquent\Casts\Attribute;
+
 class User extends Authenticatable implements HasMedia
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable,HasApiTokens;
     use InteractsWithMedia;
      use SoftDeletes;
-     
+
     /**
      * The attributes that are mass assignable.
      *
@@ -32,6 +35,32 @@ class User extends Authenticatable implements HasMedia
         'is_verified',
         'user_type',
     ];
+
+
+
+
+
+
+
+
+
+   // أو بطريقة Laravel 11 الحديثة
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->first_name . ' ' . $this->last_name,
+        );
+    }
+
+
+
+
+
+
+
+
+
+
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -53,26 +82,26 @@ class User extends Authenticatable implements HasMedia
             'password' => 'hashed',
         ];
     }
- public function otps() 
- { return $this->hasMany(Otp::class); 
+ public function otps()
+ { return $this->hasMany(Otp::class);
   }
-    public function carts() 
-    { 
-        return $this->hasMany(Cart::class); 
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
     }
     public function orders()
-     { 
-        return $this->hasMany(Order::class); 
+     {
+        return $this->hasMany(Order::class);
     }
-    public function favourites() 
-    { 
+    public function favourites()
+    {
         return $this->hasMany(Favourite::class);
      }
-    public function reviews() 
+    public function reviews()
     {
-         return $this->hasMany(Review::class); 
+         return $this->hasMany(Review::class);
         }
-    public function contacts() 
+    public function contacts()
     {
          return $this->hasMany(Contact::class);
          }
