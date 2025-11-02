@@ -8,9 +8,9 @@ Deleted Users
 
 
 
-  @if(session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-    @endif
+@if(session('success'))
+<div class="alert alert-success">{{ session('success') }}</div>
+@endif
 
 
 
@@ -45,127 +45,85 @@ Deleted Users
                     <div class="card-content collapse show">
                         <div class="card-body card-dashboard">
                             <p class="card-text">All registered users in the system</p>
-<a href="{{ route('users.index') }}" class="btn btn-primary mb-3">
-        <i class="fa fa-arrow-left"></i> Back to Active Users
-    </a>
+                            <a href="{{ route('users.index') }}" class="btn btn-primary mb-3">
+                                <i class="fa fa-arrow-left"></i> Back to Active Users
+                            </a>
 
 
                             <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Add User</a>
                             <table class="table table-striped table-bordered column-rendering">
                                 <thead>
                                     <tr>
-                                        <th>Image</th>
                                         <th>Full Name</th>
+                                        <th>Image</th>
                                         <th>Email</th>
                                         <th>Phone</th>
-                                        <th>City</th>
                                         <th>Verified</th>
-                                        <th>User Type</th>
- <th>Restore</th>
-                                        <th>Update</th>
-
-
-
-                                         <th>Deleted At</th>
+                                        <th>Restore</th>
+                                        <th>Deleted At</th>
 
                                     </tr>
                                 </thead>
 
                                 <tbody>
 
- @foreach ($trashedUsers as $user)
-
-
-
-
+                                    @foreach ($trashedUsers as $user)
 
                                     <tr>
-                                        <td><img src="images/user1.jpg" alt="User Image" width="50" class="rounded-circle"></td>
-                                            <td>{{ $user->first_name }} {{ $user->last_name }}</td>
-                                           <td>{{ $user->email }}</td>
-                                        <td>01012345678</td>
-                                        <td>Cairo</td>
-                                        <td><span class="badge badge-success">Yes</span></td>
-                                        <td>{{ $user->user_type == 1 ? 'Admin' : 'User' }}</td>
-<td>
-    {{-- زر Restore فقط --}}
-    <form action="{{ route('users.restore', $user->id) }}" method="POST" style="display: inline;">
-        @csrf
-        <button type="submit" class="btn btn-success btn-sm">
-            <i class="fa fa-undo"></i> Restore
-        </button>
-    </form>
-</td>
+                                         <td>{{ $user->first_name }} {{ $user->last_name }}</td>
+                                      <td>
+                                            <img src="{{ asset('storage/' . $user->image) }}" alt="User Image"
+                                                width="50" height="50" class="rounded-circle"
+                                                style="object-fit: cover;">
+                                        </td>
+
+                                        <td>{{ $user->email }}</td>
+                                        <td>{{$user->phone}}</td>
+
+                                             <td><span class="badge badge-success">
+                                            {{ $user->is_verified == 1 ? 'Yes' : 'No' }}</span></td>
 
 
                                         <td>
-   <a href="{{ route('users.edit', $user->id) }}">
+
+                                            <form action="{{ route('users.restore', $user->id) }}" method="POST"
+                                                style="display: inline;">
+                                                @csrf
+                                                <button type="submit" class="bg-transparent cursor-pointer border-0 " >
 
 
 
-    Edit</a>
+
+<svg width="35" height="35"    viewBox="-2 0 24 24" id="meteor-icon-kit__solid-undo" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.62132 7L7.06066 8.43934C7.64645 9.02513 7.64645 9.97487 7.06066 10.5607C6.47487 11.1464 5.52513 11.1464 4.93934 10.5607L0.93934 6.56066C0.35355 5.97487 0.35355 5.02513 0.93934 4.43934L4.93934 0.43934C5.52513 -0.146447 6.47487 -0.146447 7.06066 0.43934C7.64645 1.02513 7.64645 1.97487 7.06066 2.56066L5.62132 4H10C15.5228 4 20 8.47715 20 14C20 19.5228 15.5228 24 10 24C4.47715 24 0 19.5228 0 14C0 13.1716 0.67157 12.5 1.5 12.5C2.32843 12.5 3 13.1716 3 14C3 17.866 6.13401 21 10 21C13.866 21 17 17.866 17 14C17 10.134 13.866 7 10 7H5.62132z" fill="#758CA3"></path></g></svg>
 
 
-                                            <!-- Update SVG -->
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 32 32">
-                                                <g fill="none">
-                                                    <path fill="#b3e0ff" d="m29 20l-9 9H7.5A4.5 4.5 0 0 1 3 24.5V10l13-1l13 1z"/>
-                                                    <path fill="#0094f0" d="M3 7.5A4.5 4.5 0 0 1 7.5 3h17A4.5 4.5 0 0 1 29 7.5V10H3z"/>
-                                                </g>
-                                            </svg>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                </button>
+                                            </form>
                                         </td>
 
 
+                                        <td>{{ $user->deleted_at->format('Y-m-d H:i') }}</td>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<td>{{ $user->deleted_at->format('Y-m-d H:i') }}</td>
-
-<td>
-    {{-- زر Restore فقط --}}
-    <form action="{{ route('users.restore', $user->id) }}" method="POST" style="display: inline;">
-        @csrf
-        <button type="submit" class="btn btn-success btn-sm">
-            <i class="fa fa-undo"></i> Restore
-        </button>
-    </form>
-</td>
-
-
-
-
- 
-
-
-
-                                    </tr>
- @endforeach
+                                   </tr>
+                                    @endforeach
 
                                 </tbody>
 

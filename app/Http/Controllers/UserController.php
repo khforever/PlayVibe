@@ -109,12 +109,6 @@ public function update(UserUpdateRequest $request, $id)
     }
 
 
-
-
-
-
-
-
 public function trash()
 {
 
