@@ -86,6 +86,7 @@ require __DIR__.'/auth.php';
 // ////////////////////////////////////////categories/////////////////////////////////////////////
 
 
+
 Route::controller(CategoryController::class)->prefix('categories')->name('categories.')->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
@@ -283,33 +284,6 @@ Route::group([
     Route::put('update/{id}','update')->name('update');
 
  });
- 
-
-// //add new user
-// Route::get('addUser', function () {
-//     return view('dashboard.addUser');
-// });
-
-// //add new attributes
-// Route::get('addAttribute', function () {
-//     return view('dashboard.addAttribute');
-// });
-
-
-// //add new attributes
-// Route::get('addAttribute', function () {
-//     return view('dashboard.addAttribute');
-// });
-
-
-
-
-
-// //add new review
-// Route::get('addReview', function () {
-//     return view('dashboard.addReview');
-// });
-
 
 
 require __DIR__.'/auth.php';

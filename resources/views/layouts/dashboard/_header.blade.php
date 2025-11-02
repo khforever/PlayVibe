@@ -7,7 +7,7 @@
           <li class="nav-item mr-auto">
             <a class="navbar-brand" href="index.html">
               <img class="brand-logo" alt="modern admin logo" src="{{asset('assets/dashboard')}}/images/logo/logo.png">
-              <h3 class="brand-text">Modern Admin</h3>
+              <h3 class="brand-text">PlayVibe </h3>
             </a>
           </li>
           <li class="nav-item d-none d-md-block float-right"><a class="nav-link modern-nav-toggle pr-0" data-toggle="collapse"><i class="toggle-icon ft-toggle-right font-medium-3 white" data-ticon="ft-toggle-right"></i></a></li>
@@ -157,7 +157,7 @@
             <li class="dropdown dropdown-user nav-item">
               <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
                 <span class="mr-1">Hello,
-                  <span class="user-name text-bold-700">John Doe</span>
+                  <span class="user-name text-bold-700">{{Auth::user()->first_name ?? 'Guest'}}</span>
                 </span>
                 <span class="avatar avatar-online">
                   <img src="{{asset('assets/dashboard')}}/images/portrait/small/avatar-s-19.png" alt="avatar"><i></i></span>
