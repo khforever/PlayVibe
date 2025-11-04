@@ -29,13 +29,15 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 
+
+// Route::middleware(['auth:sanctum'])->group(function () {
+    //categories
+
 Route::apiResource('categories',CategoryController::class)->except('update','destroy');
 Route::post('/categories/{category}', [CategoryController::class, 'update']);
 Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
 
 //subcategories
-Route::middleware(['auth:sanctum'])->group(function () {
-
      Route::prefix('subcategories')->controller(SubCategoryController::class)->group(function () {
         Route::post('/', 'store');
         Route::get('/', 'index');
@@ -43,17 +45,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::post('/{id}', 'update');
         Route::delete('/{id}', 'destroy');
     });
-});
-
-Route::apiResource('sizes',SizeController::class);
-Route::apiResource('colors',ColorController::class);
-
-
-
-//
+    // sizes
+    Route::apiResource('sizes',SizeController::class);
+    //colors
+    Route::apiResource('colors',ColorController::class);
+    //users
 Route::apiResource('users', UserController::class);
 // Route::post('users/{id}/restore', [UserController::class, 'restore']);
-
 
 //attribute
 Route::prefix('attributes')->controller(AttributeController::class)->group(function () {
@@ -63,3 +61,13 @@ Route::prefix('attributes')->controller(AttributeController::class)->group(funct
     Route::put('/{id}', 'update');
     Route::delete('/{id}', 'destroy');
 });
+
+
+
+// });
+
+
+
+
+
+

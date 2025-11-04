@@ -30,7 +30,7 @@ class AttributeController extends Controller
      */
      public function store(Request $request)
     {
-        $data = $request->validate([ 
+        $data = $request->validate([
             'product_id'=>'required|integer|exists:products,id',
             'sumthumb'=>'required|string',
             'additional_info'=>'required|string',
@@ -40,12 +40,12 @@ class AttributeController extends Controller
             'spacious'=>'required|string',
 
         ]);
-        
+
         Attribute::create($data);
         return redirect()->route('products.index');
     }
 
-    
+
 
     /**
      * Show the form for editing the specified resource.
@@ -62,7 +62,7 @@ class AttributeController extends Controller
      */
     public function update(Request $request,string $id)
     {
-          $data = $request->validate([ 
+          $data = $request->validate([
             'product_id'=>'required|integer|exists:products,id',
             'sumthumb'=>'nullable|string',
             'additional_info'=>'nullable|string',
@@ -72,7 +72,7 @@ class AttributeController extends Controller
             'spacious'=>'nullable|string',
 
         ]);
-        
+
         Attribute::where('id',$id)->update($data);
         return redirect()->route('products.index');
     }

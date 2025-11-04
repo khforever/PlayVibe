@@ -22,7 +22,7 @@ class UpdateAttribute extends FormRequest
     public function rules(): array
     {
         return [
-             'product_id'=>'required|integer|exists:products,id',
+             'product_id'=>'nullable|integer|exists:products,id',
             'sumthumb'=>'nullable|string|max:255',
             'additional_info'=>'nullable|string|max:255',
             'dimension'=>'nullable|string|max:255',

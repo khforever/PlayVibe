@@ -20,9 +20,9 @@ class AttributeController extends Controller
     public function index(Request $request)
     {
      $search = $request->input('search');
-    $take = $request->input('take'); 
-    $skip = $request->input('skip');  
-    
+    $take = $request->input('take');
+    $skip = $request->input('skip');
+
     $query = Attribute::query();
 
       if ($search)
@@ -42,7 +42,7 @@ class AttributeController extends Controller
     return $this->responseApi('', $attribute, 200, ['count' =>$total]);
     }
 
-    
+
 
     /**
      * Store a newly created resource in storage.
@@ -50,10 +50,10 @@ class AttributeController extends Controller
     public function store(StoreAttribute $request)
     {
          $data = $request->validated();
-        
+
          $attribute = Attribute::create($data);
 
-          $attribute = fractal($attribute,new AttributeTransform())
+         $attribute = fractal($attribute,new AttributeTransform())
                     ->serializeWith(new ArraySerializer())
                     ->toArray();
 
@@ -76,7 +76,7 @@ class AttributeController extends Controller
         return  $this->responseApi('',$attribute,200);
     }
 
-   
+
 
     /**
      * Update the specified resource in storage.
@@ -86,9 +86,9 @@ class AttributeController extends Controller
          $data = $request->validated();
 
          $attribute = Attribute::findOrFail($id);
-        
-         Attribute::update($data);
-        
+
+        $attribute->update($data);
+
         $attribute = fractal($attribute, new AttributeTransform())
                     ->serializeWith(new ArraySerializer())
                     ->toArray();
@@ -105,12 +105,12 @@ class AttributeController extends Controller
 
         if($attribute)
         {
-            return  $this->responseApi(__('can not delete'),403); 
+            return  $this->responseApi(__('can not delete'),403);
         }
 
         $attribute->delete();
-        
+
         return  $this->responseApi(__('delete attribute successfully'),204);
-        
+
     }
 }
