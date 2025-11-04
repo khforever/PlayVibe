@@ -51,7 +51,7 @@ Route::apiResource('colors',ColorController::class);
 
 
 //
-Route::apiResource('users', UserController::class);
+// Route::apiResource('users', UserController::class);
 // Route::post('users/{id}/restore', [UserController::class, 'restore']);
 
 

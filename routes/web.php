@@ -28,58 +28,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+ 
 
-//////////////////////////////////////dashboard auth///////////////////////////////////////////////
-
-// Route::get('register', function () {
-//     return view('dashboard.auth.register');
-// });
-
-
-// Route::get('login', function () {
-//     return view('dashboard.auth.login');
-// });
-
-// Route::get('recover', function () {
-//     return view('dashboard.auth.recoverPassword');
-
-// });
-
-
-
-// ////////////////////////////////////////users/////////////////////////////////////////////
-
-
-// //show all users
-// Route::get('users', function () {
-//     return view('dashboard.users.index');
-// });
-
-
-
-
-// //add new user
-// Route::get('create', function () {
-//     return view('dashboard.users.create');
-// });
-
-
-
-
-
-
-
-// //edit user
-// Route::get('edit', function () {
-//     return view('dashboard.users.edit');
-// });
-
-
-
-
-
-
-
+ 
+ 
 
 
 
@@ -163,99 +115,12 @@ Route::controller(ProductVariantController::class)->prefix('productVariants')->n
 
 
 
-// Route::get('/users/trash', [UserController::class, 'trash'])->name('users.trash');
-
-//    Route::post('users/restore/{id}', [UserController::class, 'restore'])->name('users.restore');
-
-
-
-// Route::controller(UserController::class)
-// ->prefix('users')->name('users.')->group(function ()
-// {
-
-//      Route::get('/', 'index')->name('index');
-//     Route::get('/create', 'create')->name('create');
-//      Route::get('/show/{id}', 'show')->name('show');
-//     Route::post('/store', 'store')->name('store');
-//     Route::get('/edit/{id}', 'edit')->name('edit');
-//     Route::put('/update/{id}', 'update')->name('update');
-//     Route::delete('/destroy/{id}', 'destroy')->name('destroy');
-
-
-
-// });
-
-
-// 'dashboard.users.trashUsers'
-
-//  Route::resource('users', UserController::class);
 
 
 
 
-// /////////////////////////////////////////subcategories////////////////////////////////////////////
-
-
-// //show all subcategories
-// Route::get('subCategories', function () {
-//     return view('dashboard.subCategories');
-// });
-
-// //add new category  addSubCategory
-//   Route::get('addSubCategory', function () {
-//     return view('dashboard.addSubCategory');
-//   });
-
-
-
-// // edit subcategory
-// Route::get('editSubCategory', function (){
-//     return view('dashboard.editSubCategory');
-// });
-
-
-// ///////////////////////////////////////products//////////////////////////////////////////////
-// //show all products
-// Route::get('products', function () {
-//     return view('dashboard.products');
-// });
-
-
-// //add new product
-//   Route::get('addProduct', function () {
-//       return view('dashboard.addProduct');
-//   });
-
-
-// // edit product
-// Route::get('editProduct', function () {
-//     return view('dashboard.editProduct');
-// });
-
-
-
-// /////////////////////////////////////////just test////////////////////////////////////////////
-
-// Route::get('test', function () {
-//     return view('dashboard.welcome');
-// });
-
-// Route::get('form', function () {
-//     return view('dashboard.form');
-// });
-
-// Route::get('table', function () {
-//     return view('dashboard.table');
-// });
-
-// /////////////////////////////////////////////////////////////////////////////////////
-
-
-//add new category  addSubCategory
-//  Route::get('addSubCategory', function () {
-//     return view('dashboard.addSubCategory');
-//  });
-
+ 
+ 
 
 
 //subcategories
