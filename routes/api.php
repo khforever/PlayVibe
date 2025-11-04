@@ -49,8 +49,10 @@ Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
     Route::apiResource('sizes',SizeController::class);
     //colors
     Route::apiResource('colors',ColorController::class);
+
+
     //users
-Route::apiResource('users', UserController::class);
+//Route::apiResource('users', UserController::class);
 // Route::post('users/{id}/restore', [UserController::class, 'restore']);
 
 //attribute
@@ -62,11 +64,7 @@ Route::prefix('attributes')->controller(AttributeController::class)->group(funct
     Route::delete('/{id}', 'destroy');
 });
 
-
-
-// });
-
-
+ 
 
 
 

@@ -140,7 +140,9 @@ Add New User
                                     </div>
 
                                     {{-- User Role --}}
-                                    <div class="form-group">
+
+                                    
+                                    {{-- <div class="form-group">
                                         <label for="role">User Role <span class="text-danger">*</span></label>
                                         <select id="role" class="form-control @error('user_type') is-invalid @enderror" name="user_type" required>
                                             <option value="1" {{ old('user_type') == 1 ? 'selected' : '' }}>Admin</option>
@@ -149,7 +151,7 @@ Add New User
                                         @error('user_type')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
-                                    </div>
+                                    </div> --}}
 
                                     {{-- User Image --}}
                                     <div class="form-group">
