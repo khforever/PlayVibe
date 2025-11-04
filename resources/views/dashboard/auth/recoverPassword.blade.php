@@ -22,7 +22,7 @@
               <div class="card border-grey border-lighten-3 px-2 py-2 m-0">
                 <div class="card-header border-0 pb-0">
                   <div class="card-title text-center">
-                    <img src="{{asset('assets/dashboard')}}/images/logo/logo-dark.png" alt="branding logo">
+                    <img src="{{asset('assets/dashboard')}}/images/logo/logoDark.png" class="w-50" alt="branding logo">
                   </div>
                   <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
                     <span>We will send you a link to reset password.</span>

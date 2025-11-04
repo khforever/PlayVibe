@@ -6,7 +6,7 @@ table title
 
 
 @section('content')
- 
+
 
   <div class="app-content content">
     <div class="content-wrapper">
@@ -19,7 +19,7 @@ table title
               <div class="card border-grey border-lighten-3 px-2 py-2 m-0">
                 <div class="card-header border-0">
                   <div class="card-title text-center">
-                    <img src="{{asset('assets/dashboard')}}/images/logo/logo-dark.png" alt="branding logo">
+                    <img src="{{asset('assets/dashboard')}}/images/logo/logoDark.png" class="w-50" alt="branding logo">
                   </div>
                   <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
                     <span>Create Account</span>
@@ -31,7 +31,7 @@ table title
                        @csrf
                       <fieldset class="form-group position-relative has-icon-left mb-1">
                         <input type="text" class="form-control form-control-lg input-lg" id="user-name"  name="first_name" value="{{ old('first_name') }}"  placeholder="First Name">
-                      
+
                         <div class="form-control-position">
                           <i class="ft-user"></i>
                         </div>
@@ -40,7 +40,7 @@ table title
                             {{ $message }}
                             @enderror
                           </small>
-                        
+
                       </fieldset>
                         <fieldset class="form-group position-relative has-icon-left mb-1">
                         <input type="text" class="form-control form-control-lg input-lg" id="user-name"  name="last_name" value="{{ old('last_name') }}" placeholder="Last Name">
@@ -57,7 +57,7 @@ table title
                         @error('email')
                           <small class="text-danger">{{ $message }}</small>
                         @enderror
-                        
+
                         <div class="form-control-position">
                           <i class="ft-mail"></i>
                         </div>
@@ -94,7 +94,7 @@ table title
       </div>
     </div>
   </div>
- 
+
 
 
 

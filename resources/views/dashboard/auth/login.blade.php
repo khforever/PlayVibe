@@ -18,10 +18,10 @@ table title
               <div class="card border-grey border-lighten-3 m-0">
                 <div class="card-header border-0">
                   <div class="card-title text-center">
-                    <img src="{{asset('assets/dashboard')}}/images/logo/logo-dark.png" alt="branding logo">
+                    <img src="{{asset('assets/dashboard')}}/images/logo/logoDark.png" class="w-50" alt="branding logo">
                   </div>
                   <h6 class="card-subtitle line-on-side text-muted text-center font-small-3 pt-2">
-                    <span>Login with Modern</span>
+                    <span>Login with Playvibe</span>
                   </h6>
                 </div>
                 <div class="card-content">
@@ -65,7 +65,7 @@ table title
                 </div>
                 <div class="card-footer border-0">
                   <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1">
-                    <span>New to Modern ?</span>
+                    <span>New to Playvive ?</span>
                   </p>
                   <a href="{{ route('register') }}" class="btn btn-info btn-block btn-lg mt-3"><i class="ft-user"></i> Register</a>
                 </div>
