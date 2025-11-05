@@ -55,6 +55,7 @@ Products
                                         <th>Price</th>
                                         <th>Description</th>
                                         <th>Category/Sub_Category</th>
+                                        <th>Image</th>
                                         <th>Update</th>
                                         <th>Delete</th>
                                         <th>Add Variants</th>
@@ -69,6 +70,13 @@ Products
                                         <td>{{$product->price}}</td>
                                         <td>{{$product->description}}</td>
                                         <td>{{$product->subCategory->category->name}}/{{$product->subCategory->name}}</td>
+                                        <td> @if ($product->mainImage && $product->mainImage->image_url)
+                    <img src="{{ asset($product->mainImage->image_url) }}" 
+                         width="80" height="80" 
+                         style="object-fit:cover; border-radius:8px;">
+                @else
+                    <span class="text-muted">لا توجد صورة</span>
+                @endif</td>
                                         <td>
                                             <a href="{{ route('products.edit', $product->id)}}">
                                                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"

@@ -37,3 +37,6 @@
   <!-- BEGIN Custom CSS-->
   <link rel="stylesheet" type="text/css" href="../../../assets/css/style-rtl.css">
   <!-- END Custom CSS-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+ {{-- file input --}}
+<link href="{{ asset('assets/vendors/file_input/css/fileinput.min.css') }}" rel="stylesheet"/>

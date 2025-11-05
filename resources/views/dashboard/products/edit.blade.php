@@ -65,22 +65,15 @@ Edit Product
                                             {{-- Dynamically load subcategories here --}}
                                             @foreach ($subCategories as $subCategory)
 
-                                            <option value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>
+                                            <option value="{{ $subCategory->id }}" {{ $subCategory->id == $product->sub_category_id ? 'selected' : '' }}>{{ $subCategory->name }}</option>
 
                                             @endforeach
                                         </select>
                                     </div>
 
                                     {{-- Product Image --}}
-                                    {{-- <div class="form-group">
-                                        <label for="image">Product Image</label>
-                                        <input type="file" id="image" name="image" class="form-control border-primary">
-                                        <small class="form-text text-muted">Leave blank to keep the current image.</small>
-
-                                        <div class="mt-1">
-                                            <img src="/images/products/leather-handbag.jpg" alt="Current Image" width="100" class="rounded">
-                                        </div>
-                                    </div> --}}
+                                    <input type="file" id="postImages" name="images[]" class="form-control mt-2 edit-post-image" accept="image/*"
+                            multiple />
                                 </div>
 
                                 <div class="form-actions">
@@ -101,3 +94,42 @@ Edit Product
     </section>
 </div>
 @endsection
+@push('js')
+<script>
+$(document).ready(function() {
+    $("#postImages").fileinput({
+        theme: 'fa5',
+        showCancel: false,
+        showUpload: false,
+        maxFileCount: 5,
+        overwriteInitial: false,
+        initialPreviewAsData: true,
+
+        // عرض الصور القديمة
+        initialPreview: [
+            @foreach($product->images as $image)
+                "{{ asset($image->image_url) }}",
+            @endforeach
+        ],
+
+        // إعدادات كل صورة
+        initialPreviewConfig: [
+            @foreach($product->images as $image)
+            {
+                caption: "{{ basename($image->image_url) }}",
+                width: "120px",
+                url: "{{ route('products.deleteImage', $image->id) }}", // رابط الحذف
+                key: {{ $image->id }}
+            },
+            @endforeach
+        ],
+
+        // بيانات إضافية للطلب (عشان Laravel يقبل DELETE)
+        deleteExtraData: {
+            _method: 'DELETE',
+            _token: '{{ csrf_token() }}'
+        },
+    });
+});
+</script>
+@endpush

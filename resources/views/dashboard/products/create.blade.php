@@ -25,6 +25,13 @@ Add Product
                     <div class="card-content collapse show">
                         <div class="card-body">
                             <div class="card-text mb-2">
+                                   @if (session()->has('errors'))
+              <div class="alert alert-danger">
+                @foreach (session('errors')->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+              </div>
+          @endif
                                 <h2>Product Information Form</h2>
                                 <p>Enter product details below.</p>
                             </div>
@@ -66,13 +73,10 @@ Add Product
                                             @endforeach
                                         </select>
                                     </div>
-
-                                    {{-- Product Image --}}
-                                    {{-- <div class="form-group">
-                                        <label for="image">Product Image</label>
-                                        <input type="file" id="image" name="image" class="form-control border-primary">
-                                    </div> --}}
-
+               <input type="file" id="productImage" class="form-control mb-2" accept="image/*" multiple name="images[]"/>
+                  <div class="tn-slider mb-2">
+                      <div id="imagePreview" class="slick-slider"></div>
+                  </div>
                                
 
 
@@ -96,3 +100,20 @@ Add Product
     </section>
 </div>
 @endsection
+@push('js')
+<script>
+$(document).ready(function() {
+    // initialize with defaults
+    $("#productImage").fileinput({
+         theme: 'fa5',
+          showCancel: true,
+          showUpload:false,
+          maxFileCount:5,
+    });
+
+    // with plugin options
+    $("#productImage").fileinput({'uploadUrl': '/path/to/your-upload-api', 'previewFileType': 'any'});
+    
+});
+</script>
+@endpush
