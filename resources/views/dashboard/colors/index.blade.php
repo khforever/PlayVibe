@@ -40,7 +40,7 @@ Colors
 
 <div class="card-header d-flex justify-content-between align-items-center">
     <h4 class="card-title mb-0">Colors</h4>
-    <a href=" " class="btn btn-primary">
+    <a href="{{route('colors.create')}} " class="btn btn-primary">
         <i class="la la-plus"></i> Colors
     </a>
 </div>
