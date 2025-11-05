@@ -1,13 +1,17 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Exception;
 use App\Models\Product;
+use App\Models\Attribute;
+use App\Models\SubCategory;
+use App\Utils\ImageManager;
+use App\Models\ProductImage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
-use App\Models\SubCategory;
-use App\Models\Attribute;
+use Illuminate\Support\Facades\File;
 
 
 
@@ -18,7 +22,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-       $products = Product::all();
+       $products = Product::with('MainImage')->get();
        $attributes = Attribute::with('product')->get();
         return view('dashboard.products.index',compact('products','attributes'));
     }
@@ -40,8 +44,21 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         //  dd($request->all());
-      $productDataValidated = $request->validated();
-      $product = Product::create($productDataValidated);
+          try {
+            DB::beginTransaction();
+           $productDataValidated = $request->validated();
+           $product = Product::create($productDataValidated);
+           $paths='assets/dashboard/products/';
+           ImageManager::uploadImage($request, $product, $paths);
+            DB::commit();
+        } catch (Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['errors' => $e->getMessage()]);
+        }
+    //     Session::flash('success', 'Your registration was successful.');
+    //     return redirect()->back();
+    //   $productDataValidated = $request->validated();
+    //   $product = Product::create($productDataValidated);
       return redirect()->route('products.index')->with('success', 'Product Created Successfully!');
     }
 
@@ -59,7 +76,7 @@ class ProductController extends Controller
     public function edit(Product $product, $id)
     {
         $subCategories = SubCategory::all();
-        $product = Product::findOrFail($id);
+        $product = Product::with(['images'])->findOrFail($id);
         return view('dashboard.products.edit',compact('product','subCategories'));
     }
 
@@ -68,6 +85,8 @@ class ProductController extends Controller
      */
     public function update(UpdateProductRequest $request, $id)
     {
+        try {
+        DB::beginTransaction();
         $product = Product::findOrFail($id);
         $productDataValidated = $request->validated();
         $product->update([
@@ -76,7 +95,18 @@ class ProductController extends Controller
             'price'=>$productDataValidated['price'],
             'sub_category_id'=>$productDataValidated['sub_category_id'],
         ]);
+        $paths='assets/dashboard/products';
+
+   
+    if ($request->hasFile('images')) {
+        ImageManager::updateImage($request, $product, $paths);
+    }
+         DB::commit();
         return redirect()->route('products.index')->with('success', 'Product Updated Successfully!');
+    } catch (Exception $e) {
+        DB::rollBack();
+        return redirect()->back()->withErrors(['error' => $e->getMessage()]);
+    }
     }
 
     /**
@@ -85,8 +115,22 @@ class ProductController extends Controller
     public function destroy(Product $product, $id)
     {
         $product=Product::findOrFail($id);
+          ImageManager::deleteImages($product);
         $product->where('id', $id)->delete();
         return redirect()->route('products.index')->with('success', 'Product Deleted Successfully!');
 
     }
+    public function deleteImage($id)
+{
+    $image = ProductImage::findOrFail($id);
+
+    if (File::exists(public_path($image->image_url))) {
+        File::delete(public_path($image->image_url));
+    }
+
+    $image->delete();
+
+    return response()->json(['success' => true]);
+}
+
 }

@@ -26,6 +26,8 @@ class StoreProductRequest extends FormRequest
             'description' => 'nullable|string',
             'price' => 'required|numeric|min:0',
             'sub_category_id' => 'required|exists:sub_categories,id',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpg,jpeg,png,webp|max:2048',
         ];
     }
 
@@ -42,6 +44,11 @@ class StoreProductRequest extends FormRequest
             'price.numeric' => 'The price must be a number.',
             'sub_category_id.required' => 'The category field is required.',
             'sub_category_id.exists' => 'The selected category does not exist.',
+
+            'images.array' => 'Images must be sent as an array.',
+        'images.*.image' => 'Each file must be a valid image.',
+        'images.*.mimes' => 'Images must be of type: jpg, jpeg, png, or webp.',
+        'images.*.max' => 'Each image must not exceed 2MB in size.',
         ];
     }
 }

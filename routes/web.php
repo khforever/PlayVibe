@@ -17,7 +17,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return view('dashboard.auth.login');
+    return view('dashboard.users.index');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -80,6 +80,7 @@ Route::controller(ProductController::class)->prefix('products')->name('products.
     Route::get('/edit/{product_id}', 'edit')->name('edit');
     Route::put('/update/{product_id}', 'update')->name('update');
     Route::delete('/destroy/{product_id}', 'destroy')->name('destroy');
+    Route::delete('/image/{id}', [ProductController::class, 'deleteImage'])->name('deleteImage');
 });
 
 // ////////////////////////////////////////Product variants  /////////////////////////////////////////////
