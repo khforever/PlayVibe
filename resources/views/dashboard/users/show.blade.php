@@ -87,19 +87,44 @@ Edit User
                                         </div>
                                     </div>
 
+
+
+          {{-- Current & New Image --}}
+                                    <div class="form-group">
+                                        <label>  Profile Image</label>
+                                        <div class="mb-2">
+                                            @if($user->image)
+                                                <img src="{{ asset('storage/' . $user->image) }}" alt="User Image"
+                                                     class="img-thumbnail" style="max-width: 150px; max-height: 150px;">
+                                            @else
+                                                <p class="text-muted">No image uploaded</p>
+                                            @endif
+                                        </div>
+                                    </div>
+
+
+
+{{--
                                     <div class="form-group">
                                         <label for="userImage">Profile Image</label>
                                         <input type="file" id="userImage" class="form-control-file" name="image">
-                                    </div>
+                                    </div> --}}
                                 </div>
 
                                 <div class="form-actions">
+
+{{--
                                     <button type="button" class="btn btn-warning mr-1">
                                         <i class="ft-x"></i> Cancel
-                                    </button>
+                                    </button> --}}
+
+{{--
                                     <button type="submit" class="btn btn-primary">
                                         <i class="la la-check-square-o"></i> Update
                                     </button>
+ --}}
+
+
                                 </div>
                             </form>
                         </div>
