@@ -34,7 +34,7 @@ Products
         <i class="la la-plus"></i> Add Products
     </a>
 
-    
+
 </div>
 
 <div>
@@ -56,10 +56,11 @@ Products
                                         <th>Description</th>
                                         <th>Category/Sub_Category</th>
                                         <th>Image</th>
+                                        <th>Show</th>
                                         <th>Update</th>
                                         <th>Delete</th>
                                         <th>Add Variants</th>
-                                         
+
 
                                     </tr>
                                 </thead>
@@ -71,12 +72,32 @@ Products
                                         <td>{{$product->description}}</td>
                                         <td>{{$product->subCategory->category->name}}/{{$product->subCategory->name}}</td>
                                         <td> @if ($product->mainImage && $product->mainImage->image_url)
-                    <img src="{{ asset($product->mainImage->image_url) }}" 
-                         width="80" height="80" 
+                    <img src="{{ asset($product->mainImage->image_url) }}"
+                         width="80" height="80"
                          style="object-fit:cover; border-radius:8px;">
                 @else
                     <span class="text-muted">لا توجد صورة</span>
                 @endif</td>
+
+
+
+<td>
+                                            <a href="{{ route('products.show', $product->id)}}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                                                viewBox="0 0 48 48">
+                                                <g fill="none" stroke="#000" stroke-linecap="round"
+                                                    stroke-linejoin="round" stroke-width="4">
+                                                    <path
+                                                        d="M24 10c-11 0-20 14-20 14s9 14 20 14s20-14 20-14s-9-14-20-14Zm0 22a8 8 0 1 1 0-16a8 8 0 0 1 0 16Z" />
+                                                </g>
+                                            </svg>
+                                            </a>
+
+
+
+
+
+
                                         <td>
                                             <a href="{{ route('products.edit', $product->id)}}">
                                                  <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
@@ -198,13 +219,13 @@ Products
                                              <a href="{{ route('productVariants.index', $product->id) }} " class="btn btn-primary">
                                               <i class="la la-plus"></i> Add Variant
                                                                   </a>
-                                        
+
 
                                         @endforeach
                                     </tr>
                                 </tbody>
                                 <tfoot>
-                                    
+
                                 </tfoot>
                             </table>
                         </div>
@@ -227,7 +248,7 @@ Products
                                         <th>spacious</th>
                                          <th>Update</th>
 
-                                         
+
 
                                     </tr>
                                 </thead>
@@ -335,29 +356,29 @@ Products
                                             </a>
                                         </td>
 
-                                @endforeach  
+                                @endforeach
                                     </tr>
                                 </tbody>
                                 <tfoot>
-                                    
+
                                 </tfoot>
                             </table>
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
 
             </div>
 
 
-               
+
         </div>
 
 
 
 
 
-      
+
 
 
 

@@ -28,10 +28,10 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
- 
 
- 
- 
+
+
+
 
 
 
@@ -77,6 +77,7 @@ Route::controller(ProductController::class)->prefix('products')->name('products.
     Route::get('/', 'index')->name('index');
     Route::get('/create', 'create')->name('create');
     Route::post('/store', 'store')->name('store');
+    Route::get('/show/{product_id}', 'show')->name('show');
     Route::get('/edit/{product_id}', 'edit')->name('edit');
     Route::put('/update/{product_id}', 'update')->name('update');
     Route::delete('/destroy/{product_id}', 'destroy')->name('destroy');
@@ -120,8 +121,8 @@ Route::controller(ProductVariantController::class)->prefix('productVariants')->n
 
 
 
- 
- 
+
+
 
 
 //subcategories
