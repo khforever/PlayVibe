@@ -28,23 +28,16 @@ public function create($id)
 
 
 
-
-   
     /**
      * Store a newly created resource in storage.
      */
 
-
-
-
-
-
 public function store(Request $request, $id)
 {
-    // التأكد من أن المنتج موجود
+
     $product = Product::findOrFail($id);
 
-    // التحقق من صحة البيانات
+
     $data = $request->validate([
         'sumthumb' => 'required|string',
         'additional_info' => 'required|string',
@@ -54,51 +47,12 @@ public function store(Request $request, $id)
         'spacious' => 'required|string',
     ]);
 
-    // ربط الـ attribute بالمنتج
     $data['product_id'] = $product->id;
 
-    // إنشاء الـ attribute
     Attribute::create($data);
 
     return redirect()->route('products.index')->with('success', 'Attribute added successfully!');
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-     public function store33(Request $request , $id)
-    {
-
-     //   $products = Product::select('id','name')->get();
-
-        $products = Product::findOrFail($id);
-
-
-        $data = $request->validate([
-           // 'product_id'=>'required|integer|exists:products,id',
-            'sumthumb'=>'required|string',
-            'additional_info'=>'required|string',
-            'dimension'=>'required|string',
-            'maincompartment'=>'required|string',
-            'durable_fabric'=>'required|string',
-            'spacious'=>'required|string',
-
-        ]);
-
-        Attribute::create($data);
-        return redirect()->route('products.index');
-    }
 
 
 

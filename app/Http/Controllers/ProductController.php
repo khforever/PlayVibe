@@ -65,17 +65,14 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+      public function show($id)
     {
 
          $product = Product::findOrFail($id);
-        $productImg = Product::with(['images'])->findOrFail($id);
-        //    $attribute = Attribute::with('product')->findOrFail($id);
-           $subCategory= SubCategory::with('category')->findOrFail($product->sub_category_id);
            $attributes = Attribute::where('product_id', $product->id)->get();
            $images = ProductImage::where('product_id', $product->id)->get();
-        //    $image = ProductImage::where('product_id', $product->id)->first();
-        return view('dashboard.products.show',compact('product','productImg','subCategory','attributes','images'));
+
+        return view('dashboard.products.show',compact('product','attributes','images'));
     }
 
     /**
