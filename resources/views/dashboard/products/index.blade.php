@@ -28,212 +28,258 @@ Products
                     </div>
 
 
-<div class="card-header d-flex justify-content-between align-items-center">
-    <h4 class="card-title mb-0">Products</h4>
-    <a href="{{ route('products.create') }} " class="btn btn-primary">
-        <i class="la la-plus"></i> Add Products
-    </a>
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h4 class="card-title mb-0">Products</h4>
+                        <a href="{{ route('products.create') }} " class="btn btn-primary">
+                            <i class="la la-plus"></i> Add Products
+                        </a>
 
 
-</div>
-
-<div>
-    <div class="card-header d-flex justify-content-between align-items-center">
-    <h4 class="card-title mb-0">attributes</h4>
-<a href="{{ route('attribute.create') }} " class="btn btn-primary">
-        <i class="la la-plus"></i> Add attributes
-    </a>
-</div>
-
-                    <div class="card-content collapse show">
-                        <div class="card-body card-dashboard">
-                            <p class="card-text">Each column has Products</p>
-                            <table class="table table-striped table-bordered column-rendering">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Price</th>
-                                        <th>Description</th>
-                                        <th>Category/Sub_Category</th>
-                                        <th>Image</th>
-                                        <th>Show</th>
-                                        <th>Update</th>
-                                        <th>Delete</th>
-                                        <th>Add Variants</th>
+                    </div>
 
 
-                                    </tr>
-                                </thead>
-                               <tbody>
-                                @foreach ($products as $product)
-                                    <tr>
-                                        <td>{{$product->name}}</td>
-                                        <td>{{$product->price}}</td>
-                                        <td>{{$product->description}}</td>
-                                        <td>{{$product->subCategory->category->name}}/{{$product->subCategory->name}}</td>
-                                        <td> @if ($product->mainImage && $product->mainImage->image_url)
-                    <img src="{{ asset($product->mainImage->image_url) }}"
-                         width="80" height="80"
-                         style="object-fit:cover; border-radius:8px;">
-                @else
-                    <span class="text-muted">لا توجد صورة</span>
-                @endif</td>
+                        <div class="card-content collapse show">
+                            <div class="card-body card-dashboard">
+                                <p class="card-text">Each column has Products</p>
+                                <table class="table table-striped table-bordered column-rendering">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Price</th>
+                                            {{-- <th>Description</th> --}}
+                                            <th>Category/Sub_Category</th>
+                                            <th>Image</th>
+                                            <th>Show</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                            <th>Add Variants</th>
+                                            <th>Add Attribute</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($products as $product)
+                                        <tr>
+                                            <td>{{$product->name}}</td>
+                                            <td>{{$product->price}}</td>
+                                            {{-- <td>{{$product->description}}</td> --}}
+                                            <td>{{$product->subCategory->category->name}}/{{$product->subCategory->name}}
+                                            </td>
+                                            <td> @if ($product->mainImage && $product->mainImage->image_url)
+                                                <img src="{{ asset($product->mainImage->image_url) }}" width="80"
+                                                    height="80" style="object-fit:cover; border-radius:8px;">
+                                                @else
+                                                <span class="text-muted">لا توجد صورة</span>
+                                                @endif
+                                            </td>
 
 
 
-<td>
-                                            <a href="{{ route('products.show', $product->id)}}">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
-                                                viewBox="0 0 48 48">
-                                                <g fill="none" stroke="#000" stroke-linecap="round"
-                                                    stroke-linejoin="round" stroke-width="4">
-                                                    <path
-                                                        d="M24 10c-11 0-20 14-20 14s9 14 20 14s20-14 20-14s-9-14-20-14Zm0 22a8 8 0 1 1 0-16a8 8 0 0 1 0 16Z" />
-                                                </g>
-                                            </svg>
-                                            </a>
-
-
-
-
-
-
-                                        <td>
-                                            <a href="{{ route('products.edit', $product->id)}}">
-                                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                                                viewBox="0 0 32 32">
-                                                <g fill="none">
-                                                    <path fill="url(#SVGU1eE1b5T)"
-                                                        d="m29 20l-9 9H7.5A4.5 4.5 0 0 1 3 24.5V10l13-1l13 1z" />
-                                                    <path fill="url(#SVGkFtYpesI)"
-                                                        d="m29 20l-9 9H7.5A4.5 4.5 0 0 1 3 24.5V10l13-1l13 1z" />
-                                                    <path fill="url(#SVGJ3aOCI1z)" fill-opacity="0.3"
-                                                        d="m29 20l-9 9H7.5A4.5 4.5 0 0 1 3 24.5V10l13-1l13 1z" />
-                                                    <g filter="url(#SVGzEwpPcLX)">
-                                                        <path fill="url(#SVGkHpQsC8g)"
-                                                            d="M10.5 18a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3m1.5 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0m4 1.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3m1.5-6.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0m4 1.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3" />
-                                                    </g>
-                                                    <path fill="url(#SVGR8qwqQEB)"
-                                                        d="M3 7.5A4.5 4.5 0 0 1 7.5 3h17A4.5 4.5 0 0 1 29 7.5V10H3z" />
-                                                    <path fill="url(#SVGuLUjtdLw)"
-                                                        d="m20.539 29.47l7.61-7.544v-4.074h-4.073l-7.567 7.64l.308 3.696z" />
-                                                    <path fill="url(#SVGLFchkdje)"
-                                                        d="m20.539 29.47l.223-.223s-1.726-.661-2.535-1.47c-.809-.81-1.47-2.534-1.47-2.534l-.248.249a2.66 2.66 0 0 0-.686 1.206l-.79 3.051a1 1 0 0 0 1.217 1.22l3.02-.778a2.8 2.8 0 0 0 1.269-.722" />
-                                                    <path fill="url(#SVGbvsSaeki)"
-                                                        d="m26.937 23.14l2.211-2.214a2.88 2.88 0 0 0 .072-4.017a2.88 2.88 0 0 0-4.144-.057l-2.238 2.241z" />
-                                                    <path fill="url(#SVGPCCetcDD)"
-                                                        d="M24.094 17.838a5.43 5.43 0 0 0 4.106 4.038l-1.55 1.551a5.43 5.43 0 0 1-4.106-4.04z" />
-                                                    <defs>
-                                                        <linearGradient id="SVGU1eE1b5T" x1="20.694" x2="13.492"
-                                                            y1="31.456" y2="9.925" gradientUnits="userSpaceOnUse">
-                                                            <stop stop-color="#b3e0ff" />
-                                                            <stop offset="1" stop-color="#b3e0ff" />
-                                                        </linearGradient>
-                                                        <linearGradient id="SVGkFtYpesI" x1="18.786" x2="22.353"
-                                                            y1="17.182" y2="33.578" gradientUnits="userSpaceOnUse">
-                                                            <stop stop-color="#dcf8ff" stop-opacity="0" />
-                                                            <stop offset="1" stop-color="#ff6ce8" stop-opacity="0.7" />
-                                                        </linearGradient>
-                                                        <linearGradient id="SVGkHpQsC8g" x1="14.727" x2="17.137"
-                                                            y1="14.077" y2="30.097" gradientUnits="userSpaceOnUse">
-                                                            <stop stop-color="#0078d4" />
-                                                            <stop offset="1" stop-color="#0067bf" />
-                                                        </linearGradient>
-                                                        <linearGradient id="SVGR8qwqQEB" x1="3" x2="25.069" y1="3"
-                                                            y2="-4.352" gradientUnits="userSpaceOnUse">
-                                                            <stop stop-color="#0094f0" />
-                                                            <stop offset="1" stop-color="#2764e7" />
-                                                        </linearGradient>
-                                                        <linearGradient id="SVGuLUjtdLw" x1="19.861" x2="26.044"
-                                                            y1="19.948" y2="26.149" gradientUnits="userSpaceOnUse">
-                                                            <stop stop-color="#ffa43d" />
-                                                            <stop offset="1" stop-color="#fb5937" />
-                                                        </linearGradient>
-                                                        <linearGradient id="SVGLFchkdje" x1="14.174" x2="18.325"
-                                                            y1="26.847" y2="30.975" gradientUnits="userSpaceOnUse">
-                                                            <stop offset=".255" stop-color="#ffd394" />
-                                                            <stop offset="1" stop-color="#ff921f" />
-                                                        </linearGradient>
-                                                        <linearGradient id="SVGbvsSaeki" x1="28.502" x2="25.869"
-                                                            y1="17.485" y2="19.968" gradientUnits="userSpaceOnUse">
-                                                            <stop stop-color="#f97dbd" />
-                                                            <stop offset="1" stop-color="#dd3ce2" />
-                                                        </linearGradient>
-                                                        <linearGradient id="SVGPCCetcDD" x1="25.469" x2="21.489"
-                                                            y1="21.663" y2="19.902" gradientUnits="userSpaceOnUse">
-                                                            <stop stop-color="#ff921f" />
-                                                            <stop offset="1" stop-color="#ffe994" />
-                                                        </linearGradient>
-                                                        <radialGradient id="SVGJ3aOCI1z" cx="0" cy="0" r="1"
-                                                            gradientTransform="rotate(135 5.719 17.306)scale(12.0208 6.0988)"
-                                                            gradientUnits="userSpaceOnUse">
-                                                            <stop offset=".535" stop-color="#4a43cb" />
-                                                            <stop offset=".926" stop-color="#4a43cb" stop-opacity="0" />
-                                                        </radialGradient>
-                                                        <filter id="SVGzEwpPcLX" width="16.667" height="10.667"
-                                                            x="7.667" y="14.333" color-interpolation-filters="sRGB"
-                                                            filterUnits="userSpaceOnUse">
-                                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                                            <feColorMatrix in="SourceAlpha" result="hardAlpha"
-                                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                                                            <feOffset dy=".667" />
-                                                            <feGaussianBlur stdDeviation=".667" />
-                                                            <feColorMatrix
-                                                                values="0 0 0 0 0.1242 0 0 0 0 0.323337 0 0 0 0 0.7958 0 0 0 0.32 0" />
-                                                            <feBlend in2="BackgroundImageFix"
-                                                                result="effect1_dropShadow_72095_10112" />
-                                                            <feBlend in="SourceGraphic"
-                                                                in2="effect1_dropShadow_72095_10112" result="shape" />
-                                                        </filter>
-                                                    </defs>
-                                                </g>
-                                            </svg>
-                                            </a>
-                                        </td>
-
-
-
-                                        <td colspan="1">
-                                            <form action="{{ route('products.destroy', $product->id) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button  type="submit" class="bg-transparent cursor-pointer border-0 ">
-
+                                            <td>
+                                                <a href="{{ route('products.show', $product->id)}}">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
-                                                viewBox="0 0 48 48">
-                                                <g fill="none" stroke-linejoin="round" stroke-width="4">
-                                                    <path fill="#ff2f51" stroke="#000" d="M9 10V44H39V10H9Z" />
-                                                    <path stroke="#fff" stroke-linecap="round" d="M20 20V33" />
-                                                    <path stroke="#fff" stroke-linecap="round" d="M28 20V33" />
-                                                    <path stroke="#000" stroke-linecap="round" d="M4 10H44" />
-                                                    <path fill="#ff2f51" stroke="#000"
-                                                        d="M16 10L19.289 4H28.7771L32 10H16Z" />
-                                                </g>
-                                            </svg>
-                                        </button>
-                                            </form>
-
-                                        </td>
-
-                                        <td>
-                                             <a href="{{ route('productVariants.index', $product->id) }} " class="btn btn-primary">
-                                              <i class="la la-plus"></i> Add Variant
-                                                                  </a>
+                                                        viewBox="0 0 48 48">
+                                                        <g fill="none" stroke="#000" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="4">
+                                                            <path
+                                                                d="M24 10c-11 0-20 14-20 14s9 14 20 14s20-14 20-14s-9-14-20-14Zm0 22a8 8 0 1 1 0-16a8 8 0 0 1 0 16Z" />
+                                                        </g>
+                                                    </svg>
+                                                </a>
 
 
-                                        @endforeach
-                                    </tr>
-                                </tbody>
-                                <tfoot>
 
-                                </tfoot>
-                            </table>
+
+
+
+                                            <td>
+                                                <a href="{{ route('products.edit', $product->id)}}">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                                        viewBox="0 0 32 32">
+                                                        <g fill="none">
+                                                            <path fill="url(#SVGU1eE1b5T)"
+                                                                d="m29 20l-9 9H7.5A4.5 4.5 0 0 1 3 24.5V10l13-1l13 1z" />
+                                                            <path fill="url(#SVGkFtYpesI)"
+                                                                d="m29 20l-9 9H7.5A4.5 4.5 0 0 1 3 24.5V10l13-1l13 1z" />
+                                                            <path fill="url(#SVGJ3aOCI1z)" fill-opacity="0.3"
+                                                                d="m29 20l-9 9H7.5A4.5 4.5 0 0 1 3 24.5V10l13-1l13 1z" />
+                                                            <g filter="url(#SVGzEwpPcLX)">
+                                                                <path fill="url(#SVGkHpQsC8g)"
+                                                                    d="M10.5 18a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3m1.5 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0m4 1.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3m1.5-6.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0m4 1.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3" />
+                                                            </g>
+                                                            <path fill="url(#SVGR8qwqQEB)"
+                                                                d="M3 7.5A4.5 4.5 0 0 1 7.5 3h17A4.5 4.5 0 0 1 29 7.5V10H3z" />
+                                                            <path fill="url(#SVGuLUjtdLw)"
+                                                                d="m20.539 29.47l7.61-7.544v-4.074h-4.073l-7.567 7.64l.308 3.696z" />
+                                                            <path fill="url(#SVGLFchkdje)"
+                                                                d="m20.539 29.47l.223-.223s-1.726-.661-2.535-1.47c-.809-.81-1.47-2.534-1.47-2.534l-.248.249a2.66 2.66 0 0 0-.686 1.206l-.79 3.051a1 1 0 0 0 1.217 1.22l3.02-.778a2.8 2.8 0 0 0 1.269-.722" />
+                                                            <path fill="url(#SVGbvsSaeki)"
+                                                                d="m26.937 23.14l2.211-2.214a2.88 2.88 0 0 0 .072-4.017a2.88 2.88 0 0 0-4.144-.057l-2.238 2.241z" />
+                                                            <path fill="url(#SVGPCCetcDD)"
+                                                                d="M24.094 17.838a5.43 5.43 0 0 0 4.106 4.038l-1.55 1.551a5.43 5.43 0 0 1-4.106-4.04z" />
+                                                            <defs>
+                                                                <linearGradient id="SVGU1eE1b5T" x1="20.694" x2="13.492"
+                                                                    y1="31.456" y2="9.925"
+                                                                    gradientUnits="userSpaceOnUse">
+                                                                    <stop stop-color="#b3e0ff" />
+                                                                    <stop offset="1" stop-color="#b3e0ff" />
+                                                                </linearGradient>
+                                                                <linearGradient id="SVGkFtYpesI" x1="18.786" x2="22.353"
+                                                                    y1="17.182" y2="33.578"
+                                                                    gradientUnits="userSpaceOnUse">
+                                                                    <stop stop-color="#dcf8ff" stop-opacity="0" />
+                                                                    <stop offset="1" stop-color="#ff6ce8"
+                                                                        stop-opacity="0.7" />
+                                                                </linearGradient>
+                                                                <linearGradient id="SVGkHpQsC8g" x1="14.727" x2="17.137"
+                                                                    y1="14.077" y2="30.097"
+                                                                    gradientUnits="userSpaceOnUse">
+                                                                    <stop stop-color="#0078d4" />
+                                                                    <stop offset="1" stop-color="#0067bf" />
+                                                                </linearGradient>
+                                                                <linearGradient id="SVGR8qwqQEB" x1="3" x2="25.069"
+                                                                    y1="3" y2="-4.352" gradientUnits="userSpaceOnUse">
+                                                                    <stop stop-color="#0094f0" />
+                                                                    <stop offset="1" stop-color="#2764e7" />
+                                                                </linearGradient>
+                                                                <linearGradient id="SVGuLUjtdLw" x1="19.861" x2="26.044"
+                                                                    y1="19.948" y2="26.149"
+                                                                    gradientUnits="userSpaceOnUse">
+                                                                    <stop stop-color="#ffa43d" />
+                                                                    <stop offset="1" stop-color="#fb5937" />
+                                                                </linearGradient>
+                                                                <linearGradient id="SVGLFchkdje" x1="14.174" x2="18.325"
+                                                                    y1="26.847" y2="30.975"
+                                                                    gradientUnits="userSpaceOnUse">
+                                                                    <stop offset=".255" stop-color="#ffd394" />
+                                                                    <stop offset="1" stop-color="#ff921f" />
+                                                                </linearGradient>
+                                                                <linearGradient id="SVGbvsSaeki" x1="28.502" x2="25.869"
+                                                                    y1="17.485" y2="19.968"
+                                                                    gradientUnits="userSpaceOnUse">
+                                                                    <stop stop-color="#f97dbd" />
+                                                                    <stop offset="1" stop-color="#dd3ce2" />
+                                                                </linearGradient>
+                                                                <linearGradient id="SVGPCCetcDD" x1="25.469" x2="21.489"
+                                                                    y1="21.663" y2="19.902"
+                                                                    gradientUnits="userSpaceOnUse">
+                                                                    <stop stop-color="#ff921f" />
+                                                                    <stop offset="1" stop-color="#ffe994" />
+                                                                </linearGradient>
+                                                                <radialGradient id="SVGJ3aOCI1z" cx="0" cy="0" r="1"
+                                                                    gradientTransform="rotate(135 5.719 17.306)scale(12.0208 6.0988)"
+                                                                    gradientUnits="userSpaceOnUse">
+                                                                    <stop offset=".535" stop-color="#4a43cb" />
+                                                                    <stop offset=".926" stop-color="#4a43cb"
+                                                                        stop-opacity="0" />
+                                                                </radialGradient>
+                                                                <filter id="SVGzEwpPcLX" width="16.667" height="10.667"
+                                                                    x="7.667" y="14.333"
+                                                                    color-interpolation-filters="sRGB"
+                                                                    filterUnits="userSpaceOnUse">
+                                                                    <feFlood flood-opacity="0"
+                                                                        result="BackgroundImageFix" />
+                                                                    <feColorMatrix in="SourceAlpha" result="hardAlpha"
+                                                                        values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                                                    <feOffset dy=".667" />
+                                                                    <feGaussianBlur stdDeviation=".667" />
+                                                                    <feColorMatrix
+                                                                        values="0 0 0 0 0.1242 0 0 0 0 0.323337 0 0 0 0 0.7958 0 0 0 0.32 0" />
+                                                                    <feBlend in2="BackgroundImageFix"
+                                                                        result="effect1_dropShadow_72095_10112" />
+                                                                    <feBlend in="SourceGraphic"
+                                                                        in2="effect1_dropShadow_72095_10112"
+                                                                        result="shape" />
+                                                                </filter>
+                                                            </defs>
+                                                        </g>
+                                                    </svg>
+                                                </a>
+                                            </td>
+
+
+
+                                            <td colspan="1">
+                                                <form action="{{ route('products.destroy', $product->id) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                        class="bg-transparent cursor-pointer border-0 ">
+
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+                                                            viewBox="0 0 48 48">
+                                                            <g fill="none" stroke-linejoin="round" stroke-width="4">
+                                                                <path fill="#ff2f51" stroke="#000"
+                                                                    d="M9 10V44H39V10H9Z" />
+                                                                <path stroke="#fff" stroke-linecap="round"
+                                                                    d="M20 20V33" />
+                                                                <path stroke="#fff" stroke-linecap="round"
+                                                                    d="M28 20V33" />
+                                                                <path stroke="#000" stroke-linecap="round"
+                                                                    d="M4 10H44" />
+                                                                <path fill="#ff2f51" stroke="#000"
+                                                                    d="M16 10L19.289 4H28.7771L32 10H16Z" />
+                                                            </g>
+                                                        </svg>
+                                                    </button>
+                                                </form>
+
+                                            </td>
+
+                                            <td>
+                                                <a href="{{ route('productVariants.index', $product->id) }} "
+                                                    class="btn btn-primary btn-sm">
+                                                    {{-- <i class="la la-plus"></i> --}}
+                                                     Add Variant
+                                                </a>
+
+                                            </td>
+
+
+
+
+                                            <td>
+
+
+                                                <div>
+                                                    <a href="{{ route('attributes.create',$product->id) }} "
+                                                        class="btn btn-primary btn-sm">
+                                                        {{-- <i class="la la-plus"></i> --}}
+                                                         Add attributes
+                                                    </a>
+                                                </div>
+
+                                            </td>
+
+
+
+
+
+
+
+
+                                            @endforeach
+
+
+
+
+
+
+
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+
+                                    </tfoot>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- attribute -->
-                <div class="card-content collapse show">
+                    <!-- attribute -->
+                    <div class="card-content collapse show">
                         <div class="card-body card-dashboard">
                             <p class="card-text">attributes of each product</p>
                             <table class="table table-striped table-bordered column-rendering">
@@ -246,117 +292,121 @@ Products
                                         <th>maincompartment</th>
                                         <th>durable_fabric</th>
                                         <th>spacious</th>
-                                         <th>Update</th>
+                                        <th>Update</th>
 
 
 
                                     </tr>
                                 </thead>
-                               <tbody>
-                                @foreach ($attributes as $attribute)
+                                <tbody>
+                                    @foreach ($attributes as $attribute)
                                     <tr>
                                         <td>{{$attribute->product->name}}</td>
                                         <td>{{$attribute->sumthumb}}</td>
                                         <td>{{$attribute->additional_info}}</td>
                                         <!-- <td>{{$attribute->dimension}}</td> -->
-                                         <td>{{$attribute->maincompartment}}</td>
-                                          <td>{{$attribute->durable_fabric}}</td>
-                                           <td>{{$attribute->spacious}}</td>
+                                        <td>{{$attribute->maincompartment}}</td>
+                                        <td>{{$attribute->durable_fabric}}</td>
+                                        <td>{{$attribute->spacious}}</td>
 
-                                           <td>
-                                            <a href="{{ route('attribute.edit', $attribute->id)}}">
-                                                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
-                                                viewBox="0 0 32 32">
-                                                <g fill="none">
-                                                    <path fill="url(#SVGU1eE1b5T)"
-                                                        d="m29 20l-9 9H7.5A4.5 4.5 0 0 1 3 24.5V10l13-1l13 1z" />
-                                                    <path fill="url(#SVGkFtYpesI)"
-                                                        d="m29 20l-9 9H7.5A4.5 4.5 0 0 1 3 24.5V10l13-1l13 1z" />
-                                                    <path fill="url(#SVGJ3aOCI1z)" fill-opacity="0.3"
-                                                        d="m29 20l-9 9H7.5A4.5 4.5 0 0 1 3 24.5V10l13-1l13 1z" />
-                                                    <g filter="url(#SVGzEwpPcLX)">
-                                                        <path fill="url(#SVGkHpQsC8g)"
-                                                            d="M10.5 18a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3m1.5 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0m4 1.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3m1.5-6.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0m4 1.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3" />
+                                        <td>
+                                            <a href="{{ route('attributes.edit', $attribute->id)}}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40"
+                                                    viewBox="0 0 32 32">
+                                                    <g fill="none">
+                                                        <path fill="url(#SVGU1eE1b5T)"
+                                                            d="m29 20l-9 9H7.5A4.5 4.5 0 0 1 3 24.5V10l13-1l13 1z" />
+                                                        <path fill="url(#SVGkFtYpesI)"
+                                                            d="m29 20l-9 9H7.5A4.5 4.5 0 0 1 3 24.5V10l13-1l13 1z" />
+                                                        <path fill="url(#SVGJ3aOCI1z)" fill-opacity="0.3"
+                                                            d="m29 20l-9 9H7.5A4.5 4.5 0 0 1 3 24.5V10l13-1l13 1z" />
+                                                        <g filter="url(#SVGzEwpPcLX)">
+                                                            <path fill="url(#SVGkHpQsC8g)"
+                                                                d="M10.5 18a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3m1.5 3.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0m4 1.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3m1.5-6.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0m4 1.5a1.5 1.5 0 1 0 0-3a1.5 1.5 0 0 0 0 3" />
+                                                        </g>
+                                                        <path fill="url(#SVGR8qwqQEB)"
+                                                            d="M3 7.5A4.5 4.5 0 0 1 7.5 3h17A4.5 4.5 0 0 1 29 7.5V10H3z" />
+                                                        <path fill="url(#SVGuLUjtdLw)"
+                                                            d="m20.539 29.47l7.61-7.544v-4.074h-4.073l-7.567 7.64l.308 3.696z" />
+                                                        <path fill="url(#SVGLFchkdje)"
+                                                            d="m20.539 29.47l.223-.223s-1.726-.661-2.535-1.47c-.809-.81-1.47-2.534-1.47-2.534l-.248.249a2.66 2.66 0 0 0-.686 1.206l-.79 3.051a1 1 0 0 0 1.217 1.22l3.02-.778a2.8 2.8 0 0 0 1.269-.722" />
+                                                        <path fill="url(#SVGbvsSaeki)"
+                                                            d="m26.937 23.14l2.211-2.214a2.88 2.88 0 0 0 .072-4.017a2.88 2.88 0 0 0-4.144-.057l-2.238 2.241z" />
+                                                        <path fill="url(#SVGPCCetcDD)"
+                                                            d="M24.094 17.838a5.43 5.43 0 0 0 4.106 4.038l-1.55 1.551a5.43 5.43 0 0 1-4.106-4.04z" />
+                                                        <defs>
+                                                            <linearGradient id="SVGU1eE1b5T" x1="20.694" x2="13.492"
+                                                                y1="31.456" y2="9.925" gradientUnits="userSpaceOnUse">
+                                                                <stop stop-color="#b3e0ff" />
+                                                                <stop offset="1" stop-color="#b3e0ff" />
+                                                            </linearGradient>
+                                                            <linearGradient id="SVGkFtYpesI" x1="18.786" x2="22.353"
+                                                                y1="17.182" y2="33.578" gradientUnits="userSpaceOnUse">
+                                                                <stop stop-color="#dcf8ff" stop-opacity="0" />
+                                                                <stop offset="1" stop-color="#ff6ce8"
+                                                                    stop-opacity="0.7" />
+                                                            </linearGradient>
+                                                            <linearGradient id="SVGkHpQsC8g" x1="14.727" x2="17.137"
+                                                                y1="14.077" y2="30.097" gradientUnits="userSpaceOnUse">
+                                                                <stop stop-color="#0078d4" />
+                                                                <stop offset="1" stop-color="#0067bf" />
+                                                            </linearGradient>
+                                                            <linearGradient id="SVGR8qwqQEB" x1="3" x2="25.069" y1="3"
+                                                                y2="-4.352" gradientUnits="userSpaceOnUse">
+                                                                <stop stop-color="#0094f0" />
+                                                                <stop offset="1" stop-color="#2764e7" />
+                                                            </linearGradient>
+                                                            <linearGradient id="SVGuLUjtdLw" x1="19.861" x2="26.044"
+                                                                y1="19.948" y2="26.149" gradientUnits="userSpaceOnUse">
+                                                                <stop stop-color="#ffa43d" />
+                                                                <stop offset="1" stop-color="#fb5937" />
+                                                            </linearGradient>
+                                                            <linearGradient id="SVGLFchkdje" x1="14.174" x2="18.325"
+                                                                y1="26.847" y2="30.975" gradientUnits="userSpaceOnUse">
+                                                                <stop offset=".255" stop-color="#ffd394" />
+                                                                <stop offset="1" stop-color="#ff921f" />
+                                                            </linearGradient>
+                                                            <linearGradient id="SVGbvsSaeki" x1="28.502" x2="25.869"
+                                                                y1="17.485" y2="19.968" gradientUnits="userSpaceOnUse">
+                                                                <stop stop-color="#f97dbd" />
+                                                                <stop offset="1" stop-color="#dd3ce2" />
+                                                            </linearGradient>
+                                                            <linearGradient id="SVGPCCetcDD" x1="25.469" x2="21.489"
+                                                                y1="21.663" y2="19.902" gradientUnits="userSpaceOnUse">
+                                                                <stop stop-color="#ff921f" />
+                                                                <stop offset="1" stop-color="#ffe994" />
+                                                            </linearGradient>
+                                                            <radialGradient id="SVGJ3aOCI1z" cx="0" cy="0" r="1"
+                                                                gradientTransform="rotate(135 5.719 17.306)scale(12.0208 6.0988)"
+                                                                gradientUnits="userSpaceOnUse">
+                                                                <stop offset=".535" stop-color="#4a43cb" />
+                                                                <stop offset=".926" stop-color="#4a43cb"
+                                                                    stop-opacity="0" />
+                                                            </radialGradient>
+                                                            <filter id="SVGzEwpPcLX" width="16.667" height="10.667"
+                                                                x="7.667" y="14.333" color-interpolation-filters="sRGB"
+                                                                filterUnits="userSpaceOnUse">
+                                                                <feFlood flood-opacity="0"
+                                                                    result="BackgroundImageFix" />
+                                                                <feColorMatrix in="SourceAlpha" result="hardAlpha"
+                                                                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
+                                                                <feOffset dy=".667" />
+                                                                <feGaussianBlur stdDeviation=".667" />
+                                                                <feColorMatrix
+                                                                    values="0 0 0 0 0.1242 0 0 0 0 0.323337 0 0 0 0 0.7958 0 0 0 0.32 0" />
+                                                                <feBlend in2="BackgroundImageFix"
+                                                                    result="effect1_dropShadow_72095_10112" />
+                                                                <feBlend in="SourceGraphic"
+                                                                    in2="effect1_dropShadow_72095_10112"
+                                                                    result="shape" />
+                                                            </filter>
+                                                        </defs>
                                                     </g>
-                                                    <path fill="url(#SVGR8qwqQEB)"
-                                                        d="M3 7.5A4.5 4.5 0 0 1 7.5 3h17A4.5 4.5 0 0 1 29 7.5V10H3z" />
-                                                    <path fill="url(#SVGuLUjtdLw)"
-                                                        d="m20.539 29.47l7.61-7.544v-4.074h-4.073l-7.567 7.64l.308 3.696z" />
-                                                    <path fill="url(#SVGLFchkdje)"
-                                                        d="m20.539 29.47l.223-.223s-1.726-.661-2.535-1.47c-.809-.81-1.47-2.534-1.47-2.534l-.248.249a2.66 2.66 0 0 0-.686 1.206l-.79 3.051a1 1 0 0 0 1.217 1.22l3.02-.778a2.8 2.8 0 0 0 1.269-.722" />
-                                                    <path fill="url(#SVGbvsSaeki)"
-                                                        d="m26.937 23.14l2.211-2.214a2.88 2.88 0 0 0 .072-4.017a2.88 2.88 0 0 0-4.144-.057l-2.238 2.241z" />
-                                                    <path fill="url(#SVGPCCetcDD)"
-                                                        d="M24.094 17.838a5.43 5.43 0 0 0 4.106 4.038l-1.55 1.551a5.43 5.43 0 0 1-4.106-4.04z" />
-                                                    <defs>
-                                                        <linearGradient id="SVGU1eE1b5T" x1="20.694" x2="13.492"
-                                                            y1="31.456" y2="9.925" gradientUnits="userSpaceOnUse">
-                                                            <stop stop-color="#b3e0ff" />
-                                                            <stop offset="1" stop-color="#b3e0ff" />
-                                                        </linearGradient>
-                                                        <linearGradient id="SVGkFtYpesI" x1="18.786" x2="22.353"
-                                                            y1="17.182" y2="33.578" gradientUnits="userSpaceOnUse">
-                                                            <stop stop-color="#dcf8ff" stop-opacity="0" />
-                                                            <stop offset="1" stop-color="#ff6ce8" stop-opacity="0.7" />
-                                                        </linearGradient>
-                                                        <linearGradient id="SVGkHpQsC8g" x1="14.727" x2="17.137"
-                                                            y1="14.077" y2="30.097" gradientUnits="userSpaceOnUse">
-                                                            <stop stop-color="#0078d4" />
-                                                            <stop offset="1" stop-color="#0067bf" />
-                                                        </linearGradient>
-                                                        <linearGradient id="SVGR8qwqQEB" x1="3" x2="25.069" y1="3"
-                                                            y2="-4.352" gradientUnits="userSpaceOnUse">
-                                                            <stop stop-color="#0094f0" />
-                                                            <stop offset="1" stop-color="#2764e7" />
-                                                        </linearGradient>
-                                                        <linearGradient id="SVGuLUjtdLw" x1="19.861" x2="26.044"
-                                                            y1="19.948" y2="26.149" gradientUnits="userSpaceOnUse">
-                                                            <stop stop-color="#ffa43d" />
-                                                            <stop offset="1" stop-color="#fb5937" />
-                                                        </linearGradient>
-                                                        <linearGradient id="SVGLFchkdje" x1="14.174" x2="18.325"
-                                                            y1="26.847" y2="30.975" gradientUnits="userSpaceOnUse">
-                                                            <stop offset=".255" stop-color="#ffd394" />
-                                                            <stop offset="1" stop-color="#ff921f" />
-                                                        </linearGradient>
-                                                        <linearGradient id="SVGbvsSaeki" x1="28.502" x2="25.869"
-                                                            y1="17.485" y2="19.968" gradientUnits="userSpaceOnUse">
-                                                            <stop stop-color="#f97dbd" />
-                                                            <stop offset="1" stop-color="#dd3ce2" />
-                                                        </linearGradient>
-                                                        <linearGradient id="SVGPCCetcDD" x1="25.469" x2="21.489"
-                                                            y1="21.663" y2="19.902" gradientUnits="userSpaceOnUse">
-                                                            <stop stop-color="#ff921f" />
-                                                            <stop offset="1" stop-color="#ffe994" />
-                                                        </linearGradient>
-                                                        <radialGradient id="SVGJ3aOCI1z" cx="0" cy="0" r="1"
-                                                            gradientTransform="rotate(135 5.719 17.306)scale(12.0208 6.0988)"
-                                                            gradientUnits="userSpaceOnUse">
-                                                            <stop offset=".535" stop-color="#4a43cb" />
-                                                            <stop offset=".926" stop-color="#4a43cb" stop-opacity="0" />
-                                                        </radialGradient>
-                                                        <filter id="SVGzEwpPcLX" width="16.667" height="10.667"
-                                                            x="7.667" y="14.333" color-interpolation-filters="sRGB"
-                                                            filterUnits="userSpaceOnUse">
-                                                            <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                                                            <feColorMatrix in="SourceAlpha" result="hardAlpha"
-                                                                values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" />
-                                                            <feOffset dy=".667" />
-                                                            <feGaussianBlur stdDeviation=".667" />
-                                                            <feColorMatrix
-                                                                values="0 0 0 0 0.1242 0 0 0 0 0.323337 0 0 0 0 0.7958 0 0 0 0.32 0" />
-                                                            <feBlend in2="BackgroundImageFix"
-                                                                result="effect1_dropShadow_72095_10112" />
-                                                            <feBlend in="SourceGraphic"
-                                                                in2="effect1_dropShadow_72095_10112" result="shape" />
-                                                        </filter>
-                                                    </defs>
-                                                </g>
-                                            </svg>
+                                                </svg>
                                             </a>
                                         </td>
 
-                                @endforeach
+                                        @endforeach
                                     </tr>
                                 </tbody>
                                 <tfoot>
@@ -366,16 +416,17 @@ Products
                         </div>
                     </div>
                 </div>
-            </div>
+
+
+
 
             </div>
-
-
 
         </div>
 
 
 
+</div>
 
 
 
@@ -386,8 +437,11 @@ Products
 
 
 
-    </section>
-    <!-- Column rendering table -->
+
+
+
+</section>
+<!-- Column rendering table -->
 
 
 </div>

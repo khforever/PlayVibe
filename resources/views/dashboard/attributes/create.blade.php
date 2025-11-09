@@ -22,6 +22,8 @@ Add Product
                         </div>
                     </div>
 
+<h1 style="font-weight: bold; color: red;  text-align: center;">Add Attribute for: {{ $product->name }}</h1> 
+
                     <div class="card-content collapse show">
                         <div class="card-body">
                             <div class="card-text mb-2">
@@ -29,26 +31,26 @@ Add Product
                                 <p>Enter product details below.</p>
                             </div>
 
-                            <form class="form" action="{{ route('attribute.store') }}" method="POST" enctype="multipart/form-data" style="direction: ltr; text-align: left;">
+                            <form class="form" action="{{ route('attributes.store',$product->id) }}" method="POST" enctype="multipart/form-data" style="direction: ltr; text-align: left;">
                                 @csrf
 
                                 <div class="form-body">
                                     <h4 class="form-section"><i class="la la-cube"></i> Product attributes</h4>
 
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label for="product_id">product name</label>
                                         <select id="product_id" name="product_id" class="form-control border-primary" required>
                                             <option value="">-- Select product --</option>
-                                          
+
                                             @foreach ($products as $product)
 
                                             <option value="{{ $product->id }}">{{ $product->name }}</option>
 
                                             @endforeach
                                         </select>
-                                    </div>
+                                    </div> --}}
 
-                                   
+
                                     <div class="form-group">
                                         <label for="name">sumthumb</label>
                                         <input type="text" id="name" name="sumthumb" class="form-control border-primary" placeholder="Enter sumthumb " value ="{{old('sumthumb')}}">
@@ -57,7 +59,7 @@ Add Product
                                          @enderror
                                     </div>
 
-                                  
+
                                     <div class="form-group">
                                         <label for="description">additional_info</label>
                                          <input type="text" id="name" name="additional_info" class="form-control border-primary" placeholder="Enter additional_info "  value ="{{old('additional_info')}}">
@@ -65,7 +67,7 @@ Add Product
                                         <div class="alert alert-warning">{{$message}}</div>
                                          @enderror
                                     </div>
-                     
+
                                     <div class="form-group">
                                         <label for="dimension">dimension</label>
                                         <input type="text" id="price" name="dimension" step="0.01" class="form-control border-primary" placeholder="Enter dimension" value ="{{old('dimension')}}" required>
@@ -89,7 +91,7 @@ Add Product
                                         <div class="alert alert-warning">{{$message}}</div>
                                          @enderror
                                     </div>
-                                   
+
                                 <div class="form-group">
                                         <label for="durable_fabric">spacious</label>
                                         <input type="text" id="spacious" name="spacious" step="0.01" class="form-control border-primary" placeholder="Enter spacious" value ="{{old('spacious')}}" required>
@@ -97,7 +99,7 @@ Add Product
                                         <div class="alert alert-warning">{{$message}}</div>
                                          @enderror
                                     </div>
-                               
+
 
 
                                 </div>

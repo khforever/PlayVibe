@@ -23,9 +23,7 @@ Add Product
                     </div>
 
 
-
-  {{-- <h1>Edit Attribute for: {{ $product->name }}</h1> --}}
-
+  {{-- <h1 style="font-weight: bold; color: red;  text-align: center;">Add Attribute for: {{ $product->name }}</h1> --}}
 
 
                     <div class="card-content collapse show">
@@ -35,33 +33,29 @@ Add Product
                                 <p>Enter product details below.</p>
                             </div>
 
-                            <form class="form" action="{{ route('attributes.update',$attribute->id) }}" method="POST" enctype="multipart/form-data" style="direction: ltr; text-align: left;">
-                               @csrf
-                               @Method('put')
-
-
- 
+                            <form class="form" action="{{ route('attributes.store',$product->id) }}" method="POST" enctype="multipart/form-data" style="direction: ltr; text-align: left;">
+                                @csrf
 
                                 <div class="form-body">
                                     <h4 class="form-section"><i class="la la-cube"></i> Product attributes</h4>
 
-                                    <div class="form-group">
-                                        {{-- <label for="product_id">product name</label>
+                                    {{-- <div class="form-group">
+                                        <label for="product_id">product name</label>
                                         <select id="product_id" name="product_id" class="form-control border-primary" required>
                                             <option value="">-- Select product --</option>
 
                                             @foreach ($products as $product)
 
-                                            <option value="{{ $product->id }}"@selected(old('product_id', $attribute->product_id) == $product->id)>{{ $product->name }}</option>
+                                            <option value="{{ $product->id }}">{{ $product->name }}</option>
 
                                             @endforeach
-                                        </select> --}}
-                                    </div>
+                                        </select>
+                                    </div> --}}
 
 
                                     <div class="form-group">
                                         <label for="name">sumthumb</label>
-                                        <input type="text" id="name" name="sumthumb" class="form-control border-primary" placeholder="Enter sumthumb "  value ="{{old('sumthumb',$attribute->sumthumb)}}">
+                                        <input type="text" id="name" name="sumthumb" class="form-control border-primary" placeholder="Enter sumthumb " value ="{{old('sumthumb')}}">
                                          @error('sumthumb')
                                         <div class="alert alert-warning">{{$message}}</div>
                                          @enderror
@@ -70,40 +64,40 @@ Add Product
 
                                     <div class="form-group">
                                         <label for="description">additional_info</label>
-                                         <input type="text" id="name" name="additional_info" class="form-control border-primary" placeholder="Enter additional_info "  value ="{{old('additional_info',$attribute->additional_info)}}">
-                                           @error('additional_info')
+                                         <input type="text" id="name" name="additional_info" class="form-control border-primary" placeholder="Enter additional_info "  value ="{{old('additional_info')}}">
+                                          @error('additional_info')
                                         <div class="alert alert-warning">{{$message}}</div>
                                          @enderror
                                     </div>
 
-
                                     <div class="form-group">
                                         <label for="dimension">dimension</label>
-                                        <input type="text" id="price" name="dimension" step="0.01" class="form-control border-primary" placeholder="Enter dimension" value ="{{old('dimension',$attribute->dimension)}}" required>
-                                          @error('dimension')
+                                        <input type="text" id="price" name="dimension" step="0.01" class="form-control border-primary" placeholder="Enter dimension" value ="{{old('dimension')}}" required>
+                                         @error('dimension')
                                         <div class="alert alert-warning">{{$message}}</div>
                                          @enderror
                                     </div>
 
                                     <div class="form-group">
                                         <label for="maincompartment">maincompartment</label>
-                                        <input type="text" id="maincompartment" name="maincompartment" step="0.01" class="form-control border-primary" placeholder="Enter maincompartment " value ="{{old('maincompartment',$attribute->maincompartment)}}" required>
-                                          @error('maincompartment')
+                                        <input type="text" id="maincompartment" name="maincompartment" step="0.01" class="form-control border-primary" placeholder="Enter maincompartment " value ="{{old('maincompartment')}}" required>
+                                         @error('maincompartment')
                                         <div class="alert alert-warning">{{$message}}</div>
                                          @enderror
                                     </div>
 
                                     <div class="form-group">
                                         <label for="durable_fabric">durable_fabric</label>
-                                        <input type="text" id="durable_fabric" name="durable_fabric" step="0.01" class="form-control border-primary" placeholder="Enter durable_fabric" value ="{{old('durable_fabric',$attribute->durable_fabric)}}" required>
-                                    </div>  @error('durable_fabric')
+                                        <input type="text" id="durable_fabric" name="durable_fabric" step="0.01" class="form-control border-primary" placeholder="Enter durable_fabric"  value ="{{old('durable_fabric')}}" required>
+                                         @error('durable_fabric')
                                         <div class="alert alert-warning">{{$message}}</div>
                                          @enderror
+                                    </div>
 
                                 <div class="form-group">
                                         <label for="durable_fabric">spacious</label>
-                                        <input type="text" id="spacious" name="spacious" step="0.01" class="form-control border-primary" placeholder="Enter spacious" value ="{{old('spacious',$attribute->spacious)}}"required>
-                                          @error('spacious')
+                                        <input type="text" id="spacious" name="spacious" step="0.01" class="form-control border-primary" placeholder="Enter spacious" value ="{{old('spacious')}}" required>
+                                         @error('durable_fabric')
                                         <div class="alert alert-warning">{{$message}}</div>
                                          @enderror
                                     </div>

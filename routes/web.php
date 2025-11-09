@@ -142,15 +142,19 @@ Route::group([
 
 Route::group([
     'prefix'=>'attributes',
-    'as'=>'attribute.',
+    'as'=>'attributes.',
     'controller'=>AttributeController::class,
 ],function(){
-    Route::get('create','create')->name('create');
-    Route::post('store','store')->name('store');
+    Route::get('create/{id}','create')->name('create');
+    Route::post('store/{id}','store')->name('store');
     Route::get('edit/{id}','edit')->name('edit');
     Route::put('update/{id}','update')->name('update');
 
  });
+
+
+
+
 
 
 require __DIR__.'/auth.php';

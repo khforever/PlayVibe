@@ -19,19 +19,74 @@ class AttributeController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        $products = Product::select('id','name')->get();
-        return view('dashboard.attributes.create',compact('products'));
-    }
 
+public function create($id)
+{
+    $product = Product::findOrFail($id);
+    return view('dashboard.attributes.create', compact('product'));
+}
+
+
+
+
+   
     /**
      * Store a newly created resource in storage.
      */
-     public function store(Request $request)
+
+
+
+
+
+
+public function store(Request $request, $id)
+{
+    // التأكد من أن المنتج موجود
+    $product = Product::findOrFail($id);
+
+    // التحقق من صحة البيانات
+    $data = $request->validate([
+        'sumthumb' => 'required|string',
+        'additional_info' => 'required|string',
+        'dimension' => 'required|string',
+        'maincompartment' => 'required|string',
+        'durable_fabric' => 'required|string',
+        'spacious' => 'required|string',
+    ]);
+
+    // ربط الـ attribute بالمنتج
+    $data['product_id'] = $product->id;
+
+    // إنشاء الـ attribute
+    Attribute::create($data);
+
+    return redirect()->route('products.index')->with('success', 'Attribute added successfully!');
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     public function store33(Request $request , $id)
     {
+
+     //   $products = Product::select('id','name')->get();
+
+        $products = Product::findOrFail($id);
+
+
         $data = $request->validate([
-            'product_id'=>'required|integer|exists:products,id',
+           // 'product_id'=>'required|integer|exists:products,id',
             'sumthumb'=>'required|string',
             'additional_info'=>'required|string',
             'dimension'=>'required|string',
