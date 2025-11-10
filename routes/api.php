@@ -65,11 +65,11 @@ Route::prefix('attributes')->controller(AttributeController::class)->group(funct
     Route::delete('/{id}', 'destroy');
 });
 
- 
+
 //cart controller
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/cart', [CartController::class, 'index']);
-    Route::post('/cart/add', [CartController::class, 'addItem']);
+    Route::post('/cart/add', [CartController::class, 'addItems']);
     Route::put('/cart/item/{id}', [CartController::class, 'updateItem']);
     Route::delete('/cart/item/{id}', [CartController::class, 'removeItem']);
 });

@@ -11,66 +11,82 @@ use App\Models\ProductVariant;
 class CartController extends Controller
 {
     //add item
-    public function addItems(Request $request)
-    {
-        $request->validate([
-            'items' => 'required|array|min:1',
-            'items.*.product_variant_id' => 'required|exists:product_variants,id',
-            'items.*.quantity' => 'required|integer|min:1',
-        ]);
+   public function addItems(Request $request)
+{
+    $request->validate([
+        'items' => 'required|array|min:1',
+        'items.*.product_variant_id' => 'required|exists:product_variants,id',
+        'items.*.quantity' => 'required|integer|min:1',
+    ]);
 
-       $user = $request->user()->id;
+    $user = $request->user()->id;
 
-        $cart = Cart::firstOrCreate([
-            'user_id' =>$user 
-        ]);
+    $cart = Cart::firstOrCreate([
+        'user_id' => $user
+    ]);
 
-        $addedItems = [];
+    $addedItems = [];
 
-        foreach ($request->items as $item) 
-            {
-            $variant = ProductVariant::with('product')->find($item['product_variant_id']);
+    foreach ($request->items as $item) {
+        $variant = ProductVariant::with('product')->find($item['product_variant_id']);
 
-            if (!$variant || !$variant->product)
-            {
-                return response()->json([
-                    'message' => 'Product or variant not found'
-                ], 404);
-            }
+        if (!$variant || !$variant->product) {
+            return response()->json([
+                'message' => 'Product or variant not found'
+            ], 404);
+        }
 
-            $price = $variant->product->price;
+        $price = $variant->product->price;
+        $total = $price * $item['quantity'];
 
-            $total = $price * $item['quantity'];
+        $cartItem = CartItem::updateOrCreate(
+            [
+                'cart_id' => $cart->id,
+                'product_variant_id' => $variant->id,
+            ],
+            [
+                'quantity' => $item['quantity'],
+                'price' => $price,
+                'total_price' => $total,
+            ]
+        );
 
-            $item = CartItem::updateOrCreate(
-                [
-                    'cart_id' => $cart->id,
-                    'product_variant_id' => $variant->id,
-                ],
-                [
-                    'quantity' => $item['quantity'],
-                    'price' => $price,
-                    'total_price' => $total,
-                ]
-            );
-
-        return response()->json([
-            'message' => 'Items added successfully',
-            'items' => $addedItems
-        ], 201);
-    }
-    
+        $addedItems[] = $cartItem;
     }
 
+    return response()->json([
+        'message' => 'Items added successfully',
+        'items' => $addedItems
+    ], 201);
+}
 
-//update item
- public function updateItem(Request $request,string $id)
+
+
+
+    //update item
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+public function updateItem(Request $request,string $id)
     {
         $request->validate(['quantity' => 'required|integer|min:1']);
 
         $item = CartItem::with('variant.product')
                           ->findOrFail($id);
-                          
+
         $item->quantity = $request->quantity;
         $item->total_price = $item->price * $request->quantity;
 

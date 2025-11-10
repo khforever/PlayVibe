@@ -152,10 +152,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
-							"header": [],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": ""
+							"body": null
 						}
 					]
 				},
@@ -205,10 +205,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
-							"header": [],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": ""
+							"body": null
 						}
 					]
 				},
@@ -301,10 +301,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
-							"header": [],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": ""
+							"body": null
 						}
 					]
 				},
@@ -397,10 +397,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
-							"header": [],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": ""
+							"body": null
 						}
 					]
 				},
@@ -486,10 +486,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
-							"header": [],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": ""
+							"body": null
 						}
 					]
 				},
@@ -599,10 +599,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
-							"header": [],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": ""
+							"body": null
 						}
 					]
 				},
@@ -669,10 +669,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
-							"header": [],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": ""
+							"body": null
 						}
 					]
 				}
@@ -776,10 +776,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
-							"header": [],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": ""
+							"body": null
 						}
 					]
 				},
@@ -871,10 +871,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
-							"header": [],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": ""
+							"body": null
 						}
 					]
 				},
@@ -934,10 +934,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
-							"header": [],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": ""
+							"body": null
 						}
 					]
 				}
@@ -993,10 +993,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
-							"header": [],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": ""
+							"body": null
 						}
 					]
 				},
@@ -1113,10 +1113,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
-							"header": [],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": ""
+							"body": null
 						}
 					]
 				},
@@ -1155,10 +1155,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
-							"header": [],
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": ""
+							"body": null
 						}
 					]
 				},
@@ -1260,6 +1260,117 @@
 							"body": ""
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "cart",
+			"item": [
+				{
+					"name": "addItems",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "gb6J17f73Z4KMR85bP7wYCW5Vypcm2LY9hJeeOAn76e74bb7",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"items\": [\r\n    { \"product_variant_id\": 5, \"quantity\": 2 },\r\n    { \"product_variant_id\": 3, \"quantity\": 3 }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/cart/add",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cart",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateItem",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "gb6J17f73Z4KMR85bP7wYCW5Vypcm2LY9hJeeOAn76e74bb7",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \r\n      \"quantity\": 2  \r\n  \r\n \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/cart/item/4",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cart",
+								"item",
+								"4"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
