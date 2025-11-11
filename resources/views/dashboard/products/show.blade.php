@@ -389,53 +389,6 @@
 
 
 
-            <!-- Product Details -->
-
-
-
-
-            {{-- <form action="{{ route('cart.add', $product->id) }}" method="POST">
-                @csrf
-                <div class="flex space-x-4 items-center">
-                    <input type="number" name="quantity" min="1" value="1"
-                        class="border rounded-xl w-20 px-3 py-2 text-center focus:ring focus:ring-green-300">
-                    <button type="submit"
-                        class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl shadow-lg transition-all">
-                        <i class="fa fa-cart-plus mr-2"></i> Add to Cart
-                    </button>
-                </div>
-            </form> --}}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             <!-- Back Button -->
