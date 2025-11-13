@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\SizeController;
 use App\Http\Controllers\Api\ColorController;
 use App\Http\Controllers\Api\front\CartController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ProductController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -75,4 +76,6 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 
-
+//Product Controller
+Route::apiResource('products', ProductController::class);
+Route::delete('products/image/{id}', [ProductController::class, 'deleteImage']);
