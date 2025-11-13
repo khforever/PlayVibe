@@ -19,11 +19,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://playvibe.test/api/categories",
-							"protocol": "http",
+							"raw": "{{url}}/api/categories",
 							"host": [
-								"playvibe",
-								"test"
+								"{{url}}"
 							],
 							"path": [
 								"api",
@@ -48,16 +46,41 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
-							"header": [],
-							"cookie": [
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
 								{
-									"expires": "Invalid Date",
-									"domain": "",
-									"path": ""
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Nov 2025 14:36:18 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
 								}
 							],
-							"body": ""
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 7,\n        \"name\": \"2clothes\",\n        \"image\": \"img-03.png\",\n        \"created_at\": \"2025-11-05T20:00:24.000000Z\",\n        \"updated_at\": \"2025-11-05T20:00:51.000000Z\"\n    },\n    {\n        \"id\": 6,\n        \"name\": \"ملابس\",\n        \"image\": \"51S7089OYmL._AC_SX569_.jpg\",\n        \"created_at\": \"2025-11-05T06:36:18.000000Z\",\n        \"updated_at\": \"2025-11-05T06:36:18.000000Z\"\n    },\n    {\n        \"id\": 5,\n        \"name\": \"CRM2025\",\n        \"image\": \"61AK9Fw3+pL._AC_SX679_.jpg\",\n        \"created_at\": \"2025-11-04T23:05:25.000000Z\",\n        \"updated_at\": \"2025-11-04T23:05:25.000000Z\"\n    },\n    {\n        \"id\": 4,\n        \"name\": \"clothes\",\n        \"image\": \"51S7089OYmL._AC_SX569_.jpg\",\n        \"created_at\": \"2025-11-01T07:23:12.000000Z\",\n        \"updated_at\": \"2025-11-01T07:23:12.000000Z\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"bag\",\n        \"image\": \"4img-02.png\",\n        \"created_at\": \"2025-10-30T08:46:59.000000Z\",\n        \"updated_at\": \"2025-11-05T06:39:03.000000Z\"\n    },\n    {\n        \"id\": 1,\n        \"name\": \"category men\",\n        \"image\": \"61u-UKGaOOL._AC_SX569_.jpg\",\n        \"created_at\": \"2025-10-30T08:46:09.000000Z\",\n        \"updated_at\": \"2025-10-30T08:46:09.000000Z\"\n    }\n]"
 						}
 					]
 				},
@@ -431,7 +454,7 @@
 			"name": "Sizes",
 			"item": [
 				{
-					"name": "allsizes",
+					"name": "store size",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -461,7 +484,7 @@
 					},
 					"response": [
 						{
-							"name": "allsizes",
+							"name": "store size",
 							"originalRequest": {
 								"method": "POST",
 								"header": [],
@@ -486,28 +509,77 @@
 									]
 								}
 							},
+							"status": "OK",
+							"code": 200,
 							"_postman_previewlanguage": null,
-							"header": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Nov 2025 14:37:08 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
 							"cookie": [],
-							"body": null
+							"body": "{\n    \"message\": \"Size created successfully\"\n}"
 						}
 					]
 				},
 				{
-					"name": "store",
+					"name": "all sizes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
 						"url": {
-							"raw": ""
+							"raw": "{{url}}/api/sizes",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"sizes"
+							]
 						}
 					},
 					"response": [
 						{
-							"name": "store",
+							"name": "all sizes",
 							"originalRequest": {
-								"method": "POST",
+								"method": "GET",
 								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
 								"url": {
 									"raw": "{{url}}/api/sizes",
 									"host": [
@@ -519,16 +591,41 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
-							"header": [],
-							"cookie": [
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
 								{
-									"expires": "Invalid Date",
-									"domain": "",
-									"path": ""
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 12 Nov 2025 14:38:06 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
 								}
 							],
-							"body": ""
+							"cookie": [],
+							"body": "[\n    {\n        \"id\": 1,\n        \"size\": \"large\",\n        \"created_at\": \"2025-10-30T08:44:12.000000Z\",\n        \"updated_at\": \"2025-10-30T08:44:12.000000Z\"\n    },\n    {\n        \"id\": 2,\n        \"size\": \"x large\",\n        \"created_at\": \"2025-10-30T08:44:24.000000Z\",\n        \"updated_at\": \"2025-10-30T08:44:24.000000Z\"\n    },\n    {\n        \"id\": 3,\n        \"size\": \"small\",\n        \"created_at\": \"2025-11-05T06:44:07.000000Z\",\n        \"updated_at\": \"2025-11-05T06:44:07.000000Z\"\n    },\n    {\n        \"id\": 4,\n        \"size\": \"xx large\",\n        \"created_at\": \"2025-11-05T20:41:18.000000Z\",\n        \"updated_at\": \"2025-11-05T20:41:18.000000Z\"\n    },\n    {\n        \"id\": 5,\n        \"size\": \"small\",\n        \"created_at\": \"2025-11-12T14:37:07.000000Z\",\n        \"updated_at\": \"2025-11-12T14:37:07.000000Z\"\n    }\n]"
 						}
 					]
 				}
@@ -1267,7 +1364,7 @@
 			"name": "cart",
 			"item": [
 				{
-					"name": "addItems",
+					"name": "add Items cart",
 					"protocolProfileBehavior": {
 						"disabledSystemHeaders": {
 							"accept": true
@@ -1300,7 +1397,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"items\": [\r\n    { \"product_variant_id\": 5, \"quantity\": 2 },\r\n    { \"product_variant_id\": 3, \"quantity\": 3 }\r\n  ]\r\n}",
+							"raw": "{\r\n  \"items\": [\r\n    { \"product_variant_id\": 3, \"quantity\": 2 },\r\n    { \"product_variant_id\": 2, \"quantity\": 3 }\r\n  ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1319,10 +1416,495 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "success add Items cart",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"items\": [\r\n    { \"product_variant_id\": 3, \"quantity\": 2 },\r\n    { \"product_variant_id\": 2, \"quantity\": 3 }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/cart/add",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"cart",
+										"add"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 11 Nov 2025 04:05:05 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Items added successfully\",\n    \"items\": [\n        {\n            \"id\": 5,\n            \"cart_id\": 1,\n            \"product_variant_id\": 3,\n            \"quantity\": 2,\n            \"price\": \"186.00\",\n            \"total_price\": 372,\n            \"created_at\": \"2025-11-11T03:23:56.000000Z\",\n            \"updated_at\": \"2025-11-11T04:05:04.000000Z\"\n        },\n        {\n            \"id\": 3,\n            \"cart_id\": 1,\n            \"product_variant_id\": 2,\n            \"quantity\": 3,\n            \"price\": \"186.00\",\n            \"total_price\": 558,\n            \"created_at\": \"2025-11-10T07:15:20.000000Z\",\n            \"updated_at\": \"2025-11-11T04:05:05.000000Z\"\n        }\n    ],\n    \"total_cart_price\": 930\n}"
+						},
+						{
+							"name": "failed add Items cart",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"items\": [\r\n    { \"product_variant_id\": 9, \"quantity\": 2 },\r\n    { \"product_variant_id\": 2, \"quantity\": 3 }\r\n  ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/cart/add",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"cart",
+										"add"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 11 Nov 2025 11:22:43 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Failed to add items to cart\",\n    \"error\": \"The selected items.0.product_variant_id is invalid.\"\n}"
+						}
+					]
 				},
 				{
-					"name": "updateItem",
+					"name": "show all items cart",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true,
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "gb6J17f73Z4KMR85bP7wYCW5Vypcm2LY9hJeeOAn76e74bb7",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/cart",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cart"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "show all items cart",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/cart",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"cart"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 11 Nov 2025 04:28:17 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"cart_id\": 1,\n    \"total\": 203346,\n    \"items\": [\n        {\n            \"id\": 1,\n            \"cart_id\": 1,\n            \"product_variant_id\": 1,\n            \"quantity\": 2,\n            \"price\": \"186.00\",\n            \"total_price\": \"372.00\",\n            \"created_at\": \"2025-11-10T07:11:50.000000Z\",\n            \"updated_at\": \"2025-11-10T07:11:50.000000Z\"\n        },\n        {\n            \"id\": 2,\n            \"cart_id\": 1,\n            \"product_variant_id\": 5,\n            \"quantity\": 2,\n            \"price\": \"99999.00\",\n            \"total_price\": \"199998.00\",\n            \"created_at\": \"2025-11-10T07:13:47.000000Z\",\n            \"updated_at\": \"2025-11-11T04:02:55.000000Z\"\n        },\n        {\n            \"id\": 3,\n            \"cart_id\": 1,\n            \"product_variant_id\": 2,\n            \"quantity\": 6,\n            \"price\": \"186.00\",\n            \"total_price\": \"1116.00\",\n            \"created_at\": \"2025-11-10T07:15:20.000000Z\",\n            \"updated_at\": \"2025-11-11T04:28:03.000000Z\"\n        },\n        {\n            \"id\": 5,\n            \"cart_id\": 1,\n            \"product_variant_id\": 3,\n            \"quantity\": 10,\n            \"price\": \"186.00\",\n            \"total_price\": \"1860.00\",\n            \"created_at\": \"2025-11-11T03:23:56.000000Z\",\n            \"updated_at\": \"2025-11-11T04:28:03.000000Z\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "remove item",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "gb6J17f73Z4KMR85bP7wYCW5Vypcm2LY9hJeeOAn76e74bb7",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/cart/item/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"cart",
+								"item",
+								"3"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "failed remove item",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/cart/item/4",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"cart",
+										"item",
+										"4"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 11 Nov 2025 04:55:04 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Cart item not found\",\n    \"status\": false\n}"
+						},
+						{
+							"name": "success remove item",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/cart/item/3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"cart",
+										"item",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 11 Nov 2025 04:56:34 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Item removed successfully\",\n    \"status\": true\n}"
+						}
+					]
+				},
+				{
+					"name": "update Item cart",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1358,7 +1940,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/api/cart/item/4",
+							"raw": "{{url}}/api/cart/item/3",
 							"host": [
 								"{{url}}"
 							],
@@ -1366,11 +1948,670 @@
 								"api",
 								"cart",
 								"item",
-								"4"
+								"3"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "success update Item cart",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \r\n      \"quantity\": 2  \r\n  \r\n \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/cart/item/3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"cart",
+										"item",
+										"3"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 11 Nov 2025 04:46:22 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Item updated successfully\",\n    \"item\": {\n        \"id\": 3,\n        \"cart_id\": 1,\n        \"product_variant_id\": 2,\n        \"quantity\": 2,\n        \"price\": \"186.00\",\n        \"total_price\": 372,\n        \"created_at\": \"2025-11-10T07:15:20.000000Z\",\n        \"updated_at\": \"2025-11-11T04:46:22.000000Z\",\n        \"variant\": {\n            \"id\": 2,\n            \"product_id\": 1,\n            \"color_id\": 2,\n            \"size_id\": 1,\n            \"created_at\": \"2025-10-30T08:49:36.000000Z\",\n            \"updated_at\": \"2025-10-30T08:49:36.000000Z\",\n            \"product\": {\n                \"id\": 1,\n                \"name\": \"Darryl Nieves\",\n                \"description\": \"Excepturi nostrum es\",\n                \"price\": \"186.00\",\n                \"sub_category_id\": 1,\n                \"created_at\": \"2025-10-30T08:49:07.000000Z\",\n                \"updated_at\": \"2025-10-30T08:49:07.000000Z\"\n            }\n        }\n    }\n}"
+						},
+						{
+							"name": "failed update Item cart",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n   \r\n      \"quantity\": 2  \r\n  \r\n \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/cart/item/9",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"cart",
+										"item",
+										"9"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 11 Nov 2025 04:51:01 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Cart item not found\",\n    \"status\": false\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "all products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/products",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success all products",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/products",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Nov 2025 00:21:06 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Products retrieved successfully.\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Darryl Nieves\",\n            \"description\": \"Excepturi nostrum es\",\n            \"price\": \"186.00\",\n            \"sub_category_id\": 1,\n            \"created_at\": \"2025-10-30T08:49:07.000000Z\",\n            \"updated_at\": \"2025-10-30T08:49:07.000000Z\",\n            \"main_image\": null,\n            \"images\": [],\n            \"sub_category\": {\n                \"id\": 1,\n                \"category_id\": 1,\n                \"name\": \"clothes\",\n                \"image\": \"http://127.0.0.1:8000/assets/dashboard/subcategory/1761814078.jpg\",\n                \"created_at\": \"2025-10-30T08:47:58.000000Z\",\n                \"updated_at\": \"2025-10-30T08:47:58.000000Z\"\n            }\n        },\n        {\n            \"id\": 2,\n            \"name\": \"product test\",\n            \"description\": \"mmmmmmmmmmmmm\",\n            \"price\": \"99999.00\",\n            \"sub_category_id\": 1,\n            \"created_at\": \"2025-11-05T10:47:10.000000Z\",\n            \"updated_at\": \"2025-11-05T10:47:10.000000Z\",\n            \"main_image\": {\n                \"id\": 1,\n                \"product_id\": 2,\n                \"image_url\": \"assets/dashboard/products/6b75b070-3d2b-4cda-b7a6-e4832001656d1762339630.jpg\",\n                \"is_main\": 1,\n                \"created_at\": \"2025-11-05T10:47:11.000000Z\",\n                \"updated_at\": \"2025-11-05T10:47:11.000000Z\"\n            },\n            \"images\": [\n                {\n                    \"id\": 1,\n                    \"product_id\": 2,\n                    \"image_url\": \"assets/dashboard/products/6b75b070-3d2b-4cda-b7a6-e4832001656d1762339630.jpg\",\n                    \"is_main\": 1,\n                    \"created_at\": \"2025-11-05T10:47:11.000000Z\",\n                    \"updated_at\": \"2025-11-05T10:47:11.000000Z\"\n                },\n                {\n                    \"id\": 2,\n                    \"product_id\": 2,\n                    \"image_url\": \"assets/dashboard/products/9f891f0d-eafe-48ce-ac7f-cd47823567391762339975.jpg\",\n                    \"is_main\": 0,\n                    \"created_at\": \"2025-11-05T10:52:55.000000Z\",\n                    \"updated_at\": \"2025-11-05T10:52:55.000000Z\"\n                },\n                {\n                    \"id\": 3,\n                    \"product_id\": 2,\n                    \"image_url\": \"assets/dashboard/products/6df57124-3f1e-4edd-9186-bb856571fbe81762339975.jpg\",\n                    \"is_main\": 0,\n                    \"created_at\": \"2025-11-05T10:52:55.000000Z\",\n                    \"updated_at\": \"2025-11-05T10:52:55.000000Z\"\n                }\n            ],\n            \"sub_category\": {\n                \"id\": 1,\n                \"category_id\": 1,\n                \"name\": \"clothes\",\n                \"image\": \"http://127.0.0.1:8000/assets/dashboard/subcategory/1761814078.jpg\",\n                \"created_at\": \"2025-10-30T08:47:58.000000Z\",\n                \"updated_at\": \"2025-10-30T08:47:58.000000Z\"\n            }\n        },\n        {\n            \"id\": 3,\n            \"name\": \"Tobias Kirkland\",\n            \"description\": \"Fugit voluptate eum\",\n            \"price\": \"183.00\",\n            \"sub_category_id\": 3,\n            \"created_at\": \"2025-11-05T20:42:31.000000Z\",\n            \"updated_at\": \"2025-11-05T20:42:31.000000Z\",\n            \"main_image\": null,\n            \"images\": [],\n            \"sub_category\": {\n                \"id\": 3,\n                \"category_id\": 1,\n                \"name\": \"Kessie Chambers\",\n                \"image\": \"http://127.0.0.1:8000/assets/dashboard/subcategory/1761981813.jpg\",\n                \"created_at\": \"2025-11-01T07:23:33.000000Z\",\n                \"updated_at\": \"2025-11-01T07:23:33.000000Z\"\n            }\n        },\n        {\n            \"id\": 4,\n            \"name\": \"Merritt Sweeney\",\n            \"description\": \"Odio officiis veniam\",\n            \"price\": \"446.00\",\n            \"sub_category_id\": 6,\n            \"created_at\": \"2025-11-07T01:02:40.000000Z\",\n            \"updated_at\": \"2025-11-07T01:02:40.000000Z\",\n            \"main_image\": {\n                \"id\": 8,\n                \"product_id\": 4,\n                \"image_url\": \"assets/dashboard/products/ac6dafaf-2eec-4fef-bb54-6971b01219041762477362.png\",\n                \"is_main\": 1,\n                \"created_at\": \"2025-11-07T01:02:42.000000Z\",\n                \"updated_at\": \"2025-11-07T01:02:42.000000Z\"\n            },\n            \"images\": [\n                {\n                    \"id\": 8,\n                    \"product_id\": 4,\n                    \"image_url\": \"assets/dashboard/products/ac6dafaf-2eec-4fef-bb54-6971b01219041762477362.png\",\n                    \"is_main\": 1,\n                    \"created_at\": \"2025-11-07T01:02:42.000000Z\",\n                    \"updated_at\": \"2025-11-07T01:02:42.000000Z\"\n                },\n                {\n                    \"id\": 9,\n                    \"product_id\": 4,\n                    \"image_url\": \"assets/dashboard/products/6e4c72fe-cb1b-442c-ab38-d6f4257391081762477362.png\",\n                    \"is_main\": 0,\n                    \"created_at\": \"2025-11-07T01:02:42.000000Z\",\n                    \"updated_at\": \"2025-11-07T01:02:42.000000Z\"\n                },\n                {\n                    \"id\": 10,\n                    \"product_id\": 4,\n                    \"image_url\": \"assets/dashboard/products/a28c1ced-2478-42dc-a4d9-41a95154da5d1762477362.png\",\n                    \"is_main\": 0,\n                    \"created_at\": \"2025-11-07T01:02:42.000000Z\",\n                    \"updated_at\": \"2025-11-07T01:02:42.000000Z\"\n                },\n                {\n                    \"id\": 11,\n                    \"product_id\": 4,\n                    \"image_url\": \"assets/dashboard/products/b45200eb-60b2-4e1b-8163-c3851da62eed1762477362.png\",\n                    \"is_main\": 0,\n                    \"created_at\": \"2025-11-07T01:02:42.000000Z\",\n                    \"updated_at\": \"2025-11-07T01:02:42.000000Z\"\n                },\n                {\n                    \"id\": 12,\n                    \"product_id\": 4,\n                    \"image_url\": \"assets/dashboard/products/31761f3f-813b-41c8-8243-b6ebe1090d801762477362.png\",\n                    \"is_main\": 0,\n                    \"created_at\": \"2025-11-07T01:02:42.000000Z\",\n                    \"updated_at\": \"2025-11-07T01:02:42.000000Z\"\n                }\n            ],\n            \"sub_category\": {\n                \"id\": 6,\n                \"category_id\": 1,\n                \"name\": \"CRM2025\",\n                \"image\": \"http://127.0.0.1:8000/assets/dashboard/subcategory/1762299029.png\",\n                \"created_at\": \"2025-11-04T23:30:29.000000Z\",\n                \"updated_at\": \"2025-11-04T23:30:29.000000Z\"\n            }\n        },\n        {\n            \"id\": 5,\n            \"name\": \"Jasper Snider\",\n            \"description\": \"Reiciendis eos dolor\",\n            \"price\": \"386.00\",\n            \"sub_category_id\": 6,\n            \"created_at\": \"2025-11-07T01:07:53.000000Z\",\n            \"updated_at\": \"2025-11-07T01:07:53.000000Z\",\n            \"main_image\": {\n                \"id\": 13,\n                \"product_id\": 5,\n                \"image_url\": \"assets/dashboard/products/3affb0fe-b287-4ce3-98f5-f88e5551a8ce1762477674.png\",\n                \"is_main\": 1,\n                \"created_at\": \"2025-11-07T01:07:54.000000Z\",\n                \"updated_at\": \"2025-11-07T01:07:54.000000Z\"\n            },\n            \"images\": [\n                {\n                    \"id\": 13,\n                    \"product_id\": 5,\n                    \"image_url\": \"assets/dashboard/products/3affb0fe-b287-4ce3-98f5-f88e5551a8ce1762477674.png\",\n                    \"is_main\": 1,\n                    \"created_at\": \"2025-11-07T01:07:54.000000Z\",\n                    \"updated_at\": \"2025-11-07T01:07:54.000000Z\"\n                }\n            ],\n            \"sub_category\": {\n                \"id\": 6,\n                \"category_id\": 1,\n                \"name\": \"CRM2025\",\n                \"image\": \"http://127.0.0.1:8000/assets/dashboard/subcategory/1762299029.png\",\n                \"created_at\": \"2025-11-04T23:30:29.000000Z\",\n                \"updated_at\": \"2025-11-04T23:30:29.000000Z\"\n            }\n        },\n        {\n            \"id\": 6,\n            \"name\": \"Clark Mccray\",\n            \"description\": \"Sequi iusto aspernat\",\n            \"price\": \"622.00\",\n            \"sub_category_id\": 3,\n            \"created_at\": \"2025-11-07T01:41:30.000000Z\",\n            \"updated_at\": \"2025-11-07T01:41:30.000000Z\",\n            \"main_image\": {\n                \"id\": 14,\n                \"product_id\": 6,\n                \"image_url\": \"assets/dashboard/products/f92f03fe-8095-4f2b-9a56-6fc2cfbe98d51762479690.png\",\n                \"is_main\": 1,\n                \"created_at\": \"2025-11-07T01:41:30.000000Z\",\n                \"updated_at\": \"2025-11-07T01:41:30.000000Z\"\n            },\n            \"images\": [\n                {\n                    \"id\": 14,\n                    \"product_id\": 6,\n                    \"image_url\": \"assets/dashboard/products/f92f03fe-8095-4f2b-9a56-6fc2cfbe98d51762479690.png\",\n                    \"is_main\": 1,\n                    \"created_at\": \"2025-11-07T01:41:30.000000Z\",\n                    \"updated_at\": \"2025-11-07T01:41:30.000000Z\"\n                },\n                {\n                    \"id\": 15,\n                    \"product_id\": 6,\n                    \"image_url\": \"assets/dashboard/products/cd44e633-aa19-40f0-ae55-0aef72e82a3e1762479690.png\",\n                    \"is_main\": 0,\n                    \"created_at\": \"2025-11-07T01:41:30.000000Z\",\n                    \"updated_at\": \"2025-11-07T01:41:30.000000Z\"\n                },\n                {\n                    \"id\": 16,\n                    \"product_id\": 6,\n                    \"image_url\": \"assets/dashboard/products/d6d87fa9-2ad4-4df0-a694-56d1597adb971762479690.png\",\n                    \"is_main\": 0,\n                    \"created_at\": \"2025-11-07T01:41:30.000000Z\",\n                    \"updated_at\": \"2025-11-07T01:41:30.000000Z\"\n                },\n                {\n                    \"id\": 17,\n                    \"product_id\": 6,\n                    \"image_url\": \"assets/dashboard/products/ba491cdb-cbcf-4da2-93e8-95b4d113fe671762479690.png\",\n                    \"is_main\": 0,\n                    \"created_at\": \"2025-11-07T01:41:30.000000Z\",\n                    \"updated_at\": \"2025-11-07T01:41:30.000000Z\"\n                }\n            ],\n            \"sub_category\": {\n                \"id\": 3,\n                \"category_id\": 1,\n                \"name\": \"Kessie Chambers\",\n                \"image\": \"http://127.0.0.1:8000/assets/dashboard/subcategory/1761981813.jpg\",\n                \"created_at\": \"2025-11-01T07:23:33.000000Z\",\n                \"updated_at\": \"2025-11-01T07:23:33.000000Z\"\n            }\n        },\n        {\n            \"id\": 7,\n            \"name\": \"Ahly T shirt\",\n            \"description\": \"in egypt ,Ahly T shirt clothes\",\n            \"price\": \"200.00\",\n            \"sub_category_id\": 1,\n            \"created_at\": \"2025-11-07T03:17:40.000000Z\",\n            \"updated_at\": \"2025-11-07T04:07:18.000000Z\",\n            \"main_image\": null,\n            \"images\": [],\n            \"sub_category\": {\n                \"id\": 1,\n                \"category_id\": 1,\n                \"name\": \"clothes\",\n                \"image\": \"http://127.0.0.1:8000/assets/dashboard/subcategory/1761814078.jpg\",\n                \"created_at\": \"2025-10-30T08:47:58.000000Z\",\n                \"updated_at\": \"2025-10-30T08:47:58.000000Z\"\n            }\n        },\n        {\n            \"id\": 8,\n            \"name\": \"kholoud\",\n            \"description\": \"Dolores exercitation\",\n            \"price\": \"857.00\",\n            \"sub_category_id\": 6,\n            \"created_at\": \"2025-11-09T05:34:56.000000Z\",\n            \"updated_at\": \"2025-11-09T05:34:56.000000Z\",\n            \"main_image\": null,\n            \"images\": [],\n            \"sub_category\": {\n                \"id\": 6,\n                \"category_id\": 1,\n                \"name\": \"CRM2025\",\n                \"image\": \"http://127.0.0.1:8000/assets/dashboard/subcategory/1762299029.png\",\n                \"created_at\": \"2025-11-04T23:30:29.000000Z\",\n                \"updated_at\": \"2025-11-04T23:30:29.000000Z\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "delete product",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/products/5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"5"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success delete product",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/products/5",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"products",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Nov 2025 00:51:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Product deleted successfully.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "update product",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"name\": \"test product\",\r\n        \"description\": \"next\",\r\n        \"price\": \"11\",\r\n        \"sub_category_id\": \"1\",\r\n       \r\n        \r\n        \"images\": [\r\n            {\r\n                \"id\": 22,\r\n                \"product_id\": 9,\r\n                \"image_url\": \"assets/dashboard/products/e264c65b-cbfb-4d1a-b02c-b7fa59f044ce1762994004.png\",\r\n                \"is_main\": 0,\r\n                \"created_at\": \"2025-11-13T00:33:24.000000Z\",\r\n                \"updated_at\": \"2025-11-13T00:33:24.000000Z\"\r\n            }\r\n        ]}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/products/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"2"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success update product",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"name\": \"first product\",\r\n        \"description\": \"update\",\r\n        \"price\": \"11\",\r\n        \"sub_category_id\": \"1\",\r\n        \"updated_at\": \"2025-11-13T00:33:21.000000Z\",\r\n        \"created_at\": \"2025-11-13T00:33:21.000000Z\",\r\n        \"id\": 9,\r\n        \"images\": [\r\n            {\r\n                \"id\": 22,\r\n                \"product_id\": 9,\r\n                \"image_url\": \"assets/dashboard/products/e264c65b-cbfb-4d1a-b02c-b7fa59f044ce1762994004.png\",\r\n                \"is_main\": 0,\r\n                \"created_at\": \"2025-11-13T00:33:24.000000Z\",\r\n                \"updated_at\": \"2025-11-13T00:33:24.000000Z\"\r\n            }\r\n        ]}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/products/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"products",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Nov 2025 00:44:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Product updated successfully.\",\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"first product\",\n        \"description\": \"update\",\n        \"price\": \"11\",\n        \"sub_category_id\": \"1\",\n        \"created_at\": \"2025-10-30T08:49:07.000000Z\",\n        \"updated_at\": \"2025-11-13T00:44:33.000000Z\",\n        \"images\": []\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "store",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "first product",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "aaaaaaaaaaaaa",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "11",
+									"type": "text"
+								},
+								{
+									"key": "sub_category_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "images",
+									"type": "file",
+									"src": "/D:/desktop oct 2025/UI UX/Component 4.png"
+								},
+								{
+									"key": "images[1]",
+									"type": "file",
+									"src": "/D:/desktop oct 2025/UI UX/image 9.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/products",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "failed store",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "first product",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "aaaaaaaaaaaaa",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "111111",
+											"type": "text"
+										},
+										{
+											"key": "sub_category_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "images",
+											"type": "file",
+											"src": "/D:/desktop oct 2025/UI UX/Component 4.png"
+										},
+										{
+											"key": "images[1]",
+											"type": "file",
+											"src": "/D:/desktop oct 2025/UI UX/image 9.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/products",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Nov 2025 00:32:27 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": false,\n    \"message\": \"Failed to create product.\",\n    \"error\": \"SQLSTATE[22003]: Numeric value out of range: 1264 Out of range value for column 'price' at row 1 (Connection: mysql, SQL: insert into `products` (`name`, `description`, `price`, `sub_category_id`, `updated_at`, `created_at`) values (first product, aaaaaaaaaaaaa, 111111111, 1, 2025-11-13 00:32:25, 2025-11-13 00:32:25))\"\n}"
+						},
+						{
+							"name": "success store",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "first product",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "aaaaaaaaaaaaa",
+											"type": "text"
+										},
+										{
+											"key": "price",
+											"value": "11",
+											"type": "text"
+										},
+										{
+											"key": "sub_category_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "images",
+											"type": "file",
+											"src": "/D:/desktop oct 2025/UI UX/Component 4.png"
+										},
+										{
+											"key": "images[1]",
+											"type": "file",
+											"src": "/D:/desktop oct 2025/UI UX/image 9.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/products",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"products"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 13 Nov 2025 00:33:24 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Product created successfully.\",\n    \"data\": {\n        \"name\": \"first product\",\n        \"description\": \"aaaaaaaaaaaaa\",\n        \"price\": \"11\",\n        \"sub_category_id\": \"1\",\n        \"updated_at\": \"2025-11-13T00:33:21.000000Z\",\n        \"created_at\": \"2025-11-13T00:33:21.000000Z\",\n        \"id\": 9,\n        \"images\": [\n            {\n                \"id\": 22,\n                \"product_id\": 9,\n                \"image_url\": \"assets/dashboard/products/e264c65b-cbfb-4d1a-b02c-b7fa59f044ce1762994004.png\",\n                \"is_main\": 0,\n                \"created_at\": \"2025-11-13T00:33:24.000000Z\",\n                \"updated_at\": \"2025-11-13T00:33:24.000000Z\"\n            }\n        ]\n    }\n}"
+						}
+					]
 				}
 			]
 		},
@@ -1397,6 +2638,16 @@
 				}
 			},
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "gb6J17f73Z4KMR85bP7wYCW5Vypcm2LY9hJeeOAn76e74bb7",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [
 					{
@@ -1410,7 +2661,7 @@
 					"formdata": [
 						{
 							"key": "email",
-							"value": "eng.kholoudmohamed@gmail.com",
+							"value": "khm@gmail.com",
 							"type": "text"
 						},
 						{
@@ -1432,7 +2683,227 @@
 				},
 				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "success login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "eng.kholoudmohamed@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.23"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 11 Nov 2025 04:32:32 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"message\": \"user login successfully\",\n    \"data\": {\n        \"id\": 7,\n        \"first_name\": \"kholoud\",\n        \"last_name\": \"hafez\",\n        \"email\": \"eng.kholoudmohamed@gmail.com\",\n        \"phone\": \"000000000\",\n        \"address\": \"cairo\",\n        \"city\": \"cairo\",\n        \"image\": \"http://127.0.0.1:8000/storage/default.png\",\n        \"user_type\": 2\n    },\n    \"token\": \"4|vNTtM8UjddCd8U9QBQpiCLL1HzfYt4kGpwBGybJP114d0521\"\n}"
+				},
+				{
+					"name": "failed login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "eng.kholoudmohamed@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "1234567891111",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.23"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 11 Nov 2025 04:33:10 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"message\": \"invalid credintials\",\n    \"data\": null\n}"
+				},
+				{
+					"name": "verify login",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "khm@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.23"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 11 Nov 2025 04:33:45 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"status\": true,\n    \"message\": \"user must be verify\",\n    \"data\": null\n}"
+				}
+			]
 		},
 		{
 			"name": "logout",
@@ -1457,7 +2928,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "{{vault:authorization-secret}}",
+							"value": "",
 							"type": "string"
 						}
 					]
@@ -1481,13 +2952,12 @@
 					]
 				},
 				"url": {
-					"raw": "{{url}}/api/auth/logout?logout=one device",
+					"raw": "{{url}}/api/logout?logout=one device",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
-						"auth",
 						"logout"
 					],
 					"query": [
@@ -1499,7 +2969,82 @@
 				},
 				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
 			},
-			"response": []
+			"response": [
+				{
+					"name": "logout",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"value": "",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/logout?logout=one device",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"logout"
+							],
+							"query": [
+								{
+									"key": "logout",
+									"value": "one device"
+								}
+							]
+						}
+					},
+					"status": "Unauthorized",
+					"code": 401,
+					"_postman_previewlanguage": null,
+					"header": [
+						{
+							"key": "Host",
+							"value": "127.0.0.1:8000"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.23"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 11 Nov 2025 04:37:46 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"message\": \"Unauthenticated.\"\n}"
+				}
+			]
 		},
 		{
 			"name": "send otp",
@@ -1538,13 +3083,12 @@
 					]
 				},
 				"url": {
-					"raw": "{{url}}/api/auth/sendotp?usage=forget",
+					"raw": "{{url}}/api/sendotp?usage=forget",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
-						"auth",
 						"sendotp"
 					],
 					"query": [
@@ -1605,13 +3149,12 @@
 					]
 				},
 				"url": {
-					"raw": "{{url}}/api/auth/verify-email",
+					"raw": "{{url}}/api/verify-email",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
-						"auth",
 						"verify-email"
 					]
 				},
@@ -1676,13 +3219,12 @@
 					]
 				},
 				"url": {
-					"raw": "{{url}}/api/auth/reset-password?usage=forget",
+					"raw": "{{url}}/api/reset-password?usage=forget",
 					"host": [
 						"{{url}}"
 					],
 					"path": [
 						"api",
-						"auth",
 						"reset-password"
 					],
 					"query": [
