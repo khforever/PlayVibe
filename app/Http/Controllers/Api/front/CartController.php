@@ -93,12 +93,12 @@ public function addItems(Request $request)
         $cartTotal += $total;
     }
 
-    $cart->update(['total_price' => $cartTotal]);
 
     return response()->json([
         'message' => 'Items added successfully',
-        'items' => $addedItems,
-        'total_cart_price' => $cartTotal
+        'total_cart_price' => $cartTotal,
+        'items' => $addedItems
+
     ], 201);
 }
 
@@ -217,7 +217,7 @@ public function updateItem1(Request $request,string $id)
         ], 500);
     }
 
- 
+
     if ($item->cart) {
         $newTotal = $item->cart->items()->sum('total_price');
         $item->cart->update(['total_price' => $newTotal]);
