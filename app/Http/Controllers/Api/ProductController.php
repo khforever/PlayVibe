@@ -22,7 +22,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::with(['MainImage', 'images', 'subCategory'])->get();
+        $products = Product::with(['MainImage', 'images', 'subCategory','variants.color',
+    'variants.size'])->get();
         return response()->json([
             'status' => true,
             'message' => 'Products retrieved successfully.',
@@ -65,22 +66,61 @@ class ProductController extends Controller
     /**
      * Display the specified product (GET /api/products/{id})
      */
-    public function show($id)
-    {
-        $product = Product::with(['images', 'attributes', 'subCategory'])->find($id);
+   public function show($id)
+{
+    // تحميل المنتج مع كل العلاقات
+    $product = Product::with([
+        'images',
+        'attributes',
+        'subCategory',
+        'variants.color',
+        'variants.size',
+        'reviews.user'
+    ])->find($id);
 
-        if (!$product) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Product not found.',
-            ], 404);
-        }
-
+    if (!$product) {
         return response()->json([
-            'status' => true,
-            'data' => $product,
-        ]);
+            'status' => false,
+            'message' => 'Product not found.',
+        ], 404);
     }
+
+    // الريفيوهات
+    $reviews = $product->reviews;
+
+    // عدد الريفيوهات
+    $reviewsCount = $reviews->count();
+
+    // متوسط التقييم
+    $averageRating = $reviewsCount > 0 
+        ? round($reviews->avg('rating'), 1)
+        : 0;
+
+    // إحصائيات عدد النجوم 1 → 5
+    $ratingStatsRaw = $product->reviews()
+        ->selectRaw('rating, COUNT(*) as total')
+        ->groupBy('rating')
+        ->orderBy('rating', 'desc')
+        ->get()
+        ->mapWithKeys(fn($row) => [$row->rating => $row->total]);
+
+    // ترتيب الإحصائيات بشكل ثابت
+    $ratingStats = [];
+    for ($i = 5; $i >= 1; $i--) {
+        $ratingStats[$i] = $ratingStatsRaw[$i] ?? 0;
+    }
+
+    return response()->json([
+        'status' => true,
+        'data' => $product,
+        'reviews_summary' => [
+            'count' => $reviewsCount,
+            'average' => $averageRating,
+            'stars' => $ratingStats
+        ],
+       
+    ]);
+}
 
     /**
      * Update a product (PUT/PATCH /api/products/{id})
