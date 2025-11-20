@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\front\AuthController;
 use App\Http\Controllers\Api\front\CartController;
 use App\Http\Controllers\Api\SubCategoryController;
 use App\Http\Controllers\Api\FavouriteController;
+use App\Http\Controllers\Api\OrderController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -98,3 +99,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/favourites/{product_id}', [FavouriteController::class, 'destroy']);
 
 });
+
+
+//order controller
+
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::post('/orders', [OrderController::class, 'store']);
+    Route::get('/orders', [OrderController::class, 'index']);
+    Route::get('/orders/{id}', [OrderController::class, 'show']);
+});
+Route::post('/orders/{id}/cancel', [OrderController::class, 'cancel'])
+    ->middleware('auth:sanctum');
