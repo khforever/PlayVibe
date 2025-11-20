@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\ColorController;
 use App\Http\Controllers\Api\front\CartController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\FavouriteController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -79,3 +80,15 @@ Route::middleware('auth:sanctum')->group(function () {
 //Product Controller
 Route::apiResource('products', ProductController::class);
 Route::delete('products/image/{id}', [ProductController::class, 'deleteImage']);
+
+
+//favourite controller
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::get('/favourites', [FavouriteController::class, 'index']);
+    Route::post('/favourites', [FavouriteController::class, 'store']);
+    Route::get('/favourites/{product_id}', [FavouriteController::class, 'show']);
+    Route::put('/favourites/{id}', [FavouriteController::class, 'update']);
+    Route::delete('/favourites/{product_id}', [FavouriteController::class, 'destroy']);
+
+});
