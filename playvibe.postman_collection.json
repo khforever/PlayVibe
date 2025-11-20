@@ -2612,6 +2612,643 @@
 							"body": "{\n    \"status\": true,\n    \"message\": \"Product created successfully.\",\n    \"data\": {\n        \"name\": \"first product\",\n        \"description\": \"aaaaaaaaaaaaa\",\n        \"price\": \"11\",\n        \"sub_category_id\": \"1\",\n        \"updated_at\": \"2025-11-13T00:33:21.000000Z\",\n        \"created_at\": \"2025-11-13T00:33:21.000000Z\",\n        \"id\": 9,\n        \"images\": [\n            {\n                \"id\": 22,\n                \"product_id\": 9,\n                \"image_url\": \"assets/dashboard/products/e264c65b-cbfb-4d1a-b02c-b7fa59f044ce1762994004.png\",\n                \"is_main\": 0,\n                \"created_at\": \"2025-11-13T00:33:24.000000Z\",\n                \"updated_at\": \"2025-11-13T00:33:24.000000Z\"\n            }\n        ]\n    }\n}"
 						}
 					]
+				},
+				{
+					"name": "show  one product",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/products/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success show",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/api/products/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"products",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 20 Nov 2025 03:25:05 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"data\": {\n        \"id\": 1,\n        \"name\": \"test product\",\n        \"description\": \"next\",\n        \"price\": \"11.00\",\n        \"sub_category_id\": 1,\n        \"created_at\": \"2025-10-30T08:49:07.000000Z\",\n        \"updated_at\": \"2025-11-13T00:48:42.000000Z\",\n        \"images\": [],\n        \"attributes\": {\n            \"id\": 1,\n            \"product_id\": 1,\n            \"sumthumb\": \"sumthumb text\",\n            \"additional_info\": \"additional_info desc\",\n            \"dimension\": \"587\",\n            \"maincompartment\": \"maincompartment desc\",\n            \"durable_fabric\": \"durable_fabric desc\",\n            \"spacious\": \"spacious desc\",\n            \"created_at\": \"2025-11-02T11:15:36.000000Z\",\n            \"updated_at\": \"2025-11-08T23:56:03.000000Z\"\n        },\n        \"sub_category\": {\n            \"id\": 1,\n            \"category_id\": 1,\n            \"name\": \"clothes\",\n            \"image\": \"http://127.0.0.1:8000/assets/dashboard/subcategory/1761814078.jpg\",\n            \"created_at\": \"2025-10-30T08:47:58.000000Z\",\n            \"updated_at\": \"2025-10-30T08:47:58.000000Z\"\n        },\n        \"variants\": [\n            {\n                \"id\": 3,\n                \"product_id\": 1,\n                \"color_id\": 1,\n                \"size_id\": 1,\n                \"created_at\": \"2025-10-30T08:50:01.000000Z\",\n                \"updated_at\": \"2025-10-30T08:50:01.000000Z\",\n                \"color\": {\n                    \"id\": 1,\n                    \"color\": \"Apple Blossom\",\n                    \"code\": \"#a74949\",\n                    \"created_at\": \"2025-10-30T08:43:33.000000Z\",\n                    \"updated_at\": \"2025-10-30T08:43:33.000000Z\"\n                },\n                \"size\": {\n                    \"id\": 1,\n                    \"size\": \"large\",\n                    \"created_at\": \"2025-10-30T08:44:12.000000Z\",\n                    \"updated_at\": \"2025-10-30T08:44:12.000000Z\"\n                }\n            },\n            {\n                \"id\": 1,\n                \"product_id\": 1,\n                \"color_id\": 1,\n                \"size_id\": 2,\n                \"created_at\": \"2025-10-30T08:49:23.000000Z\",\n                \"updated_at\": \"2025-10-30T08:49:23.000000Z\",\n                \"color\": {\n                    \"id\": 1,\n                    \"color\": \"Apple Blossom\",\n                    \"code\": \"#a74949\",\n                    \"created_at\": \"2025-10-30T08:43:33.000000Z\",\n                    \"updated_at\": \"2025-10-30T08:43:33.000000Z\"\n                },\n                \"size\": {\n                    \"id\": 2,\n                    \"size\": \"x large\",\n                    \"created_at\": \"2025-10-30T08:44:24.000000Z\",\n                    \"updated_at\": \"2025-10-30T08:44:24.000000Z\"\n                }\n            },\n            {\n                \"id\": 2,\n                \"product_id\": 1,\n                \"color_id\": 2,\n                \"size_id\": 1,\n                \"created_at\": \"2025-10-30T08:49:36.000000Z\",\n                \"updated_at\": \"2025-10-30T08:49:36.000000Z\",\n                \"color\": {\n                    \"id\": 2,\n                    \"color\": \"Congo Brown\",\n                    \"code\": \"#623c3c\",\n                    \"created_at\": \"2025-10-30T08:43:51.000000Z\",\n                    \"updated_at\": \"2025-10-30T08:43:51.000000Z\"\n                },\n                \"size\": {\n                    \"id\": 1,\n                    \"size\": \"large\",\n                    \"created_at\": \"2025-10-30T08:44:12.000000Z\",\n                    \"updated_at\": \"2025-10-30T08:44:12.000000Z\"\n                }\n            },\n            {\n                \"id\": 6,\n                \"product_id\": 1,\n                \"color_id\": 4,\n                \"size_id\": 4,\n                \"created_at\": \"2025-11-07T03:48:02.000000Z\",\n                \"updated_at\": \"2025-11-07T03:48:02.000000Z\",\n                \"color\": {\n                    \"id\": 4,\n                    \"color\": \"Old Brick\",\n                    \"code\": \"#922020\",\n                    \"created_at\": \"2025-11-05T20:41:39.000000Z\",\n                    \"updated_at\": \"2025-11-05T20:41:39.000000Z\"\n                },\n                \"size\": {\n                    \"id\": 4,\n                    \"size\": \"xx large\",\n                    \"created_at\": \"2025-11-05T20:41:18.000000Z\",\n                    \"updated_at\": \"2025-11-05T20:41:18.000000Z\"\n                }\n            }\n        ],\n        \"reviews\": [\n            {\n                \"id\": 1,\n                \"user_id\": 7,\n                \"product_id\": 1,\n                \"rating\": 4,\n                \"comment\": \"good comment\",\n                \"created_at\": \"2025-11-20T03:02:58.000000Z\",\n                \"updated_at\": \"2025-11-20T03:02:58.000000Z\",\n                \"user\": {\n                    \"id\": 7,\n                    \"first_name\": \"kholoud\",\n                    \"last_name\": \"hafez\",\n                    \"email\": \"eng.kholoudmohamed@gmail.com\",\n                    \"phone\": \"000000000\",\n                    \"address\": \"cairo\",\n                    \"city\": \"cairo\",\n                    \"is_verified\": 1,\n                    \"user_type\": 2,\n                    \"image\": null,\n                    \"deleted_at\": null,\n                    \"created_at\": \"2025-11-02T01:21:42.000000Z\",\n                    \"updated_at\": \"2025-11-04T23:44:12.000000Z\"\n                }\n            }\n        ]\n    },\n    \"reviews_summary\": {\n        \"count\": 1,\n        \"average\": 4,\n        \"stars\": {\n            \"1\": 0,\n            \"2\": 0,\n            \"3\": 0,\n            \"4\": 1,\n            \"5\": 0\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "favourite",
+			"item": [
+				{
+					"name": "all favourite",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "LHFvjxutamkuOy2Rvp6rXsMSVdTaB3COz7nlteqqf757d673",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/api/favourites/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"favourites",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "all favorites",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/api/favourites/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"favourites",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 19 Nov 2025 16:50:11 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"user_id\": 7,\n            \"product_id\": 1,\n            \"created_at\": \"2025-11-19T16:37:02.000000Z\",\n            \"updated_at\": \"2025-11-19T16:37:02.000000Z\",\n            \"product\": {\n                \"id\": 1,\n                \"name\": \"test product\",\n                \"description\": \"next\",\n                \"price\": \"11.00\",\n                \"sub_category_id\": 1,\n                \"created_at\": \"2025-10-30T08:49:07.000000Z\",\n                \"updated_at\": \"2025-11-13T00:48:42.000000Z\",\n                \"images\": [],\n                \"variants\": [\n                    {\n                        \"id\": 3,\n                        \"product_id\": 1,\n                        \"color_id\": 1,\n                        \"size_id\": 1,\n                        \"created_at\": \"2025-10-30T08:50:01.000000Z\",\n                        \"updated_at\": \"2025-10-30T08:50:01.000000Z\",\n                        \"color\": {\n                            \"id\": 1,\n                            \"color\": \"Apple Blossom\",\n                            \"code\": \"#a74949\",\n                            \"created_at\": \"2025-10-30T08:43:33.000000Z\",\n                            \"updated_at\": \"2025-10-30T08:43:33.000000Z\"\n                        },\n                        \"size\": {\n                            \"id\": 1,\n                            \"size\": \"large\",\n                            \"created_at\": \"2025-10-30T08:44:12.000000Z\",\n                            \"updated_at\": \"2025-10-30T08:44:12.000000Z\"\n                        }\n                    },\n                    {\n                        \"id\": 1,\n                        \"product_id\": 1,\n                        \"color_id\": 1,\n                        \"size_id\": 2,\n                        \"created_at\": \"2025-10-30T08:49:23.000000Z\",\n                        \"updated_at\": \"2025-10-30T08:49:23.000000Z\",\n                        \"color\": {\n                            \"id\": 1,\n                            \"color\": \"Apple Blossom\",\n                            \"code\": \"#a74949\",\n                            \"created_at\": \"2025-10-30T08:43:33.000000Z\",\n                            \"updated_at\": \"2025-10-30T08:43:33.000000Z\"\n                        },\n                        \"size\": {\n                            \"id\": 2,\n                            \"size\": \"x large\",\n                            \"created_at\": \"2025-10-30T08:44:24.000000Z\",\n                            \"updated_at\": \"2025-10-30T08:44:24.000000Z\"\n                        }\n                    },\n                    {\n                        \"id\": 2,\n                        \"product_id\": 1,\n                        \"color_id\": 2,\n                        \"size_id\": 1,\n                        \"created_at\": \"2025-10-30T08:49:36.000000Z\",\n                        \"updated_at\": \"2025-10-30T08:49:36.000000Z\",\n                        \"color\": {\n                            \"id\": 2,\n                            \"color\": \"Congo Brown\",\n                            \"code\": \"#623c3c\",\n                            \"created_at\": \"2025-10-30T08:43:51.000000Z\",\n                            \"updated_at\": \"2025-10-30T08:43:51.000000Z\"\n                        },\n                        \"size\": {\n                            \"id\": 1,\n                            \"size\": \"large\",\n                            \"created_at\": \"2025-10-30T08:44:12.000000Z\",\n                            \"updated_at\": \"2025-10-30T08:44:12.000000Z\"\n                        }\n                    },\n                    {\n                        \"id\": 6,\n                        \"product_id\": 1,\n                        \"color_id\": 4,\n                        \"size_id\": 4,\n                        \"created_at\": \"2025-11-07T03:48:02.000000Z\",\n                        \"updated_at\": \"2025-11-07T03:48:02.000000Z\",\n                        \"color\": {\n                            \"id\": 4,\n                            \"color\": \"Old Brick\",\n                            \"code\": \"#922020\",\n                            \"created_at\": \"2025-11-05T20:41:39.000000Z\",\n                            \"updated_at\": \"2025-11-05T20:41:39.000000Z\"\n                        },\n                        \"size\": {\n                            \"id\": 4,\n                            \"size\": \"xx large\",\n                            \"created_at\": \"2025-11-05T20:41:18.000000Z\",\n                            \"updated_at\": \"2025-11-05T20:41:18.000000Z\"\n                        }\n                    }\n                ],\n                \"sub_category\": {\n                    \"id\": 1,\n                    \"category_id\": 1,\n                    \"name\": \"clothes\",\n                    \"image\": \"http://127.0.0.1:8000/assets/dashboard/subcategory/1761814078.jpg\",\n                    \"created_at\": \"2025-10-30T08:47:58.000000Z\",\n                    \"updated_at\": \"2025-10-30T08:47:58.000000Z\"\n                },\n                \"reviews\": [],\n                \"attributes\": {\n                    \"id\": 1,\n                    \"product_id\": 1,\n                    \"sumthumb\": \"sumthumb text\",\n                    \"additional_info\": \"additional_info desc\",\n                    \"dimension\": \"587\",\n                    \"maincompartment\": \"maincompartment desc\",\n                    \"durable_fabric\": \"durable_fabric desc\",\n                    \"spacious\": \"spacious desc\",\n                    \"created_at\": \"2025-11-02T11:15:36.000000Z\",\n                    \"updated_at\": \"2025-11-08T23:56:03.000000Z\"\n                }\n            }\n        },\n        {\n            \"id\": 2,\n            \"user_id\": 7,\n            \"product_id\": 7,\n            \"created_at\": \"2025-11-19T16:42:29.000000Z\",\n            \"updated_at\": \"2025-11-19T16:42:29.000000Z\",\n            \"product\": {\n                \"id\": 7,\n                \"name\": \"Ahly T shirt\",\n                \"description\": \"in egypt ,Ahly T shirt clothes\",\n                \"price\": \"200.00\",\n                \"sub_category_id\": 1,\n                \"created_at\": \"2025-11-07T03:17:40.000000Z\",\n                \"updated_at\": \"2025-11-07T04:07:18.000000Z\",\n                \"images\": [],\n                \"variants\": [\n                    {\n                        \"id\": 7,\n                        \"product_id\": 7,\n                        \"color_id\": 1,\n                        \"size_id\": 1,\n                        \"created_at\": \"2025-11-07T04:07:45.000000Z\",\n                        \"updated_at\": \"2025-11-07T04:07:45.000000Z\",\n                        \"color\": {\n                            \"id\": 1,\n                            \"color\": \"Apple Blossom\",\n                            \"code\": \"#a74949\",\n                            \"created_at\": \"2025-10-30T08:43:33.000000Z\",\n                            \"updated_at\": \"2025-10-30T08:43:33.000000Z\"\n                        },\n                        \"size\": {\n                            \"id\": 1,\n                            \"size\": \"large\",\n                            \"created_at\": \"2025-10-30T08:44:12.000000Z\",\n                            \"updated_at\": \"2025-10-30T08:44:12.000000Z\"\n                        }\n                    }\n                ],\n                \"sub_category\": {\n                    \"id\": 1,\n                    \"category_id\": 1,\n                    \"name\": \"clothes\",\n                    \"image\": \"http://127.0.0.1:8000/assets/dashboard/subcategory/1761814078.jpg\",\n                    \"created_at\": \"2025-10-30T08:47:58.000000Z\",\n                    \"updated_at\": \"2025-10-30T08:47:58.000000Z\"\n                },\n                \"reviews\": [],\n                \"attributes\": {\n                    \"id\": 4,\n                    \"product_id\": 7,\n                    \"sumthumb\": \"Sacha Heath\",\n                    \"additional_info\": \"Melanie Fields\",\n                    \"dimension\": null,\n                    \"maincompartment\": \"Laborum rerum labore\",\n                    \"durable_fabric\": \"Exercitationem quod\",\n                    \"spacious\": \"Nihil eveniet assum\",\n                    \"created_at\": \"2025-11-07T03:51:50.000000Z\",\n                    \"updated_at\": \"2025-11-07T03:51:50.000000Z\"\n                }\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "store favourite",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "LHFvjxutamkuOy2Rvp6rXsMSVdTaB3COz7nlteqqf757d673",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "product_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/favourites/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"favourites",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "product_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/favourites/",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"favourites",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 19 Nov 2025 16:37:02 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Product added to favourites\",\n    \"data\": {\n        \"user_id\": 7,\n        \"product_id\": \"1\",\n        \"updated_at\": \"2025-11-19T16:37:02.000000Z\",\n        \"created_at\": \"2025-11-19T16:37:02.000000Z\",\n        \"id\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "show favourite",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "LHFvjxutamkuOy2Rvp6rXsMSVdTaB3COz7nlteqqf757d673",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "product_id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/favourites/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"favourites",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success show favourite",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "product_id",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/api/favourites/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"favourites",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 19 Nov 2025 16:39:36 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"data\": {\n        \"id\": 1,\n        \"user_id\": 7,\n        \"product_id\": 1,\n        \"created_at\": \"2025-11-19T16:37:02.000000Z\",\n        \"updated_at\": \"2025-11-19T16:37:02.000000Z\",\n        \"product\": {\n            \"id\": 1,\n            \"name\": \"test product\",\n            \"description\": \"next\",\n            \"price\": \"11.00\",\n            \"sub_category_id\": 1,\n            \"created_at\": \"2025-10-30T08:49:07.000000Z\",\n            \"updated_at\": \"2025-11-13T00:48:42.000000Z\",\n            \"images\": [],\n            \"variants\": [\n                {\n                    \"id\": 3,\n                    \"product_id\": 1,\n                    \"color_id\": 1,\n                    \"size_id\": 1,\n                    \"created_at\": \"2025-10-30T08:50:01.000000Z\",\n                    \"updated_at\": \"2025-10-30T08:50:01.000000Z\",\n                    \"color\": {\n                        \"id\": 1,\n                        \"color\": \"Apple Blossom\",\n                        \"code\": \"#a74949\",\n                        \"created_at\": \"2025-10-30T08:43:33.000000Z\",\n                        \"updated_at\": \"2025-10-30T08:43:33.000000Z\"\n                    },\n                    \"size\": {\n                        \"id\": 1,\n                        \"size\": \"large\",\n                        \"created_at\": \"2025-10-30T08:44:12.000000Z\",\n                        \"updated_at\": \"2025-10-30T08:44:12.000000Z\"\n                    }\n                },\n                {\n                    \"id\": 1,\n                    \"product_id\": 1,\n                    \"color_id\": 1,\n                    \"size_id\": 2,\n                    \"created_at\": \"2025-10-30T08:49:23.000000Z\",\n                    \"updated_at\": \"2025-10-30T08:49:23.000000Z\",\n                    \"color\": {\n                        \"id\": 1,\n                        \"color\": \"Apple Blossom\",\n                        \"code\": \"#a74949\",\n                        \"created_at\": \"2025-10-30T08:43:33.000000Z\",\n                        \"updated_at\": \"2025-10-30T08:43:33.000000Z\"\n                    },\n                    \"size\": {\n                        \"id\": 2,\n                        \"size\": \"x large\",\n                        \"created_at\": \"2025-10-30T08:44:24.000000Z\",\n                        \"updated_at\": \"2025-10-30T08:44:24.000000Z\"\n                    }\n                },\n                {\n                    \"id\": 2,\n                    \"product_id\": 1,\n                    \"color_id\": 2,\n                    \"size_id\": 1,\n                    \"created_at\": \"2025-10-30T08:49:36.000000Z\",\n                    \"updated_at\": \"2025-10-30T08:49:36.000000Z\",\n                    \"color\": {\n                        \"id\": 2,\n                        \"color\": \"Congo Brown\",\n                        \"code\": \"#623c3c\",\n                        \"created_at\": \"2025-10-30T08:43:51.000000Z\",\n                        \"updated_at\": \"2025-10-30T08:43:51.000000Z\"\n                    },\n                    \"size\": {\n                        \"id\": 1,\n                        \"size\": \"large\",\n                        \"created_at\": \"2025-10-30T08:44:12.000000Z\",\n                        \"updated_at\": \"2025-10-30T08:44:12.000000Z\"\n                    }\n                },\n                {\n                    \"id\": 6,\n                    \"product_id\": 1,\n                    \"color_id\": 4,\n                    \"size_id\": 4,\n                    \"created_at\": \"2025-11-07T03:48:02.000000Z\",\n                    \"updated_at\": \"2025-11-07T03:48:02.000000Z\",\n                    \"color\": {\n                        \"id\": 4,\n                        \"color\": \"Old Brick\",\n                        \"code\": \"#922020\",\n                        \"created_at\": \"2025-11-05T20:41:39.000000Z\",\n                        \"updated_at\": \"2025-11-05T20:41:39.000000Z\"\n                    },\n                    \"size\": {\n                        \"id\": 4,\n                        \"size\": \"xx large\",\n                        \"created_at\": \"2025-11-05T20:41:18.000000Z\",\n                        \"updated_at\": \"2025-11-05T20:41:18.000000Z\"\n                    }\n                }\n            ],\n            \"sub_category\": {\n                \"id\": 1,\n                \"category_id\": 1,\n                \"name\": \"clothes\",\n                \"image\": \"http://127.0.0.1:8000/assets/dashboard/subcategory/1761814078.jpg\",\n                \"created_at\": \"2025-10-30T08:47:58.000000Z\",\n                \"updated_at\": \"2025-10-30T08:47:58.000000Z\"\n            },\n            \"reviews\": [],\n            \"attributes\": {\n                \"id\": 1,\n                \"product_id\": 1,\n                \"sumthumb\": \"sumthumb text\",\n                \"additional_info\": \"additional_info desc\",\n                \"dimension\": \"587\",\n                \"maincompartment\": \"maincompartment desc\",\n                \"durable_fabric\": \"durable_fabric desc\",\n                \"spacious\": \"spacious desc\",\n                \"created_at\": \"2025-11-02T11:15:36.000000Z\",\n                \"updated_at\": \"2025-11-08T23:56:03.000000Z\"\n            }\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Reviews",
+			"item": [
+				{
+					"name": "store review",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "product_id",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "rating",
+									"value": "good rating",
+									"type": "text"
+								},
+								{
+									"key": "comment",
+									"value": "good comment",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/api/reviews",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"reviews"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "store order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "aj3Pi21FCz8wuaFbe8tDKH5tXb9i4gRGQ3Yr1Kv366fb21f8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"address\": \"Cairo, Nasr City\",\r\n  \"items\": [\r\n    { \"product_id\": 1, \"quantity\": 2 },\r\n    { \"product_id\": 7, \"quantity\": 1 }\r\n  ]\r\n}\r\n\r\n\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/orders",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"orders"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "fail store",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"address\": \"Cairo, Nasr City\",\r\n  \"items\": [\r\n    { \"product_id\": 1, \"quantity\": 2 },\r\n    { \"product_id\": 7, \"quantity\": 1 }\r\n  ]\r\n}\r\n\r\n\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/orders",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"orders"
+									]
+								}
+							},
+							"status": "Unprocessable Content",
+							"code": 422,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 20 Nov 2025 06:08:07 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"The address field is required. (and 1 more error)\",\n    \"errors\": {\n        \"address\": [\n            \"The address field is required.\"\n        ],\n        \"items\": [\n            \"The items field is required.\"\n        ]\n    }\n}"
+						},
+						{
+							"name": "success store",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"address\": \"Cairo, Nasr City\",\r\n  \"items\": [\r\n    { \"product_id\": 1, \"quantity\": 2 },\r\n    { \"product_id\": 7, \"quantity\": 1 }\r\n  ]\r\n}\r\n\r\n\r\n\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/orders",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"orders"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 20 Nov 2025 06:09:02 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"Order created successfully\",\n    \"data\": {\n        \"user_id\": 7,\n        \"address\": \"Cairo, Nasr City\",\n        \"status\": \"pending\",\n        \"total\": 222,\n        \"updated_at\": \"2025-11-20T06:09:01.000000Z\",\n        \"created_at\": \"2025-11-20T06:09:01.000000Z\",\n        \"id\": 1\n    }\n}"
+						}
+					]
 				}
 			]
 		},
