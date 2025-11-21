@@ -8,198 +8,151 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Enum\OrderStatus;
+use App\Models\Cart;
+use App\Models\CartItem;
+use App\Models\ProductVariant;
 
 class OrderController extends Controller
 {
-    // 1) CREATE ORDER
-    public function store(Request $request)
-    {
 
-
-
-        $request->validate([
-            'address' => 'required|string|max:255',
-            'items'   => 'required|array|min:1',
-            'items.*.product_id' => 'required|exists:products,id',
-            'items.*.quantity'   => 'required|integer|min:1',
-        ]);
-
-        $total = 0;
-
-        foreach ($request->items as $item) {
-            $product = Product::find($item['product_id']);
-            $total += $product->price * $item['quantity'];
-        }
-
-        // Create Order
-        $order = Order::create([
-            'user_id' => $request->user()->id,
-            'address' => $request->address,
-            'status'  => 'pending',
-            'total'   => $total,
-        ]);
-
-        // Insert Order Items
-        foreach ($request->items as $item) {
-            $product = Product::find($item['product_id']);
-
-            OrderItem::create([
-                'order_id'   => $order->id,
-                'product_id' => $product->id,
-                'quantity'   => $item['quantity'],
-                'unit_price' => $product->price,
-            ]);
-        }
-
-
-
-
-
-        return response()->json([
-            'status' => true,
-            'message' => 'Order created successfully',
-            'data' => $order
-        ]);
-
-
-
-
-    }
-
-    // 2) GET ALL ORDERS OF USER
-    public function index(Request $request)
-    {
-        $orders = Order::with('items.product')
-            ->where('user_id', $request->user()->id)
-            ->orderBy('id', 'DESC')
-            ->get();
-
-        return response()->json([
-            'status' => true,
-            'data' => $orders
-        ]);
-    }
-
-    // 3) SHOW ONE ORDER
-    public function show(Request $request, $id)
-    {
-        $order = Order::with('items.product')
-            ->where('user_id', $request->user()->id)
-            ->where('id', $id)
-            ->first();
-
-        if (!$order) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Order not found'
-            ], 404);
-        }
-
-        return response()->json([
-            'status' => true,
-            'data' => $order
-        ]);
-    }
-
-
-
-
-
- public function cancel2($id)
+ public function createOrder(Request $request)
 {
-    $order = Order::findOrFail($id);
+    $user = auth()->user();
 
-    $order->status = OrderStatus::CANCELLED;  // هيشتغل تمام دلوقتي
-    $order->save();
+    $request->validate([
+        'full_name' => 'required|string',
+        'email' => 'required|email',
+        'phone' => 'required|string',
+        'address' => 'required|string',
+        'city' => 'required|string',
+        'delivery_option' => 'required|integer',
+        'payment_method' => 'required|integer',
+        'location_lat' => 'required',
+        'location_lng' => 'required',
+        'notes' => 'nullable|string',
+    ]);
+
+    // ---- Get Cart ----
+    $cart = Cart::where('user_id', $user->id)->first();
+    if (!$cart)
+        return response()->json(['message' => 'Cart is empty'], 400);
+
+    $cartItems = CartItem::where('cart_id', $cart->id)->get();
+    if ($cartItems->count() == 0)
+        return response()->json(['message' => 'Cart has no items'], 400);
+
+    // ---- Calculate Subtotal ----
+    $subtotal = $cartItems->sum(function ($item) {
+        return $item->price * $item->quantity;
+    });
+
+    // ---- Delivery Price ----
+    $delivery_price = match ((int)$request->delivery_option) {
+        1 => 50,
+        2 => 40,
+        3 => 70,
+        default => 50
+    };
+
+    // ---- Create Order ----
+    $order = Order::create([
+        'user_id' => $user->id,
+        'full_name' => $request->full_name,
+        'email' => $request->email,
+        'phone' => $request->phone,
+        'address' => $request->address,
+        'city' => $request->city,
+        'delivery_option' => $request->delivery_option,
+        'delivery_price' => $delivery_price,
+        'notes' => $request->notes,
+        'payment_method' => $request->payment_method,
+        'location_lat' => $request->location_lat,
+        'location_lng' => $request->location_lng,
+        'subtotal' => $subtotal,
+        'status' => 1
+    ]);
+
+    // ---- Move Cart Items → Order Items ----
+    foreach ($cartItems as $item) {
+
+        // 1️⃣ نجيب الـ Variant من جدول product_variants
+        $variant = ProductVariant::with('product')->find($item->product_variant_id);
+
+        if (!$variant || !$variant->product) {
+            return response()->json([
+                'message' => 'Product variant not found',
+                'variant_id' => $item->product_variant_id
+            ], 400);
+        }
+
+        // 2️⃣ ندخل البيانات في order_items
+        OrderItem::create([
+            'order_id' => $order->id,
+            'product_id' => $variant->product->id, // مهم جداً
+            'quantity' => $item->quantity,
+            'price' => $item->price,
+            'total' => $item->price * $item->quantity
+        ]);
+    }
+
+    // ---- Clear Cart ----
+    CartItem::where('cart_id', $cart->id)->delete();
+    $cart->delete();
 
     return response()->json([
-        'message' => 'Order cancelled successfully',
+        'message' => 'Order created successfully',
+        'order' => $order->load('items')
+    ]);
+}
+
+public function showOrder($id)
+{
+    $user = auth()->user();
+
+    $order = Order::with(['items.product'])
+        ->where('id', $id)
+        ->where('user_id', $user->id)
+        ->first();
+
+    if (!$order) {
+        return response()->json(['message' => 'Order not found'], 404);
+    }
+
+    return response()->json([
+        'message' => 'Order details loaded',
         'order' => $order
     ]);
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-public function cancel3(Request $request, $id)
+public function cancelOrder($id)
 {
-    $order = Order::where('user_id', $request->user()->id)
-                  ->where('id', $id)
-                  ->first();
+    $user = auth()->user();
+ 
+
+
+
+    $order = Order::where('id', $id)
+        ->where('user_id', $user->id)
+         ->where('status', Order::PENDING) // only pending orders can be cancelled
+        ->first();
 
     if (!$order) {
-        return response()->json([
-            'status' => false,
-            'message' => 'Order not found'
-        ], 404);
+        return response()->json(['message' => 'Order not found'], 404);
     }
 
-    // حالات الطلب اللي مسموح إلغاءها
-    $cancelableStatuses = ['pending', 'processing'];
+ 
 
-    if (!in_array($order->status, $cancelableStatuses)) {
-        return response()->json([
-            'status' => false,
-            'message' => 'Order cannot be cancelled at this stage'
-        ], 400);
-    }
-
-    // تحديث الحالة
-    $order->update([
-        'status' => 'cancelled'
-    ]);
+    // ✅ Cancel
+    $order->update(['status' => Order::CANCELLED]); // 2 = Order::CANCELLED; 
+   
 
     return response()->json([
-        'status' => true,
         'message' => 'Order cancelled successfully',
-        'data' => $order
+        'order' => $order
     ]);
 }
-
-
-
-
-public function cancel(Request $request, $id)
-{
-    $order = Order::where('user_id', $request->user()->id)
-                  ->where('id', $id)
-                  ->first();
-
-    if (!$order) {
-        return response()->json([
-            'status' => false,
-            'message' => 'Order not found'
-        ], 404);
-    }
-
-    // Debug: شوف الـ status الفعلي
-    return response()->json([
-        'current_status' => $order->status,
-        'status_type' => gettype($order->status),
-        'raw_attributes' => $order->getAttributes()['status']
-    ]);
-}
-
-
-
-
-
-
-
-
 
 
 

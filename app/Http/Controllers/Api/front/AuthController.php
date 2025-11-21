@@ -23,23 +23,57 @@ class AuthController extends Controller
     use Response;
     use Common;
 
-    public function register(RegisterRequest $request)
-    {
+    // public function register(RegisterRequest $request)
+    // {
+    // $data = $request->validated();
+
+    // if($request->hasfile('image'))
+    //     {
+    //     $data['image'] = $this->uploadFile($request->image,'assets/images');
+
+    //     }
+
+    //  $data['password'] = Hash::make($data['password']);
+
+    //  $user = User::create($data);
+
+    //  return $this->responseApi(__('register successfully') ,$user,201);
+
+    // }
+
+
+public function register(RegisterRequest $request)
+{
     $data = $request->validated();
 
-    if($request->hasfile('image'))
-        {
-        $data['image'] = $this->uploadFile($request->image,'assets/images');
-
-        }
-
-     $data['password'] = Hash::make($data['password']);
-
-     $user = User::create($data);
-
-     return $this->responseApi(__('register successfully'),201);
-
+    if ($request->hasFile('image')) {
+        $data['image'] = $this->uploadFile($request->image, 'assets/images');
     }
+
+    $data['password'] = Hash::make($data['password']);
+
+    $user = User::create($data);
+
+    // token
+    $token = $user->createToken('auth_token')->plainTextToken;
+
+    // fractal transform
+    $user = fractal()
+        ->item($user)
+        ->transformWith(new UserTransform())
+        ->serializeWith(new ArraySerializer())
+        ->toArray();
+
+return $this->responseApi(
+    __('register successfully'),
+    $user,
+    201,
+    ['token' => $token]
+);
+}
+
+
+
 
 //login
 public function login(LoginRequest $request)
@@ -81,7 +115,7 @@ public function logout(Request $request)
 
         $request->user()->tokens()->delete();
         return $this->responseApi(__(' logout  successfully'));
-    
+
 
 }
 

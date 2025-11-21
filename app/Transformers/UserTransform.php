@@ -15,7 +15,7 @@ class UserTransform extends TransformerAbstract
     protected array $defaultIncludes = [
         //
     ];
-    
+
     /**
      * List of resources possible to include
      *
@@ -24,7 +24,7 @@ class UserTransform extends TransformerAbstract
     protected array $availableIncludes = [
         //
     ];
-    
+
     /**
      * A Fractal transformer.
      *
@@ -42,6 +42,7 @@ class UserTransform extends TransformerAbstract
             'city'=>$user->city,
             'image' => $user->getFirstMediaUrl('image') ?: asset('storage/default.png'),
             'user_type' => $user->user_type,
+            'is_verified'=>$user->is_verified,
         ];
     }
 }
