@@ -3032,8 +3032,24 @@
 				{
 					"name": "store review",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "FY3ivZW8UO3Xb7kcsMvuKvGPJjemcQWYmx1Dx7Ft342488a7",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
@@ -3044,7 +3060,7 @@
 								},
 								{
 									"key": "rating",
-									"value": "good rating",
+									"value": "4",
 									"type": "text"
 								},
 								{
@@ -3065,57 +3081,9 @@
 							]
 						}
 					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Order",
-			"item": [
-				{
-					"name": "store order",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "aj3Pi21FCz8wuaFbe8tDKH5tXb9i4gRGQ3Yr1Kv366fb21f8",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n  \"address\": \"Cairo, Nasr City\",\r\n  \"items\": [\r\n    { \"product_id\": 1, \"quantity\": 2 },\r\n    { \"product_id\": 7, \"quantity\": 1 }\r\n  ]\r\n}\r\n\r\n\r\n\r\n",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}/api/orders",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"api",
-								"orders"
-							]
-						}
-					},
 					"response": [
 						{
-							"name": "fail store",
+							"name": "store review",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -3126,27 +3094,38 @@
 									}
 								],
 								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"address\": \"Cairo, Nasr City\",\r\n  \"items\": [\r\n    { \"product_id\": 1, \"quantity\": 2 },\r\n    { \"product_id\": 7, \"quantity\": 1 }\r\n  ]\r\n}\r\n\r\n\r\n\r\n",
-									"options": {
-										"raw": {
-											"language": "json"
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "product_id",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "rating",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "comment",
+											"value": "good comment",
+											"type": "text"
 										}
-									}
+									]
 								},
 								"url": {
-									"raw": "{{url}}/api/orders",
+									"raw": "{{url}}/api/reviews",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
 										"api",
-										"orders"
+										"reviews"
 									]
 								}
 							},
-							"status": "Unprocessable Content",
-							"code": 422,
+							"status": "Created",
+							"code": 201,
 							"_postman_previewlanguage": null,
 							"header": [
 								{
@@ -3167,7 +3146,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 20 Nov 2025 06:08:07 GMT"
+									"value": "Mon, 24 Nov 2025 14:34:43 GMT"
 								},
 								{
 									"key": "Content-Type",
@@ -3179,10 +3158,104 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"message\": \"The address field is required. (and 1 more error)\",\n    \"errors\": {\n        \"address\": [\n            \"The address field is required.\"\n        ],\n        \"items\": [\n            \"The items field is required.\"\n        ]\n    }\n}"
+							"body": "{\n    \"message\": \"Review added successfully\",\n    \"data\": {\n        \"user_id\": 1,\n        \"product_id\": \"1\",\n        \"rating\": \"4\",\n        \"comment\": \"good comment\",\n        \"updated_at\": \"2025-11-24T14:34:43.000000Z\",\n        \"created_at\": \"2025-11-24T14:34:43.000000Z\",\n        \"id\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update review",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "FY3ivZW8UO3Xb7kcsMvuKvGPJjemcQWYmx1Dx7Ft342488a7",
+									"type": "string"
+								}
+							]
 						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "  {\r\n  \"rating\": 1,\r\n  \"comment\": \"good comment\"\r\n\r\n  } ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/reviews/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"reviews",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Orders",
+			"item": [
+				{
+					"name": "store order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9jUtgmeDDwsNqrgWONbEKnJed4VriksWJiemvWYH7ef9d100",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"full_name\": \"sara Mohamed\",\r\n  \"email\": \"sara@test.com\",\r\n  \"phone\": \"01012345678\",\r\n  \"address\": \"Nasr City\",\r\n  \"city\": \"Cairo\",\r\n  \"delivery_option\": 1,\r\n  \"payment_method\": 1,\r\n  \"location_lat\": \"30.123456\",\r\n  \"location_lng\": \"31.987654\",\r\n  \"notes\": \"Call me when arriving\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/orders/store",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"orders",
+								"store"
+							]
+						}
+					},
+					"response": [
 						{
-							"name": "success store",
+							"name": "success store order",
 							"originalRequest": {
 								"method": "POST",
 								"header": [
@@ -3194,7 +3267,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n  \"address\": \"Cairo, Nasr City\",\r\n  \"items\": [\r\n    { \"product_id\": 1, \"quantity\": 2 },\r\n    { \"product_id\": 7, \"quantity\": 1 }\r\n  ]\r\n}\r\n\r\n\r\n\r\n",
+									"raw": "{\r\n  \"full_name\": \"Kholoud Mohamed\",\r\n  \"email\": \"kholoud@test.com\",\r\n  \"phone\": \"01012345678\",\r\n  \"address\": \"Nasr City\",\r\n  \"city\": \"Cairo\",\r\n  \"delivery_option\": 1,\r\n  \"payment_method\": 1,\r\n  \"location_lat\": \"30.123456\",\r\n  \"location_lng\": \"31.987654\",\r\n  \"notes\": \"Call me when arriving\"\r\n}\r\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -3202,13 +3275,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/api/orders",
+									"raw": "{{url}}/api/orders/store",
 									"host": [
 										"{{url}}"
 									],
 									"path": [
 										"api",
-										"orders"
+										"orders",
+										"store"
 									]
 								}
 							},
@@ -3234,7 +3308,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Thu, 20 Nov 2025 06:09:02 GMT"
+									"value": "Fri, 21 Nov 2025 22:43:20 GMT"
 								},
 								{
 									"key": "Content-Type",
@@ -3246,7 +3320,466 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"status\": true,\n    \"message\": \"Order created successfully\",\n    \"data\": {\n        \"user_id\": 7,\n        \"address\": \"Cairo, Nasr City\",\n        \"status\": \"pending\",\n        \"total\": 222,\n        \"updated_at\": \"2025-11-20T06:09:01.000000Z\",\n        \"created_at\": \"2025-11-20T06:09:01.000000Z\",\n        \"id\": 1\n    }\n}"
+							"body": "{\n    \"message\": \"Order created successfully\",\n    \"order\": {\n        \"user_id\": 1,\n        \"full_name\": \"Kholoud Mohamed\",\n        \"email\": \"kholoud@test.com\",\n        \"phone\": \"01012345678\",\n        \"address\": \"Nasr City\",\n        \"city\": \"Cairo\",\n        \"delivery_option\": 1,\n        \"delivery_price\": 50,\n        \"notes\": \"Call me when arriving\",\n        \"payment_method\": 1,\n        \"location_lat\": \"30.123456\",\n        \"location_lng\": \"31.987654\",\n        \"subtotal\": 22,\n        \"status\": 1,\n        \"updated_at\": \"2025-11-21T22:43:18.000000Z\",\n        \"created_at\": \"2025-11-21T22:43:18.000000Z\",\n        \"id\": 3,\n        \"items\": [\n            {\n                \"id\": 1,\n                \"order_id\": 3,\n                \"product_id\": 1,\n                \"quantity\": 2,\n                \"price\": \"11.00\",\n                \"total\": \"22.00\",\n                \"created_at\": \"2025-11-21T22:43:19.000000Z\",\n                \"updated_at\": \"2025-11-21T22:43:19.000000Z\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9jUtgmeDDwsNqrgWONbEKnJed4VriksWJiemvWYH7ef9d100",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"full_name\": \"sara Mohamed\",\r\n  \"email\": \"sara@test.com\",\r\n  \"phone\": \"01012345678\",\r\n  \"address\": \"Nasr City\",\r\n  \"city\": \"Cairo\",\r\n  \"delivery_option\": 1,\r\n  \"payment_method\": 1,\r\n  \"location_lat\": \"30.123456\",\r\n  \"location_lng\": \"31.987654\",\r\n  \"notes\": \"Call me when arriving\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/orders/update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"orders",
+								"update"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success store order",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"full_name\": \"Kholoud Mohamed\",\r\n  \"email\": \"kholoud@test.com\",\r\n  \"phone\": \"01012345678\",\r\n  \"address\": \"Nasr City\",\r\n  \"city\": \"Cairo\",\r\n  \"delivery_option\": 1,\r\n  \"payment_method\": 1,\r\n  \"location_lat\": \"30.123456\",\r\n  \"location_lng\": \"31.987654\",\r\n  \"notes\": \"Call me when arriving\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/orders/store",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"store"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Nov 2025 22:43:20 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Order created successfully\",\n    \"order\": {\n        \"user_id\": 1,\n        \"full_name\": \"Kholoud Mohamed\",\n        \"email\": \"kholoud@test.com\",\n        \"phone\": \"01012345678\",\n        \"address\": \"Nasr City\",\n        \"city\": \"Cairo\",\n        \"delivery_option\": 1,\n        \"delivery_price\": 50,\n        \"notes\": \"Call me when arriving\",\n        \"payment_method\": 1,\n        \"location_lat\": \"30.123456\",\n        \"location_lng\": \"31.987654\",\n        \"subtotal\": 22,\n        \"status\": 1,\n        \"updated_at\": \"2025-11-21T22:43:18.000000Z\",\n        \"created_at\": \"2025-11-21T22:43:18.000000Z\",\n        \"id\": 3,\n        \"items\": [\n            {\n                \"id\": 1,\n                \"order_id\": 3,\n                \"product_id\": 1,\n                \"quantity\": 2,\n                \"price\": \"11.00\",\n                \"total\": \"22.00\",\n                \"created_at\": \"2025-11-21T22:43:19.000000Z\",\n                \"updated_at\": \"2025-11-21T22:43:19.000000Z\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "show order",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9jUtgmeDDwsNqrgWONbEKnJed4VriksWJiemvWYH7ef9d100",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/orders/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"orders",
+								"1"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success store order",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"full_name\": \"Kholoud Mohamed\",\r\n  \"email\": \"kholoud@test.com\",\r\n  \"phone\": \"01012345678\",\r\n  \"address\": \"Nasr City\",\r\n  \"city\": \"Cairo\",\r\n  \"delivery_option\": 1,\r\n  \"payment_method\": 1,\r\n  \"location_lat\": \"30.123456\",\r\n  \"location_lng\": \"31.987654\",\r\n  \"notes\": \"Call me when arriving\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/orders/store",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"store"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Nov 2025 22:43:20 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Order created successfully\",\n    \"order\": {\n        \"user_id\": 1,\n        \"full_name\": \"Kholoud Mohamed\",\n        \"email\": \"kholoud@test.com\",\n        \"phone\": \"01012345678\",\n        \"address\": \"Nasr City\",\n        \"city\": \"Cairo\",\n        \"delivery_option\": 1,\n        \"delivery_price\": 50,\n        \"notes\": \"Call me when arriving\",\n        \"payment_method\": 1,\n        \"location_lat\": \"30.123456\",\n        \"location_lng\": \"31.987654\",\n        \"subtotal\": 22,\n        \"status\": 1,\n        \"updated_at\": \"2025-11-21T22:43:18.000000Z\",\n        \"created_at\": \"2025-11-21T22:43:18.000000Z\",\n        \"id\": 3,\n        \"items\": [\n            {\n                \"id\": 1,\n                \"order_id\": 3,\n                \"product_id\": 1,\n                \"quantity\": 2,\n                \"price\": \"11.00\",\n                \"total\": \"22.00\",\n                \"created_at\": \"2025-11-21T22:43:19.000000Z\",\n                \"updated_at\": \"2025-11-21T22:43:19.000000Z\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "show all orders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9jUtgmeDDwsNqrgWONbEKnJed4VriksWJiemvWYH7ef9d100",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/orders/",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"orders",
+								""
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success store order",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"full_name\": \"Kholoud Mohamed\",\r\n  \"email\": \"kholoud@test.com\",\r\n  \"phone\": \"01012345678\",\r\n  \"address\": \"Nasr City\",\r\n  \"city\": \"Cairo\",\r\n  \"delivery_option\": 1,\r\n  \"payment_method\": 1,\r\n  \"location_lat\": \"30.123456\",\r\n  \"location_lng\": \"31.987654\",\r\n  \"notes\": \"Call me when arriving\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/orders/store",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"store"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Nov 2025 22:43:20 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Order created successfully\",\n    \"order\": {\n        \"user_id\": 1,\n        \"full_name\": \"Kholoud Mohamed\",\n        \"email\": \"kholoud@test.com\",\n        \"phone\": \"01012345678\",\n        \"address\": \"Nasr City\",\n        \"city\": \"Cairo\",\n        \"delivery_option\": 1,\n        \"delivery_price\": 50,\n        \"notes\": \"Call me when arriving\",\n        \"payment_method\": 1,\n        \"location_lat\": \"30.123456\",\n        \"location_lng\": \"31.987654\",\n        \"subtotal\": 22,\n        \"status\": 1,\n        \"updated_at\": \"2025-11-21T22:43:18.000000Z\",\n        \"created_at\": \"2025-11-21T22:43:18.000000Z\",\n        \"id\": 3,\n        \"items\": [\n            {\n                \"id\": 1,\n                \"order_id\": 3,\n                \"product_id\": 1,\n                \"quantity\": 2,\n                \"price\": \"11.00\",\n                \"total\": \"22.00\",\n                \"created_at\": \"2025-11-21T22:43:19.000000Z\",\n                \"updated_at\": \"2025-11-21T22:43:19.000000Z\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "cancel order",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "9jUtgmeDDwsNqrgWONbEKnJed4VriksWJiemvWYH7ef9d100",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/orders/2/cancel",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"orders",
+								"2",
+								"cancel"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "success store order",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"full_name\": \"Kholoud Mohamed\",\r\n  \"email\": \"kholoud@test.com\",\r\n  \"phone\": \"01012345678\",\r\n  \"address\": \"Nasr City\",\r\n  \"city\": \"Cairo\",\r\n  \"delivery_option\": 1,\r\n  \"payment_method\": 1,\r\n  \"location_lat\": \"30.123456\",\r\n  \"location_lng\": \"31.987654\",\r\n  \"notes\": \"Call me when arriving\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/api/orders/store",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"api",
+										"orders",
+										"store"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Host",
+									"value": "127.0.0.1:8000"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.23"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 21 Nov 2025 22:43:20 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Order created successfully\",\n    \"order\": {\n        \"user_id\": 1,\n        \"full_name\": \"Kholoud Mohamed\",\n        \"email\": \"kholoud@test.com\",\n        \"phone\": \"01012345678\",\n        \"address\": \"Nasr City\",\n        \"city\": \"Cairo\",\n        \"delivery_option\": 1,\n        \"delivery_price\": 50,\n        \"notes\": \"Call me when arriving\",\n        \"payment_method\": 1,\n        \"location_lat\": \"30.123456\",\n        \"location_lng\": \"31.987654\",\n        \"subtotal\": 22,\n        \"status\": 1,\n        \"updated_at\": \"2025-11-21T22:43:18.000000Z\",\n        \"created_at\": \"2025-11-21T22:43:18.000000Z\",\n        \"id\": 3,\n        \"items\": [\n            {\n                \"id\": 1,\n                \"order_id\": 3,\n                \"product_id\": 1,\n                \"quantity\": 2,\n                \"price\": \"11.00\",\n                \"total\": \"22.00\",\n                \"created_at\": \"2025-11-21T22:43:19.000000Z\",\n                \"updated_at\": \"2025-11-21T22:43:19.000000Z\"\n            }\n        ]\n    }\n}"
 						}
 					]
 				}
@@ -3298,7 +3831,7 @@
 					"formdata": [
 						{
 							"key": "email",
-							"value": "khm@gmail.com",
+							"value": "eng.kholoudmohamed@gmail.com",
 							"type": "text"
 						},
 						{

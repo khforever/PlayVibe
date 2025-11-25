@@ -7,13 +7,52 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use App\Enum\OrderStatus;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\ProductVariant;
 
 class OrderController extends Controller
 {
+
+
+
+public function listOrders()
+{
+    $user = auth()->user();
+
+    // Load orders with their items + product details
+    $orders = Order::with(['items.product'])
+        ->where('user_id', $user->id)
+        ->orderBy('id', 'DESC')
+        ->get();
+
+    if ($orders->count() == 0) {
+        return response()->json([
+            'message' => 'You have no orders yet'
+        ], 200);
+    }
+
+    return response()->json([
+        'message' => 'Orders loaded successfully',
+        'orders' => $orders
+    ]);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  public function createOrder(Request $request)
 {
@@ -129,7 +168,7 @@ public function showOrder($id)
 public function cancelOrder($id)
 {
     $user = auth()->user();
- 
+
 
 
 
@@ -142,11 +181,11 @@ public function cancelOrder($id)
         return response()->json(['message' => 'Order not found'], 404);
     }
 
- 
+
 
     // ✅ Cancel
-    $order->update(['status' => Order::CANCELLED]); // 2 = Order::CANCELLED; 
-   
+    $order->update(['status' => Order::CANCELLED]); // 2 = Order::CANCELLED;
+
 
     return response()->json([
         'message' => 'Order cancelled successfully',

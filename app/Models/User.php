@@ -44,8 +44,7 @@ class User extends Authenticatable implements HasMedia
 
 
 
-   // أو بطريقة Laravel 11 الحديثة
-    protected function name(): Attribute
+     protected function name(): Attribute
     {
         return Attribute::make(
             get: fn () => $this->first_name . ' ' . $this->last_name,
