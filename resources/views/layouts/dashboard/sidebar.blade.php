@@ -58,6 +58,22 @@
 
         </ul>
 
+  {{--Carts   --}}
+         <ul class="menu-content">
+            <li class="active"><a class="menu-item" href="{{route('cart.index')}}" data-i18n="nav.dash.ecommerce">Cart</a>
+            </li>
+
+
+        </ul>
+        <div class="pt-2"></div>
+  {{--orders   --}}
+         <ul class="menu-content">
+            <li class="active"><a class="menu-item" href="{{route('orders.index')}}" data-i18n="nav.dash.ecommerce">Orders</a>
+            </li>
+
+
+        </ul>
+
 
 
 

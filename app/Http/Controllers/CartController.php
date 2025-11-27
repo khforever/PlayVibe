@@ -13,14 +13,15 @@ class CartController extends Controller
      */
     public function index()
     {
-        //
+        $carts=Cart::with(['user','items.variant','items.variant.product'])->latest()->get();
+        return view('dashboard.cart.index',compact('carts'));
     }
 
-    
 
-    
 
-   
+
+
+
 
     /**
      * Show the form for editing the specified resource.

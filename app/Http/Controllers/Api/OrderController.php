@@ -39,21 +39,6 @@ public function listOrders()
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
  public function createOrder(Request $request)
 {
     $user = auth()->user();

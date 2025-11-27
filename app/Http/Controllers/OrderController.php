@@ -12,7 +12,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders=Order::with(['user','items.product'])->orderBy('id','DESC')->get();
+        return view('dashboard.orders.index',compact('orders'));
     }
 
     /**
