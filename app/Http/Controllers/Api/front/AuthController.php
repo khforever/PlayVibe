@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\Api\front;
-
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\LoginRequest;
 use App\Http\Requests\Api\RegisterRequest;
@@ -17,29 +17,15 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use League\Fractal\Serializer\ArraySerializer;
+use App\Mail\SendOtpMail;
+use Illuminate\Support\Facades\Mail;
 
 class AuthController extends Controller
 {
     use Response;
     use Common;
 
-    // public function register(RegisterRequest $request)
-    // {
-    // $data = $request->validated();
 
-    // if($request->hasfile('image'))
-    //     {
-    //     $data['image'] = $this->uploadFile($request->image,'assets/images');
-
-    //     }
-
-    //  $data['password'] = Hash::make($data['password']);
-
-    //  $user = User::create($data);
-
-    //  return $this->responseApi(__('register successfully') ,$user,201);
-
-    // }
 
 
 public function register(RegisterRequest $request)
@@ -54,8 +40,21 @@ public function register(RegisterRequest $request)
 
     $user = User::create($data);
 
-    // token
-    $token = $user->createToken('auth_token')->plainTextToken;
+ 
+$otp = rand(1000, 9999);
+
+
+DB::table('otps')->insert([
+    'user_id'    => $user->id,
+    'usage'      => 'register',
+    'otp'        => $otp,
+    'expired_at' => now()->addMinutes(5),
+    'created_at' => now(),
+    'updated_at' => now(),
+]);
+     Mail::to($user->email)->send(new SendOtpMail($otp));
+
+     $token = $user->createToken('auth_token')->plainTextToken;
 
     // fractal transform
     $user = fractal()
@@ -64,12 +63,12 @@ public function register(RegisterRequest $request)
         ->serializeWith(new ArraySerializer())
         ->toArray();
 
-return $this->responseApi(
-    __('register successfully'),
-    $user,
-    201,
-    ['token' => $token]
-);
+    return $this->responseApi(
+        __('register successfully, check your email for OTP'),
+        $user,
+        201,
+        ['token' => $token]
+    );
 }
 
 
@@ -136,12 +135,16 @@ public function logout(Request $request)
 
         $otp = rand(1000, 9999);
 
-        $otp = Otp::create([
+      Otp::create([
            'user_id'=> $user->id,
            'otp'=> $otp,
            'expired_at'=> Carbon::now()->addMinutes(3),
            'usage'=>$usage,
         ]);
+ 
+
+    // إرسال الإيميل فقط
+    Mail::to($user->email)->send(new SendOtpMail($otp));
 
         return $this->responseApi(__('sendotp send'), 200);
     }
