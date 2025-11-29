@@ -100,17 +100,29 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category, $id)
-    {
-        $category = Category::findOrFail($id);
-        // dd($category->image);
-        // remove old image
-        $oldCategoryImage = $category->image;
-        $Path = "assets/dashboard/categories/{$oldCategoryImage}";
-        $deletedCategoryImage = UploadImageTrait::DeleteImage($Path);
-        if ($deletedCategoryImage) {
-        $category->where('id', $id)->delete();
-        return redirect()->route('categories.index')->with('success', 'Category Deleted Successfully!');
+  public function destroy($id)
+{
+    $category = Category::findOrFail($id);
+
+    $hasOrders = $category->subCategories()
+        ->whereHas('products.orderItems')
+        ->exists();
+
+    if ($hasOrders) {
+
+        return redirect()->route('categories.index')->with('error', 'Cannot delete this category because some products under it are linked to customer orders.');
     }
+
+
+    if ($category->image) {
+        UploadImageTrait::DeleteImage("assets/dashboard/categories/{$category->image}");
+    }
+
+    $category->subCategories()->delete();
+
+
+    $category->delete();
+
+    return redirect()->route('categories.index')->with('success', 'Category Deleted Successfully!');
 }
 }

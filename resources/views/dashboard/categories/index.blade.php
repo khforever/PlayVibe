@@ -55,6 +55,7 @@ Categories
                             <p class="card-text">Each column has categories</p>
                             <table class="table table-striped table-bordered column-rendering">
                                  @include('dashboard.includes.messages')
+                                 @include('dashboard.includes.errors')
                                 <thead>
                                     <tr>
                                         <th>Name</th>

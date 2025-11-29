@@ -26,7 +26,7 @@ class SubCategoryController extends Controller
     {
         $categories = Category::select('id','name')->get();
         return view('dashboard.subcategories.create',compact('categories'));
-        
+
     }
 
 
@@ -74,20 +74,27 @@ class SubCategoryController extends Controller
         if($request->hasFile('image')){
             $data['image'] = $this->uploadFile($request->image,'assets/dashboard/subcategory');
         }
-        
+
         SubCategory::where('id',$id)->update($data);
         return redirect()->route('subcategory.index');
     }
 
-   
+
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request)
-    {
-        $id = $request->id;
-        SubCategory::where('id',$id)->delete($id);
-        return redirect()->route('subcategory.index');
+  public function destroy($id)
+{
+    $sub = SubCategory::findOrFail($id);
+
+
+    if ($sub->products()->whereHas('orderItems')->exists()) {
+        return redirect()->route('subcategory.index')->with('error', 'Cannot delete this subcategory because its products are linked to customer orders.');
     }
+
+    $sub->delete();
+
+    return redirect()->route('subcategory.index')->with('success', 'Subcategory deleted successfully!');
+}
 }

@@ -121,6 +121,10 @@ class ProductController extends Controller
     {
         $product=Product::findOrFail($id);
           ImageManager::deleteImages($product);
+          if ($product->orderItems()->exists()) {
+
+            return redirect()->route('products.index')->with('error', 'Cannot delete a product that has been ordered by customers.');
+            }
         $product->where('id', $id)->delete();
         return redirect()->route('products.index')->with('success', 'Product Deleted Successfully!');
 

@@ -2,4 +2,5 @@
 @if (session('success'))
          <div class="alert alert-success text-center w-50 m-auto">{{session('success')}}</div>
          @endif
+
 </div>
