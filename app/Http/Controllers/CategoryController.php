@@ -69,32 +69,26 @@ class CategoryController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdateCategoryRequest $request, $id)
-    {
-        $category = Category::findOrFail($id);
-        $categoryData=$request->validated();
-    //if selected new image
-        if ($request->hasFile('image')) {
-            //upload image
-            $imagePath = 'assets/dashboard/categories';
-            $imageName = UploadImageTrait::uploadImage($request, $imagePath);
-            //remove old image
+{
+    $category = Category::findOrFail($id);
+    $categoryData = $request->validated();
 
-            $oldFile = $category->image;
-            $Path = "assets/dashboard/categories/{$oldFile}";
-            $deletedFile = UploadImageTrait::DeleteImage($Path);
-            if ($deletedFile) {
+    if ($request->hasFile('image')) {
+        $imagePath = 'assets/dashboard/categories';
 
-                $categoryData['image'] = $imageName;
+        $imageName = UploadImageTrait::uploadImage($request, $imagePath);
 
-
-            }
-        }
-            $categoryData['name'] = $request->name;
-            $category->update($categoryData);
-
-        return redirect()->route('categories.index')->with('success', 'Category Updated Successfully!');
+        $oldFile = $category->image;
+        $oldPath = "$imagePath/$oldFile";
+        UploadImageTrait::DeleteImage($oldPath);
+        $categoryData['image'] = $imageName;
     }
 
+    $category->update($categoryData);
+
+    return redirect()->route('categories.index')
+        ->with('success', 'Category Updated Successfully!');
+}
 
 
     /**

@@ -8,7 +8,7 @@ trait UploadImageTrait
 
     {
            $image=$request->file('image');
-           $imageName=$image->getClientOriginalName();
+           $imageName = time() . '_' . uniqid() . '.' . $image->getClientOriginalExtension();
            $image->move($path, $imageName);
                 return $imageName;
     }
