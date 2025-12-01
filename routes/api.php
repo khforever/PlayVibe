@@ -15,7 +15,13 @@ use App\Http\Controllers\Api\SubCategoryController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\SubCategoryController;
+use App\Http\Controllers\Api\SizeController;
+use App\Http\Controllers\Api\ColorController;
+use App\Http\Controllers\Api\front\CartController;
+use App\Http\Controllers\Api\front\ProfileController;
+use App\Http\Controllers\Api\UserController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -76,7 +82,7 @@ Route::prefix('attributes')->controller(AttributeController::class)->group(funct
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/cart', [CartController::class, 'index']);
     Route::post('/cart/add', [CartController::class, 'addItems']);
-    Route::put('/cart/item/{id}', [CartController::class, 'updateItem']);
+    Route::put('/cart/item/{id}', [CartController::class,'updateItem']);
     Route::delete('/cart/item/{id}', [CartController::class, 'removeItem']);
 
     //review
@@ -110,4 +116,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('orders/store', [OrderController::class, 'createOrder']);
     Route::get('/orders/{id}', [OrderController::class, 'showOrder']);
     Route::post('/orders/{id}/cancel', [OrderController::class, 'cancelOrder']);
+//updateprofile
+//
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::post('/profile', [ProfileController::class, 'updateprofile']);
+
 });
