@@ -116,10 +116,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('orders/store', [OrderController::class, 'createOrder']);
     Route::get('/orders/{id}', [OrderController::class, 'showOrder']);
     Route::post('/orders/{id}/cancel', [OrderController::class, 'cancelOrder']);
+});
 //updateprofile
 //
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/profile', [ProfileController::class, 'updateprofile']);
-
 });
