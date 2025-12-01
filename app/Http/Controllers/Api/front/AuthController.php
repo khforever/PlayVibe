@@ -40,19 +40,17 @@ public function register(RegisterRequest $request)
 
     $user = User::create($data);
 
- 
-$otp = rand(1000, 9999);
 
-
-DB::table('otps')->insert([
-    'user_id'    => $user->id,
-    'usage'      => 'register',
-    'otp'        => $otp,
-    'expired_at' => now()->addMinutes(5),
-    'created_at' => now(),
-    'updated_at' => now(),
-]);
-     Mail::to($user->email)->send(new SendOtpMail($otp));
+    // $otp = rand(1000, 9999);
+    // DB::table('otps')->insert([
+    //     'user_id'    => $user->id,
+    //     'usage'      => 'register',
+    //     'otp'        => $otp,
+    //     'expired_at' => now()->addMinutes(3),
+    //     'created_at' => now(),
+    //     'updated_at' => now(),
+    // ]);
+    // Mail::to($user->email)->send(new SendOtpMail($otp));
 
      $token = $user->createToken('auth_token')->plainTextToken;
 
@@ -85,17 +83,19 @@ public function login(LoginRequest $request)
 
    if(!$user || !Hash::check($data['password'],$user->password ))
    {
-    return $this->responseApi(__('invalid credintials'));
+  return $this->responseApi(__('invalid credintials'), null, 401);
+
+
    }
    if ($user->trashed())
    {
-    return $this->responseApi(__('account is deleted'));
+    return $this->responseApi(__('account is deleted'),null,401);
    }
 
-if ($user->is_verified !== 1)
-{
-    return $this->responseApi(__('user must be verify'));
-}
+    // if ($user->is_verified !== 1)
+    // {
+    //     return $this->responseApi(__('user must be verify'));
+    // }
    $token = $user->createToken('auth_token')->plainTextToken;
 
     $user = fractal()
@@ -130,7 +130,7 @@ public function logout(Request $request)
 
         if (!$user)
         {
-            return $this->responseApi(__('user not_found'),404);
+            return $this->responseApi(__('user not found'),null,401);
         }
 
         $otp = rand(1000, 9999);
@@ -141,12 +141,12 @@ public function logout(Request $request)
            'expired_at'=> Carbon::now()->addMinutes(3),
            'usage'=>$usage,
         ]);
- 
+
 
     // إرسال الإيميل فقط
     Mail::to($user->email)->send(new SendOtpMail($otp));
 
-        return $this->responseApi(__('sendotp send'), 200);
+        return $this->responseApi(__('otp send successfully'), 200);
     }
 
 
@@ -160,12 +160,12 @@ public function verifyEmailOtp(VerifyEmailOtp $request)
 
     if (!$user)
     {
-        return $this->responseApi(__('account not found'), 404);
+        return $this->responseApi(__('account not found'),null ,401);
     }
 
     if ($user->trashed())
      {
-        return $this->responseApi(__('account is deleted'), 403);
+        return $this->responseApi(__('account is deleted'),null, 401);
     }
 
     $otp = $user->otps()
@@ -175,7 +175,7 @@ public function verifyEmailOtp(VerifyEmailOtp $request)
 
     if(!$otp)
     {
-        return $this->responseApi(__('invalid otp'),400);
+        return $this->responseApi(__('invalid otp'),null,401);
     }
 
         $user->update(['is_verified'=>true]);
@@ -198,12 +198,12 @@ public function resetpassword(ResetPassword $request)
 
     if (!$user)
     {
-        return $this->responseApi(__('user not found'),404);
+        return $this->responseApi(__('user not found'),401);
     }
 
     if ($user->trashed())
     {
-        return $this->responseApi(__('account is deleted'), 403);
+        return $this->responseApi(__('account is deleted'), null,401);
     }
 
     $otp = Otp::where('user_id', $user->id)
@@ -213,7 +213,7 @@ public function resetpassword(ResetPassword $request)
 
     if (!$otp)
     {
-        return $this->responseApi(__('invalid otp'), 404);
+        return $this->responseApi(__('invalid otp'), null,401);
     }
 
 
