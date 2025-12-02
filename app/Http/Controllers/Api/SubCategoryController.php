@@ -19,29 +19,10 @@ class SubCategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-      public function index(Request $request)
+      public function index()
 {
-    $search = $request->input('search');
-    $take = $request->input('take'); 
-    $skip = $request->input('skip');  
-    
-    $query = SubCategory::query();
-
-      if ($search)
-    {
-        $query->where('name','like', '%' . $search . '%');
-    }
-
-    $total = $query->count();
-
-    $subcategory = $query->skip($skip ?? 0)->take($take ?? $total)->get();
-
-     $subcategory =  fractal()->collection($subcategory)
-                  ->transformWith(new SubCategoryTransform())
-                   ->serializeWith(new ArraySerializer())
-                   ->toArray();
-
-    return $this->responseApi('', $subcategory, 200, ['count' =>$total]);
+     $subcategories = SubCategory::latest()->get();
+        return response()->json($subcategories);;
 }
 
     
@@ -72,14 +53,21 @@ class SubCategoryController extends Controller
     public function show(string $id)
     {
         $subcategory = SubCategory::findOrfail($id);
+       if(!$subcategory){
+        return response()->json([
+            'success' => false,
+            'message' => 'Subcategory not found',
+        ], 404);
+       }
+       else{
+        return response()->json([
+        'success' => true,
+        'data'=>['id'=>$subcategory->id,
+        'name'=>$subcategory->name,
+        'image'=>$subcategory->image]
 
-        $subcategory = fractal()
-                 ->item($subcategory)
-                 ->transformWith(new SubCategoryTransform())
-                 ->serializeWith(new ArraySerializer())
-                 ->toArray();
-
-        return  $this->responseApi('',$subcategory,200);
+       ], 200);
+       }
     }
 
     /**
