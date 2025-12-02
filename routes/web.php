@@ -1,18 +1,20 @@
 <?php
 
 use App\Http\Controllers\AttributeController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SubCategoryController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorController;
-use App\Http\Controllers\SizeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductVariantController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SizeController;
+use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\OrderController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -59,6 +61,15 @@ Route::controller(ColorController::class)->prefix('colors')->name('colors.')->gr
     Route::delete('/destroy/{color_id}', 'destroy')->name('destroy');
 
 
+
+
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//review
+Route::controller(ReviewController::class)->prefix('comments')->name('comments.')->group(function () {
+    Route::get('/{id}', 'index')->name('index');
+    Route::delete('/destroy/{id}', 'destroy')->name('destroy');
 
 
 });

@@ -111,15 +111,17 @@ class ProductController extends Controller
     }
 
     return response()->json([
-        'status' => true,
-        'data' => $product,
-        'reviews_summary' => [
-            'count' => $reviewsCount,
-            'average' => $averageRating,
-            'stars' => $ratingStats
-        ],
-       
-    ]);
+    'status' => true,
+    'data' => [
+        'product' => $product,
+        'reviews' => $product->reviews, 
+    ],
+    'reviews_summary' => [
+        'count' => $reviewsCount,
+        'average' => $averageRating,
+        'stars' => $ratingStats
+    ],
+]);
 }
 
     /**
