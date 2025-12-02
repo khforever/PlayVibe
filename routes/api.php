@@ -1,8 +1,6 @@
 <?php
 
 use App\Http\Controllers\Api\AttributeController;
-use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\ColorController;
 use App\Http\Controllers\Api\FavouriteController;
 use App\Http\Controllers\Api\front\AuthController;
 use App\Http\Controllers\Api\front\CartController;
@@ -15,6 +13,10 @@ use App\Http\Controllers\Api\SubCategoryController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\ColorController;
+use App\Http\Controllers\Api\front\ProfileController;
+use App\Http\Controllers\Api\SiteReviewController;
 
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
@@ -83,31 +85,40 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/reviews', [ReviewController::class, 'store']);
     Route::put('/reviews/{id}', [ReviewController::class, 'update']);
  Route::delete('/reviews/{id}', [ReviewController::class, 'destroy']);
+
+
+//siteReview
+Route::post('/site-reviews', [SiteReviewController::class, 'store']);
+Route::get('/my-site-review', [SiteReviewController::class, 'show']);
+Route::put('/site-reviews/{id}', [SiteReviewController::class, 'update']);
+Route::delete('/site-reviews/{id}', [SiteReviewController::class, 'destroy']);
 });
+
+
 
 
 //Product Controller
 Route::apiResource('products', ProductController::class);
 Route::delete('products/image/{id}', [ProductController::class, 'deleteImage']);
+
 //search
 Route::get('/search', [SearchController::class, 'search']);
-//favourite controller
-Route::middleware('auth:sanctum')->group(function () {
-
-    Route::get('/favourites', [FavouriteController::class, 'index']);
-    Route::post('/favourites', [FavouriteController::class, 'store']);
-    Route::get('/favourites/{product_id}', [FavouriteController::class, 'show']);
-    Route::put('/favourites/{id}', [FavouriteController::class, 'update']);
-    Route::delete('/favourites/{product_id}', [FavouriteController::class, 'destroy']);
-
-});
-
 
 //order controller
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/orders', [OrderController::class, 'listOrders']);
+
     Route::post('orders/store', [OrderController::class, 'createOrder']);
     Route::get('/orders/{id}', [OrderController::class, 'showOrder']);
     Route::post('/orders/{id}/cancel', [OrderController::class, 'cancelOrder']);
 });
+
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::post('/profile', [ProfileController::class, 'updateprofile']);
+     Route::post('/changepassword', [ProfileController::class, 'changePassword']);
+});
+
+
+//  all site review
+Route::get('/site-reviews', [SiteReviewController::class, 'index']);

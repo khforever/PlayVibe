@@ -15,6 +15,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\SiteReviewController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -115,6 +116,16 @@ Route::controller(OrderController::class)->prefix('orders')->name('orders.')->gr
     Route::get('/', 'index')->name('index');
 
 });
+
+// //////////////////////////////////////////Site review  /////////////////////////////////////////////
+
+Route::controller(SiteReviewController::class)->prefix('site-reviews')->name('site-reviews.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('/approve/{id}', 'approve')->name('approve');
+
+
+});
+
 
 
 
