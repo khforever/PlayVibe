@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\ColorController;
 use App\Http\Controllers\Api\front\ProfileController;
+use App\Http\Controllers\Api\SiteReviewController;
 
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
@@ -84,7 +85,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/reviews', [ReviewController::class, 'store']);
     Route::put('/reviews/{id}', [ReviewController::class, 'update']);
  Route::delete('/reviews/{id}', [ReviewController::class, 'destroy']);
+
+
+//siteReview
+Route::post('/site-reviews', [SiteReviewController::class, 'store']);
+Route::get('/my-site-review', [SiteReviewController::class, 'show']);
+Route::put('/site-reviews/{id}', [SiteReviewController::class, 'update']);
+Route::delete('/site-reviews/{id}', [SiteReviewController::class, 'destroy']);
 });
+
+
 
 
 //Product Controller
@@ -110,3 +120,5 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 
+//  all site review
+Route::get('/site-reviews', [SiteReviewController::class, 'index']);
