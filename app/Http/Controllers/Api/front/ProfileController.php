@@ -48,4 +48,30 @@ class ProfileController extends Controller
         ]);
 
     }
+
+//change password
+     public function changePassword(Request $request)
+    {
+        $user = $request->user();
+
+      $data =  $request->validate([
+            'current password' => 'required',
+            'new password' => 'required|min:6',
+            'confirm password' => 'required|same:new password'
+        ]);
+
+       
+        if (!Hash::check($data['current password'], $user->password)) {
+            return response()->json([
+                'message' => 'Current password is incorrect'
+            ], 422);
+        }
+ 
+        $user->password = Hash::make($data['new password']);
+        $user->save();
+
+        return response()->json([
+            'message' => 'Password successfully updated'
+        ]);
+    }
 }
