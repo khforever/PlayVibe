@@ -1,27 +1,20 @@
 <?php
 
-use App\Http\Controllers\Api\AttributeController;
-use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\ColorController;
-use App\Http\Controllers\Api\FavouriteController;
-use App\Http\Controllers\Api\front\AuthController;
-use App\Http\Controllers\Api\front\CartController;
-use App\Http\Controllers\Api\OrderController;
-use App\Http\Controllers\Api\ProductController;
-use App\Http\Controllers\Api\ReviewController;
-use App\Http\Controllers\Api\SearchController;
-use App\Http\Controllers\Api\SizeController;
-use App\Http\Controllers\Api\SubCategoryController;
-use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\CategoryController;
-use App\Http\Controllers\Api\SubCategoryController;
 use App\Http\Controllers\Api\SizeController;
-use App\Http\Controllers\Api\ColorController;
-use App\Http\Controllers\Api\front\CartController;
-use App\Http\Controllers\Api\front\ProfileController;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\ColorController;
+use App\Http\Controllers\Api\ReviewController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\AttributeController;
+use App\Http\Controllers\Api\front\AuthController;
+use App\Http\Controllers\Api\front\CartController;
+use App\Http\Controllers\Api\SubCategoryController;
+use App\Http\Controllers\Api\SearchController;
+use App\Http\Controllers\Api\front\ProfileController;
+use App\Http\Controllers\Api\OrderController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -82,7 +75,7 @@ Route::prefix('attributes')->controller(AttributeController::class)->group(funct
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/cart', [CartController::class, 'index']);
     Route::post('/cart/add', [CartController::class, 'addItems']);
-    Route::put('/cart/item/{id}', [CartController::class,'updateItem']);
+    Route::put('/cart/item/{id}', [CartController::class, 'updateItem']);
     Route::delete('/cart/item/{id}', [CartController::class, 'removeItem']);
 
     //review
@@ -95,31 +88,23 @@ Route::middleware('auth:sanctum')->group(function () {
 //Product Controller
 Route::apiResource('products', ProductController::class);
 Route::delete('products/image/{id}', [ProductController::class, 'deleteImage']);
+
 //search
 Route::get('/search', [SearchController::class, 'search']);
-//favourite controller
-Route::middleware('auth:sanctum')->group(function () {
-
-    Route::get('/favourites', [FavouriteController::class, 'index']);
-    Route::post('/favourites', [FavouriteController::class, 'store']);
-    Route::get('/favourites/{product_id}', [FavouriteController::class, 'show']);
-    Route::put('/favourites/{id}', [FavouriteController::class, 'update']);
-    Route::delete('/favourites/{product_id}', [FavouriteController::class, 'destroy']);
-
-});
-
 
 //order controller
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/orders', [OrderController::class, 'listOrders']);
+
     Route::post('orders/store', [OrderController::class, 'createOrder']);
     Route::get('/orders/{id}', [OrderController::class, 'showOrder']);
     Route::post('/orders/{id}/cancel', [OrderController::class, 'cancelOrder']);
 });
-//updateprofile
-//
+
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/profile', [ProfileController::class, 'updateprofile']);
+
 });
+
+

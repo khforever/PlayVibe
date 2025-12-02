@@ -92,10 +92,10 @@ public function login(LoginRequest $request)
     return $this->responseApi(__('account is deleted'),null,401);
    }
 
-    // if ($user->is_verified !== 1)
-    // {
-    //     return $this->responseApi(__('user must be verify'));
-    // }
+    if ($user->is_verified !== 1)
+    {
+        return $this->responseApi(__('user must be verify'));
+    }
    $token = $user->createToken('auth_token')->plainTextToken;
 
     $user = fractal()
