@@ -48,7 +48,7 @@ class SubCategoryController extends Controller
 
         SubCategory::create($data);
 
-         if ($request->hasFile('image')) 
+         if ($request->hasFile('image'))
             {
                      $subcategory->addMedia($request->file('image'))
                      ->toMediaCollection('images');

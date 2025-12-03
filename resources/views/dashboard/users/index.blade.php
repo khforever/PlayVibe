@@ -78,7 +78,7 @@ Users
                                     <tr>
                                         <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                                         <td>
-                                            <img src="{{ asset('storage/' . $user->image) }}" alt="User Image"
+                                            <img src="{{  $user->image }}" alt="User Image"
                                                 width="50" height="50" class="rounded-circle"
                                                 style="object-fit: cover;">
                                         </td>

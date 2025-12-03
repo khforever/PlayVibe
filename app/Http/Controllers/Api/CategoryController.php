@@ -18,6 +18,10 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::latest()->get();
+          $categories->map(function ($cat) {
+        $cat->image = asset('assets/dashboard/categories/' . $cat->image);
+        return $cat;
+    });
         return response()->json($categories);
     }
 
@@ -61,7 +65,7 @@ class CategoryController extends Controller
         'success' => true,
         'data'=>['id'=>$category->id,
         'name'=>$category->name,
-        'image'=>$category->image]
+        'image'=>$category->image_url]
 
        ], 200);
        }

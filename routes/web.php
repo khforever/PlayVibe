@@ -1,18 +1,21 @@
 <?php
 
 use App\Http\Controllers\AttributeController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\SubCategoryController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ColorController;
-use App\Http\Controllers\SizeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductVariantController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
+use App\Http\Controllers\SizeController;
+use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\OrderController;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\SiteReviewController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -62,6 +65,15 @@ Route::controller(ColorController::class)->prefix('colors')->name('colors.')->gr
 
 
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+//review
+Route::controller(ReviewController::class)->prefix('comments')->name('comments.')->group(function () {
+    Route::get('/{id}', 'index')->name('index');
+    Route::delete('/destroy/{id}', 'destroy')->name('destroy');
+
+
+});
 // ////////////////////////////////////////sizes  /////////////////////////////////////////////
 Route::controller(SizeController::class)->prefix('sizes')->name('sizes.')->group(function () {
     Route::get('/', 'index')->name('index');
@@ -102,8 +114,19 @@ Route::controller(CartController::class)->prefix('cart')->name('cart.')->group(f
 // //////////////////////////////////////////Order  /////////////////////////////////////////////
 Route::controller(OrderController::class)->prefix('orders')->name('orders.')->group(function () {
     Route::get('/', 'index')->name('index');
+    Route::post('/deliverd/{id}', 'deliverd')->name('deliverd');
 
 });
+
+// //////////////////////////////////////////Site review  /////////////////////////////////////////////
+
+Route::controller(SiteReviewController::class)->prefix('site-reviews')->name('site-reviews.')->group(function () {
+    Route::get('/', 'index')->name('index');
+    Route::post('/approve/{id}', 'approve')->name('approve');
+
+
+});
+
 
 
 

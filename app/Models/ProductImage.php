@@ -12,4 +12,10 @@ class ProductImage extends Model
     protected $fillable = ['product_id', 'image_url', 'is_main'];
 
     public function product() { return $this->belongsTo(Product::class); }
+public function getImageUrlAttribute()
+{
+      return isset($this->attributes['image_url'])
+        ? asset($this->attributes['image_url'])
+        : null;
+}
 }

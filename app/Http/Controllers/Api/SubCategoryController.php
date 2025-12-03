@@ -63,14 +63,21 @@ class SubCategoryController extends Controller
     public function show(string $id)
     {
         $subcategory = SubCategory::findOrfail($id);
+       if(!$subcategory){
+        return response()->json([
+            'success' => false,
+            'message' => 'Subcategory not found',
+        ], 404);
+       }
+       else{
+        return response()->json([
+        'success' => true,
+        'data'=>['id'=>$subcategory->id,
+        'name'=>$subcategory->name,
+        'image'=>$subcategory->image]
 
-        $subcategory = fractal()
-                 ->item($subcategory)
-                 ->transformWith(new SubCategoryTransform())
-                 ->serializeWith(new ArraySerializer())
-                 ->toArray();
-
-        return  $this->responseApi('',$subcategory,200);
+       ], 200);
+       }
     }
 
     /**

@@ -62,13 +62,13 @@ Add Product
 
                                     {{-- Sub Category --}}
                                     <div class="form-group">
-                                        <label for="sub_category_id">Subcategory</label>
+                                        <label for="sub_category_id">Category-Subcategory</label>
                                         <select id="sub_category_id" name="sub_category_id" class="form-control border-primary" required>
                                             <option value="">-- Select Subcategory --</option>
                                             {{-- Dynamically load subcategories here --}}
                                             @foreach ($subCategories as $subCategory)
 
-                                            <option value="{{ $subCategory->id }}">{{ $subCategory->name }}</option>
+                                            <option value="{{ $subCategory->id }}"> {{ $subCategory->category->name }} — {{ $subCategory->name }}</option>
 
                                             @endforeach
                                         </select>

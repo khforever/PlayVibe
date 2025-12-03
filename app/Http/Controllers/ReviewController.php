@@ -10,9 +10,13 @@ class ReviewController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($productId)
     {
-        //
+         $reviews=Review::where('product_id', $productId)
+                     ->with('user')  
+                     ->latest()
+                     ->get();
+       return view('dashboard.productComments.index',compact('reviews'));
     }
 
     /**
@@ -20,7 +24,7 @@ class ReviewController extends Controller
      */
     public function create()
     {
-        //
+      
     }
 
     /**
@@ -58,8 +62,11 @@ class ReviewController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Review $review)
+    public function destroy($id)
     {
-        //
+        $review = Review::findOrFail($id);
+    $review->delete();
+
+    return redirect()->back()->with('success', 'Review deleted successfully');
     }
 }

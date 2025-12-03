@@ -12,4 +12,8 @@ class Category extends Model
     protected $fillable = ['name', 'image'];
 
     public function subCategories() { return $this->hasMany(SubCategory::class); }
+    public function getImageUrlAttribute()
+{
+    return $this->image ? asset("assets/dashboard/categories/".$this->image) : null;
+}
 }
