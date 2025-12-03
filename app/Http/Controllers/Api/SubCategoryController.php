@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StoreSubCategory;
 use App\Http\Requests\Api\UpdateSubCategory;
+use App\Models\Category;
 use App\Models\SubCategory;
 use App\Traits\Common;
 use App\Traits\Response;
@@ -19,11 +20,20 @@ class SubCategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-      public function index()
-{
-     $subcategories = SubCategory::latest()->get();
-        return response()->json($subcategories);;
-}
+     public function index(string $id)
+    {
+        $category = Category::with('subCategories')->find($id);
+
+        if (!$category)
+        {
+            return response()->json(['message' => 'Category not found'], 404);
+        }
+
+        return response()->json([
+            'category' => $category->name,
+            'sub_categories' => $category->subCategories
+        ]);
+    }
 
     
     /**
