@@ -111,6 +111,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('orders/store', [OrderController::class, 'createOrder']);
     Route::get('/orders/{id}', [OrderController::class, 'showOrder']);
     Route::post('/orders/{id}/cancel', [OrderController::class, 'cancelOrder']);
+    Route::get('/orders/delivered/{id}', [OrderController::class, 'getDeliveredOrders']);
+    Route::post('orders/reorder/{id}', [OrderController::class, 'reorder']);
+    Route::post('/orders/archive/{id}', [OrderController::class, 'archiveDeliveredOrder']);
+
+
+
 });
 
 Route::middleware('auth:sanctum')->group(function () {

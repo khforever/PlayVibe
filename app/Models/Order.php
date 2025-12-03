@@ -13,7 +13,7 @@ class Order extends Model
         'user_id', 'full_name', 'email', 'phone',
         'address', 'city', 'delivery_option', 'delivery_price',
         'notes', 'payment_method', 'location_lat', 'location_lng',
-        'subtotal', 'status'
+        'subtotal', 'status','is_archived'
     ];
 
     public const PENDING = 1;
