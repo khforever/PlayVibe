@@ -9,19 +9,10 @@ All Site siteReview
 @section('content')
 <div class="app-content content  ">
 
-<div class="container py-4">
+<div class="container-fluid py-4">
 
         <h2 class="fw-bold text-center mb-2  ">All Site Reviews</h2>
-
-@if(session('success'))
-        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
-            {{ session('success') }}
-            <button type="button" class="btn-close" data-bs-dismiss="alert">✖</button>
-        </div>
-    @endif
-
-
-
+       @include('dashboard.includes.messages')
     <div class="card shadow-sm">
         <div class="card-body p-0">
 
