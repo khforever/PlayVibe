@@ -51,7 +51,7 @@ Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
 
         Route::get('/category/{id}', 'index');
         Route::get('/{id}', 'show');
-       
+
     });
     // sizes
     Route::apiResource('sizes',SizeController::class);
@@ -121,3 +121,16 @@ Route::middleware('auth:sanctum')->group(function () {
 
 //  all site review
 Route::get('/site-reviews', [SiteReviewController::class, 'index']);
+
+
+
+//favourite controller
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::get('/favourites', [FavouriteController::class, 'index']);
+    Route::post('/favourites', [FavouriteController::class, 'store']);
+    Route::get('/favourites/{product_id}', [FavouriteController::class, 'show']);
+    Route::put('/favourites/{id}', [FavouriteController::class, 'update']);
+    Route::delete('/favourites/{product_id}', [FavouriteController::class, 'destroy']);
+
+});
