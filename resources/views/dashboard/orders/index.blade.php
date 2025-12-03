@@ -19,10 +19,13 @@ Orders
             @if($orders->count() > 0)
 
                 <table class="table table-bordered table-hover text-center align-middle">
+                 @include('dashboard.includes.messages')
+
                     <thead class="table-dark">
                         <tr>
                             <th>#</th>
                             <th>User</th>
+                            <th>Client Details</th>
                             <th>Order ID</th>
                             <th>Total Items</th>
                             <th>Subtotal</th>
@@ -30,6 +33,7 @@ Orders
                             <th>Total</th>
                             <th>Status</th>
                             <th>View Items</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
 
@@ -39,6 +43,10 @@ Orders
                                 <td>{{ $index + 1 }}</td>
 
                                 <td>{{ $order->user->name }}</td>
+                                <td>
+                                    {{ $order->address }}, {{ $order->city }}, {{ $order->country }}, {{ $order->phone }}
+
+                                </td>
 
                                 <td>{{ $order->id }}</td>
 
@@ -54,11 +62,11 @@ Orders
 
 
                                   @if ($order->status == 1)
-                                 <span class="badge bg-success">Active</span>
+                                 <span class="badge bg-warning">pendding</span>
                                   @elseif ($order->status == 2)
                                   <span class="badge bg-danger">Cancelled</span>
-                                    @else
-                                     <span class="badge bg-secondary">Unknown</span>
+                                  @elseif ($order->status == 3)
+                                  <span class="badge bg-success">Deliverd</span>
                                     @endif
 
 
@@ -71,6 +79,22 @@ Orders
                                         View Items
                                     </button>
                                 </td>
+                                <td>
+                                    <form action="{{ route('orders.deliverd', $order->id) }}" method="POST">
+                                    @csrf
+                                   @if($order->status == 1)
+                                     <button class="btn btn-sm btn-primary w-100">
+                                        deliverd
+                                     </button>
+                                     @else
+                                     <button class="btn btn-sm btn-black w-100" disabled>
+                                        deliverd
+                                     </button>
+                                   @endif
+                                </form>
+                                </td>
+
+
                             </tr>
 
                             {{-- Collapse Row --}}

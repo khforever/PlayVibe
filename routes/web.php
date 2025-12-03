@@ -114,6 +114,7 @@ Route::controller(CartController::class)->prefix('cart')->name('cart.')->group(f
 // //////////////////////////////////////////Order  /////////////////////////////////////////////
 Route::controller(OrderController::class)->prefix('orders')->name('orders.')->group(function () {
     Route::get('/', 'index')->name('index');
+    Route::post('/deliverd/{id}', 'deliverd')->name('deliverd');
 
 });
 
