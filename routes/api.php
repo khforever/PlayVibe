@@ -47,11 +47,10 @@ Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
 
 //subcategories
      Route::prefix('subcategories')->controller(SubCategoryController::class)->group(function () {
-        Route::post('/', 'store');
-        Route::get('/', 'index');
+
+        Route::get('/category/{id}', 'index');
         Route::get('/{id}', 'show');
-        Route::post('/{id}', 'update');
-        Route::delete('/{id}', 'destroy');
+       
     });
     // sizes
     Route::apiResource('sizes',SizeController::class);

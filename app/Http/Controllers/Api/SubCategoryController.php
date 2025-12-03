@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\StoreSubCategory;
 use App\Http\Requests\Api\UpdateSubCategory;
+use App\Models\Category;
 use App\Models\SubCategory;
 use App\Traits\Common;
 use App\Traits\Response;
@@ -19,30 +20,20 @@ class SubCategoryController extends Controller
     /**
      * Display a listing of the resource.
      */
-      public function index(Request $request)
-{
-    $search = $request->input('search');
-    $take = $request->input('take'); 
-    $skip = $request->input('skip');  
-    
-    $query = SubCategory::query();
-
-      if ($search)
+     public function index(string $id)
     {
-        $query->where('name','like', '%' . $search . '%');
+        $category = Category::with('subCategories')->find($id);
+
+        if (!$category)
+        {
+            return response()->json(['message' => 'Category not found'], 404);
+        }
+
+        return response()->json([
+            'category' => $category->name,
+            'sub_categories' => $category->subCategories
+        ]);
     }
-
-    $total = $query->count();
-
-    $subcategory = $query->skip($skip ?? 0)->take($take ?? $total)->get();
-
-     $subcategory =  fractal()->collection($subcategory)
-                  ->transformWith(new SubCategoryTransform())
-                   ->serializeWith(new ArraySerializer())
-                   ->toArray();
-
-    return $this->responseApi('', $subcategory, 200, ['count' =>$total]);
-}
 
     
     /**
