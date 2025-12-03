@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
- 
+
 class Order extends Model
 {
     use HasFactory;
@@ -19,7 +19,7 @@ class Order extends Model
     public const PENDING = 1;
 
     public const CANCELLED = 2;
-
+    public const DELEVERD = 3;
 
  public const STANDEARD =1;
   public const ECO = 2;
@@ -27,7 +27,7 @@ class Order extends Model
 
    public const CASH = 1;
 
-   
+
 
 
   public function user()

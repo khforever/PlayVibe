@@ -117,6 +117,13 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/profile', [ProfileController::class, 'updateprofile']);
      Route::post('/changepassword', [ProfileController::class, 'changePassword']);
+
+Route::get('/orders-latest', [ProfileController::class, 'latestOrder']);
+Route::delete('/order/{id}', [ProfileController::class, 'deleteOrder']);
+Route::post('/order/{id}/reorder', [ProfileController::class, 'reorder']);
+
+
+
 });
 
 
