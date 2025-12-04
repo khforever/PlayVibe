@@ -55,9 +55,8 @@ Edit Category
                                 </div>
 
                                 <div class="form-actions">
-                                    <button type="button" class="btn btn-warning mr-1">
-                                        <i class="ft-x"></i> Cancel
-                                    </button>
+                                <a  class="btn btn-warning mr-1" href="{{route('categories.index')}}"> <i class="ft-x" ></i> Cancel</a>
+
                                     <button type="submit" class="btn btn-primary">
                                         <i class="la la-check-square-o"></i> Update
                                     </button>

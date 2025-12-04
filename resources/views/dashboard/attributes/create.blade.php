@@ -22,7 +22,7 @@ Add Product
                         </div>
                     </div>
 
-<h1 style="font-weight: bold; color: red;  text-align: center;">Add Attribute for: {{ $product->name }}</h1> 
+<h1 style="font-weight: bold; color: red;  text-align: center;">Add Attribute for: {{ $product->name }}</h1>
 
                     <div class="card-content collapse show">
                         <div class="card-body">
@@ -105,9 +105,8 @@ Add Product
                                 </div>
 
                                 <div class="form-actions">
-                                    <button type="reset" class="btn btn-warning mr-1">
-                                        <i class="ft-x"></i> Cancel
-                                    </button>
+                                     <a class="btn btn-warning mr-1" href="{{route("products.index")}}"> <i class="ft-x" ></i> Cancel
+                                     </a>
                                     <button type="submit" class="btn btn-primary">
                                         <i class="la la-check-square-o"></i> Save
                                     </button>
