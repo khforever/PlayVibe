@@ -13,8 +13,10 @@ use App\Http\Controllers\{
     SizeController,
     SubCategoryController,
     UserController,
-    SiteReviewController
+    SiteReviewController,
+    DashboardController
 };
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -25,10 +27,8 @@ Route::get('/', function () {
 //      Auth + Verified Middleware
 // --------------------------------------
 Route::middleware(['auth', 'verified'])->group(function () {
-
-    Route::get('/dashboard', function () {
-        return view('dashboard.users.index');
-    })->name('dashboard');
+// dashboard
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
