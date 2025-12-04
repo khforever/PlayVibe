@@ -66,9 +66,10 @@ Add New SubCategory
                                 </div>
 
                                 <div class="form-actions">
-                                    <button type="reset" class="btn btn-warning mr-1">
-                                        <i class="ft-x"></i> Cancel
-                                    </button>
+                                <a  class="btn btn-warning mr-1" href="{{route('subcategory.index')}}"> <i class="ft-x" ></i> Cancel
+                                </a>
+
+
                                     <button type="submit" class="btn btn-primary">
                                         <i class="la la-check-square-o"></i> Create
                                     </button>

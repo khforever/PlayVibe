@@ -97,11 +97,15 @@ Products
                                                 </select>
                                             </div>
 
-                                            <div class="col-md-4 text-end">
-                                                <button type="submit" class="btn btn-primary mt-4">Add Variant</button>
+                                            <div class="col-md-4 text-end" >
+                                             <button type="submit" class="btn btn-primary mt-4">Add Variant</button>
+
+                                                <a  class="btn btn-warning mt-4" href="{{route("products.index")}}"> <i class="ft-x" ></i> Cancel
+                                               </a>
                                             </div>
 
-                                            
+
+
                                         </div>
                                     </form>
                                 </div>
