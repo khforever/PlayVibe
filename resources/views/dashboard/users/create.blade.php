@@ -167,7 +167,7 @@ Add New User
 
                                 <div class="form-actions">
                                     <a  class="btn btn-warning mr-1" href="{{route("users.index")}}"> <i class="ft-x" ></i> Cancel
-                                        </a>
+                                    </a>
                                     <button type="submit" class="btn btn-primary">
                                         <i class="la la-check-square-o"></i> Save
                                     </button>
