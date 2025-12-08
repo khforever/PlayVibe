@@ -39,7 +39,94 @@ public function listOrders()
 }
 
 
- public function createOrder(Request $request)
+public function createOrder(Request $request)
+{
+    $user = auth()->user(); 
+
+    if (!$user) {
+        return response()->json(['message' => 'You must login first'], 401);
+    }
+
+    $productId = $request->product_id;
+    $variantId = $request->variant_id;
+    $quantity  = $request->quantity ?? 1;
+
+    
+    $cart = Cart::firstOrCreate([
+        'user_id' => $user->id
+    ]);
+
+
+    $product = Product::where('id', $productId)->firstOrFail();
+
+    if ($product->price === null) 
+    {
+        return response()->json([
+            'message' => 'Product has no price. Please set product price.'
+        ], 400);
+    }
+
+
+    $price = $product->price;
+
+    if ($variantId) 
+    {
+        $variant = ProductVariant::where('id', $variantId)->firstOrFail();
+
+    }
+
+    $cartItem = CartItem::create([
+        'cart_id'            => $cart->id,
+        'product_id'         => $productId,
+        'product_variant_id' => $variantId,
+        'quantity'           => $quantity,
+        'price'              => $price,
+        'total_price'        => $price * $quantity,
+    ]);
+
+   
+    $order = Order::create([
+        'user_id'        => $user->id,
+        'full_name'      => $request->full_name,
+        'email'          => $request->email,
+        'phone'          => $request->phone,
+        'address'        => $request->address,
+        'city'           => $request->city,
+
+        'delivery_option'=> $request->delivery_option ?? 1,
+        'delivery_price' => $request->delivery_price ?? 0,
+        'notes'          => $request->notes,
+        'payment_method' => $request->payment_method ?? 1,
+
+        'location_lat'   => $request->location_lat,
+        'location_lng'   => $request->location_lng,
+
+        'subtotal'       => $cartItem->total_price,
+    ]);
+
+    
+    OrderItem::create([
+        'order_id'  => $order->id,
+        'product_id'=> $productId,
+        'quantity'  => $quantity,
+        'price'     => $price,
+        'total'     => $price * $quantity,
+    ]);
+
+   //order notification
+    $admins=User::where('user_type',1)->get();
+   foreach ($admins as $admin) {
+        $admin->notify(new NewOrderNotification($order));
+   }
+   
+    return response()->json([
+        'message' => 'Order created successfully',
+        'order'   => $order,
+    ]);
+}
+
+
+ <!-- public function createOrder(Request $request)
 {
     $user = auth()->user();
 
@@ -127,7 +214,7 @@ public function listOrders()
         'message' => 'Order created successfully',
         'order' => $order->load('items')
     ]);
-}
+} -->
 
 public function showOrder($id)
 {
