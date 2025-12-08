@@ -52,9 +52,7 @@ public function addItems(Request $request)
         $variant = null;
         $price = 0;
 
-        /**
-         * CASE 1: Variant موجود
-         */
+       
         if (!empty($item['product_variant_id'])) {
 
             $variant = ProductVariant::with('product')->find($item['product_variant_id']);
@@ -81,10 +79,7 @@ public function addItems(Request $request)
                 ]
             );
         }
-
-        /**
-         * CASE 2: Product بدون Variants
-         */
+ 
         else if (!empty($item['product_id'])) {
 
             $product = Product::find($item['product_id']);

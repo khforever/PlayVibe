@@ -14,22 +14,125 @@ use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Favourite;
 
 class ProductController extends Controller
 {
     /**
      * Display all products (GET /api/products)
      */
-    public function index()
-    {
-        $products = Product::with(['MainImage', 'images', 'subCategory','variants.color',
-    'variants.size'])->get();
+ 
+       public function index(Request $request)
+{
+    $pageIndex = $request->page_index ?? 1;
+    $itemCount = $request->item_count ?? 20;
+
+    $categoryId = $request->category_id;
+    $subCategoryId = $request->sub_category_id;
+    $sortBy = $request->sort_by ?? 'id';
+
+    $query = Product::with([
+        'MainImage',
+        'images',
+        'subCategory',
+        'variants.color',
+        'variants.size'
+    ]);
+
+    if ($categoryId) {
+        $query->whereHas('subCategory', function($q) use ($categoryId) {
+            $q->where('category_id', $categoryId);
+        });
+    }
+
+
+    if ($subCategoryId) {
+        $query->where('sub_category_id', $subCategoryId);
+    }
+
+    switch ($sortBy) {
+        case 'new':
+            $query->orderBy('id', 'desc');
+            break;
+
+        case 'alpha_up':
+            $query->orderBy('name', 'asc');
+            break;
+
+        case 'alpha_down':
+            $query->orderBy('name', 'desc');
+            break;
+
+        case 'price_up':
+            $query->orderBy('price', 'asc');
+            break;
+
+        case 'price_down':
+            $query->orderBy('price', 'desc');
+            break;
+
+        default:
+            
+            $query->orderBy('id', 'desc');
+            break;
+    }
+
+    // Pagination
+    $products = $query->paginate($itemCount, ['*'], 'page', $pageIndex);
+    
+    // fav
+    $data = $products->items();
+
+   $user = auth('sanctum')->user();
+
+     if ($user) {
+     foreach ($data as $product) {
+        $product->is_favourite =Favourite::where('user_id', $user->id)
+            ->where('product_id', $product->id)
+            ->exists();
+               }
+    } else {
+    foreach ($data as $product) {
+        $product->is_favourite = false;
+        }
+    }
+       
+
+
+    // if ($products->isEmpty()) {
+    //     return response()->json(['error' => 'No products found'], 404);
+    // }
+    
+    if ($products->isEmpty()) {
         return response()->json([
             'status' => true,
             'message' => 'Products retrieved successfully.',
-            'data' => $products,
+            'pagination' => [
+                'current_page' => $products->currentPage(),
+                'total_items' => $products->total(),
+                'items_per_page' => $products->perPage(),
+                'total_pages' => $products->lastPage(),
+                'has_more_pages' => $products->hasMorePages(),
+            ],
+            'data' =>[],
         ]);
     }
+    
+    return response()->json([
+        'status' => true,
+        'message' => 'Products retrieved successfully.',
+        'pagination' => [
+            'current_page' => $products->currentPage(),
+            'total_items' => $products->total(),
+            'items_per_page' => $products->perPage(),
+            'total_pages' => $products->lastPage(),
+            'has_more_pages' => $products->hasMorePages(),
+        ],
+        'data' => $products->items(),
+    ]);
+}
+
+    
 
     /**
      * Store a newly created product (POST /api/products)
@@ -108,13 +211,27 @@ class ProductController extends Controller
     $ratingStats = [];
     for ($i = 5; $i >= 1; $i--) {
         $ratingStats[$i] = $ratingStatsRaw[$i] ?? 0;
+        
     }
 
-    return response()->json([
+// Favourite
+
+$user = auth('sanctum')->user();
+
+$isFav = false;
+
+if ($user) {
+    $isFav =Favourite::where('user_id', $user->id)
+        ->where('product_id', $product->id)
+        ->exists();
+}
+
+$product->is_favourite = $isFav;
+   return response()->json([
     'status' => true,
     'data' => [
         'product' => $product,
-        'reviews' => $product->reviews, 
+        'reviews' => $product->reviews,
     ],
     'reviews_summary' => [
         'count' => $reviewsCount,

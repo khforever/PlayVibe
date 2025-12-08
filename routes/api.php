@@ -131,13 +131,12 @@ Route::get('/site-reviews', [SiteReviewController::class, 'index']);
 
 
 
-//favourite controller
+ //favourite controller
 Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/favourites', [FavouriteController::class, 'index']);
-    Route::post('/favourites', [FavouriteController::class, 'store']);
+    Route::post('/favourites/toggle/{product_id}', [FavouriteController::class, 'toggle']);
     Route::get('/favourites/{product_id}', [FavouriteController::class, 'show']);
-    Route::put('/favourites/{id}', [FavouriteController::class, 'update']);
-    Route::delete('/favourites/{product_id}', [FavouriteController::class, 'destroy']);
+   
 
 });
