@@ -61,6 +61,27 @@ class ProductController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
+
+
+//
+
+
+return response()->json([
+    'status' => true,
+    'data' => [
+        'product' => $product,
+        'reviews' => $product->reviews,
+    ],
+    'reviews_summary' => [
+        'count' => $reviewsCount,
+        'average' => $averageRating,
+        'stars' => $ratingStats
+    ],
+]);
+
+
+//
+
     }
 
     /**
@@ -92,7 +113,7 @@ class ProductController extends Controller
     $reviewsCount = $reviews->count();
 
     // متوسط التقييم
-    $averageRating = $reviewsCount > 0 
+    $averageRating = $reviewsCount > 0
         ? round($reviews->avg('rating'), 1)
         : 0;
 
@@ -114,7 +135,7 @@ class ProductController extends Controller
     'status' => true,
     'data' => [
         'product' => $product,
-        'reviews' => $product->reviews, 
+        'reviews' => $product->reviews,
     ],
     'reviews_summary' => [
         'count' => $reviewsCount,

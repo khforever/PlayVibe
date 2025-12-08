@@ -15,4 +15,17 @@ class DashboardController extends Controller
          $users = User::all();
         return view('dashboard.users.index',compact('users'));
     }
+
+
+ public function notifications()
+{
+    $user = auth()->user();
+
+    return view('layouts.dashboard._header', [
+        'notifications' => $user->notifications,
+        'unread' => $user->unreadNotifications,
+    ]);
 }
+
+}
+

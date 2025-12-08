@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\ProductVariant;
+use App\Notifications\NewOrderNotification;
+use App\Models\User;
 
 class OrderController extends Controller
 {
@@ -38,6 +40,8 @@ public function listOrders()
     ]);
 }
 
+
+// ////
 
  public function createOrder(Request $request)
 {
@@ -119,14 +123,25 @@ public function listOrders()
         ]);
     }
 
+
+
+
     // ---- Clear Cart ----
     CartItem::where('cart_id', $cart->id)->delete();
     $cart->delete();
 
+     //order notification
+    $admins=User::where('user_type',1)->get();
+   foreach ($admins as $admin) {
+        $admin->notify(new NewOrderNotification($order));
+   }
     return response()->json([
         'message' => 'Order created successfully',
         'order' => $order->load('items')
     ]);
+
+
+
 }
 
 public function showOrder($id)
@@ -153,10 +168,6 @@ public function showOrder($id)
 public function cancelOrder($id)
 {
     $user = auth()->user();
-
-
-
-
     $order = Order::where('id', $id)
         ->where('user_id', $user->id)
          ->where('status', Order::PENDING) // only pending orders can be cancelled
