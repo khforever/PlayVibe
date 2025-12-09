@@ -20,16 +20,81 @@ class ProductController extends Controller
     /**
      * Display all products (GET /api/products)
      */
-    public function index()
-    {
-        $products = Product::with(['MainImage', 'images', 'subCategory','variants.color',
-    'variants.size'])->get();
-        return response()->json([
-            'status' => true,
-            'message' => 'Products retrieved successfully.',
-            'data' => $products,
-        ]);
+   public function index(Request $request)
+{
+    $pageIndex = $request->page_index ?? 1;
+    $itemCount = $request->item_count ?? 20;
+
+    $categoryId = $request->category_id;
+    $subCategoryId = $request->sub_category_id;
+    $sortBy = $request->sort_by ?? 'id';
+
+    $query = Product::with([
+        'MainImage',
+        'images',
+        'subCategory',
+        'variants.color',
+        'variants.size'
+    ]);
+
+    if ($categoryId) {
+        $query->whereHas('subCategory', function($q) use ($categoryId) {
+            $q->where('category_id', $categoryId);
+        });
     }
+
+
+    if ($subCategoryId) {
+        $query->where('sub_category_id', $subCategoryId);
+    }
+
+     switch ($sortBy) {
+        case 'new':
+            $query->orderBy('id', 'desc');
+            break;
+
+        case 'alpha_up':
+            $query->orderBy('name', 'asc');
+            break;
+
+        case 'alpha_down':
+            $query->orderBy('name', 'desc');
+            break;
+
+        case 'price_up':
+            $query->orderBy('price', 'asc');
+            break;
+
+        case 'price_down':
+            $query->orderBy('price', 'desc');
+            break;
+
+        default:
+         
+            $query->orderBy('id', 'desc');
+            break;
+    }
+
+    // Pagination
+    $products = $query->paginate($itemCount, ['*'], 'page', $pageIndex);
+
+    if ($products->isEmpty()) {
+    return response()->json(['error' => 'No products found'], 404);
+    }
+    return response()->json([
+        'status' => true,
+        'message' => 'Products retrieved successfully.',
+        'pagination' => [
+            'current_page' => $products->currentPage(),
+            'total_items' => $products->total(),
+            'items_per_page' => $products->perPage(),
+            'total_pages' => $products->lastPage(),
+            'has_more_pages' => $products->hasMorePages(),
+        ],
+        'data' => $products->items(),
+    ]);
+}
+
 
     /**
      * Store a newly created product (POST /api/products)
