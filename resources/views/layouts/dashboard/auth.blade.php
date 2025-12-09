@@ -56,7 +56,7 @@ data-open="click" data-menu="vertical-menu-modern" data-col="1-column">
       <div class="navbar-container">
         <div class="collapse navbar-collapse justify-content-end" id="navbar-mobile">
           <ul class="nav navbar-nav">
-            <li class="nav-item"><a class="nav-link mr-2 nav-link-label" href="index.html"><i class="ficon ft-arrow-left"></i></a></li>
+            <li class="nav-item"><a class="nav-link mr-2 nav-link-label" href="javascript:history.back()"><i class="ficon ft-arrow-left"></i></a></li>
             <li class="dropdown nav-item">
               <a class="nav-link mr-2 nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-settings"></i></a>
             </li>
