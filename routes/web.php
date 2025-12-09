@@ -162,6 +162,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('update/{id}', 'update')->name('update');
     });
 
+// read all notification
+    Route::post('/admin/notifications/read-all', function () {
+    auth()->user()->unreadNotifications->markAsRead();
+    return back();
+})->name('admin.notifications.read-all');
+
 });
 
 require __DIR__ . '/auth.php';
