@@ -25,6 +25,7 @@ class SiteReviewController extends Controller
       public function store( StoreSiteReviewRequest $request) {
 
         $reviewData = $request->validated();
+
         $userID= auth()->id();
         if (!$userID) {
             return response()->json([

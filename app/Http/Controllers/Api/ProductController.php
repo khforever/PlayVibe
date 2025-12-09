@@ -14,13 +14,15 @@ use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Favourite;
 
 class ProductController extends Controller
 {
     /**
      * Display all products (GET /api/products)
      */
-   public function index(Request $request)
+ 
+       public function index(Request $request)
 {
     $pageIndex = $request->page_index ?? 1;
     $itemCount = $request->item_count ?? 20;
@@ -48,7 +50,7 @@ class ProductController extends Controller
         $query->where('sub_category_id', $subCategoryId);
     }
 
-     switch ($sortBy) {
+    switch ($sortBy) {
         case 'new':
             $query->orderBy('id', 'desc');
             break;
@@ -70,17 +72,47 @@ class ProductController extends Controller
             break;
 
         default:
-         
+            
             $query->orderBy('id', 'desc');
             break;
     }
 
     // Pagination
     $products = $query->paginate($itemCount, ['*'], 'page', $pageIndex);
+    
+    // fav
+    $data = $products->items();
 
-    if ($products->isEmpty()) {
-    return response()->json(['error' => 'No products found'], 404);
+   $user = auth('sanctum')->user();
+
+     if ($user) {
+     foreach ($data as $product) {
+        $product->is_favourite =Favourite::where('user_id', $user->id)
+            ->where('product_id', $product->id)
+            ->exists();
+               }
+    } else {
+    foreach ($data as $product) {
+        $product->is_favourite = false;
+        }
     }
+ 
+    
+    if ($products->isEmpty()) {
+        return response()->json([
+            'status' => true,
+            'message' => 'Products retrieved successfully.',
+            'pagination' => [
+                'current_page' => $products->currentPage(),
+                'total_items' => $products->total(),
+                'items_per_page' => $products->perPage(),
+                'total_pages' => $products->lastPage(),
+                'has_more_pages' => $products->hasMorePages(),
+            ],
+            'data' =>[],
+        ]);
+    }
+    
     return response()->json([
         'status' => true,
         'message' => 'Products retrieved successfully.',
@@ -94,6 +126,11 @@ class ProductController extends Controller
         'data' => $products->items(),
     ]);
 }
+
+   
+
+
+
 
 
     /**
@@ -126,6 +163,9 @@ class ProductController extends Controller
                 'error' => $e->getMessage(),
             ], 500);
         }
+
+
+
     }
 
     /**
@@ -133,7 +173,7 @@ class ProductController extends Controller
      */
    public function show($id)
 {
-    // تحميل المنتج مع كل العلاقات
+ 
     $product = Product::with([
         'images',
         'attributes',
@@ -150,18 +190,16 @@ class ProductController extends Controller
         ], 404);
     }
 
-    // الريفيوهات
     $reviews = $product->reviews;
 
-    // عدد الريفيوهات
     $reviewsCount = $reviews->count();
 
-    // متوسط التقييم
-    $averageRating = $reviewsCount > 0 
+  
+    $averageRating = $reviewsCount > 0
         ? round($reviews->avg('rating'), 1)
         : 0;
 
-    // إحصائيات عدد النجوم 1 → 5
+   
     $ratingStatsRaw = $product->reviews()
         ->selectRaw('rating, COUNT(*) as total')
         ->groupBy('rating')
@@ -169,17 +207,31 @@ class ProductController extends Controller
         ->get()
         ->mapWithKeys(fn($row) => [$row->rating => $row->total]);
 
-    // ترتيب الإحصائيات بشكل ثابت
+
     $ratingStats = [];
     for ($i = 5; $i >= 1; $i--) {
         $ratingStats[$i] = $ratingStatsRaw[$i] ?? 0;
+        
     }
 
-    return response()->json([
+// Favourite
+
+$user = auth('sanctum')->user();
+
+$isFav = false;
+
+if ($user) {
+    $isFav =Favourite::where('user_id', $user->id)
+        ->where('product_id', $product->id)
+        ->exists();
+}
+
+$product->is_favourite = $isFav;
+   return response()->json([
     'status' => true,
     'data' => [
         'product' => $product,
-        'reviews' => $product->reviews, 
+        'reviews' => $product->reviews,
     ],
     'reviews_summary' => [
         'count' => $reviewsCount,

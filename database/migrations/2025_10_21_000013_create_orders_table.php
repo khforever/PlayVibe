@@ -39,7 +39,9 @@ public function up()
 
 
         // Status
-        $table->integer('status')->default(1); // 1: Pending, 2: Cancelled,
+        $table->integer('status')->default(1); // 1: Pending, 2: Cancelled, 3: delivered
+        //is_archived
+        $table->boolean('is_archived')->default(0);
 
         $table->timestamps();
 
@@ -49,5 +51,9 @@ public function up()
 
     public function down(): void {
         Schema::dropIfExists('orders');
+        Schema::table('orders', function (Blueprint $table) {
+        $table->dropColumn('is_archived');
+    });
+
     }
 };

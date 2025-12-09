@@ -48,11 +48,10 @@ Route::delete('/categories/{category}', [CategoryController::class, 'destroy']);
 
 //subcategories
      Route::prefix('subcategories')->controller(SubCategoryController::class)->group(function () {
-        Route::post('/', 'store');
-        Route::get('/', 'index');
+
+        Route::get('/category/{id}', 'index');
         Route::get('/{id}', 'show');
-        Route::post('/{id}', 'update');
-        Route::delete('/{id}', 'destroy');
+
     });
     // sizes
     Route::apiResource('sizes',SizeController::class);
@@ -107,10 +106,17 @@ Route::get('/search', [SearchController::class, 'search']);
 //order controller
 
 Route::middleware('auth:sanctum')->group(function () {
-
+    Route::get('/orders', [OrderController::class, 'listOrders']);
     Route::post('orders/store', [OrderController::class, 'createOrder']);
     Route::get('/orders/{id}', [OrderController::class, 'showOrder']);
     Route::post('/orders/{id}/cancel', [OrderController::class, 'cancelOrder']);
+
+    Route::get('/orders/delivered/{id}', [OrderController::class, 'getDeliveredOrders']);
+    Route::post('orders/reorder/{id}', [OrderController::class, 'reorder']);
+    Route::post('/orders/archive/{id}', [OrderController::class, 'archiveDeliveredOrder']);
+
+
+
 });
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -122,3 +128,15 @@ Route::middleware('auth:sanctum')->group(function () {
 
 //  all site review
 Route::get('/site-reviews', [SiteReviewController::class, 'index']);
+
+
+
+ //favourite controller
+Route::middleware('auth:sanctum')->group(function () {
+
+    Route::get('/favourites', [FavouriteController::class, 'index']);
+    Route::post('/favourites/toggle/{product_id}', [FavouriteController::class, 'toggle']);
+    Route::get('/favourites/{product_id}', [FavouriteController::class, 'show']);
+   
+
+});

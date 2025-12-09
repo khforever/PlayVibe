@@ -10,9 +10,12 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\CartItem;
 use App\Models\ProductVariant;
+use App\Notifications\NewOrderNotification;
+use App\Models\User;
 
 class OrderController extends Controller
 {
+
 
 
 
@@ -38,6 +41,8 @@ public function listOrders()
     ]);
 }
 
+
+// ////
 
  public function createOrder(Request $request)
 {
@@ -119,14 +124,25 @@ public function listOrders()
         ]);
     }
 
+
+
+
     // ---- Clear Cart ----
     CartItem::where('cart_id', $cart->id)->delete();
     $cart->delete();
 
+     //order notification
+    $admins=User::where('user_type',1)->get();
+   foreach ($admins as $admin) {
+        $admin->notify(new NewOrderNotification($order));
+   }
     return response()->json([
         'message' => 'Order created successfully',
         'order' => $order->load('items')
     ]);
+
+
+
 }
 
 public function showOrder($id)
@@ -153,10 +169,6 @@ public function showOrder($id)
 public function cancelOrder($id)
 {
     $user = auth()->user();
-
-
-
-
     $order = Order::where('id', $id)
         ->where('user_id', $user->id)
          ->where('status', Order::PENDING) // only pending orders can be cancelled
@@ -176,8 +188,107 @@ public function cancelOrder($id)
         'message' => 'Order cancelled successfully',
         'order' => $order
     ]);
+
 }
 
 
 
+//prevoius orders
+// get delivered orders
+public function getDeliveredOrders($id)
+{
+
+ $user_id = auth()->user()->id;
+
+$orders = Order::with('items.product')
+    ->where('user_id', $user_id)
+    ->where('id',$id)
+    ->where('status', Order::DELIVERD)
+    ->where('is_archived', 0)
+    ->orderBy('id', 'desc')
+    ->get();
+
+if ($orders->isEmpty()) {
+    return response()->json([
+        'message' => 'You have no delivered orders yet'
+    ], 200);
+}
+
+return response()->json($orders);
+}
+
+
+
+//reorder
+
+public function reorder($id)
+{
+     $user_id = auth()->user()->id;
+
+    $oldOrder = Order::with('items')->where('id', $id)
+        ->where('user_id', $user_id)
+        ->where('status', Order::DELIVERD)
+        ->first();
+
+    if (!$oldOrder) {
+        return response()->json(['message' => 'Delivered order not found'], 404);
+    }
+
+    $newOrder = Order::create([
+        'user_id' => $user_id,
+        'full_name' => $oldOrder->full_name,
+        'email' => $oldOrder->email,
+        'phone' => $oldOrder->phone,
+        'address' => $oldOrder->address,
+        'city' => $oldOrder->city,
+        'delivery_option' => $oldOrder->delivery_option,
+        'delivery_price' => $oldOrder->delivery_price,
+        'payment_method' => $oldOrder->payment_method,
+        'notes' => $oldOrder->notes,
+        'location_lat' => $oldOrder->location_lat,
+        'location_lng' => $oldOrder->location_lng,
+        'subtotal' => $oldOrder->subtotal,
+        'status' => Order::PENDING,
+    ]);
+
+    foreach ($oldOrder->items as $item) {
+        OrderItem::create([
+            'order_id' => $newOrder->id,
+            'product_id' => $item->product_id,
+            'quantity' => $item->quantity,
+            'price' => $item->price,
+            'total' => $item->total
+        ]);
+    }
+
+    return response()->json([
+        'message' => 'Order reordered successfully',
+        'new_order' => $newOrder->load('items.product')
+    ]);
+}
+
+
+
+//archeived orders or deleted orders
+
+
+public function archiveDeliveredOrder($id)
+{
+    $user_id = auth()->user()->id;
+
+    $order = Order::where('id', $id)
+        ->where('user_id', $user_id)
+        ->where('status', Order::DELIVERD)
+        ->first();
+
+    if (!$order) {
+        return response()->json(['message' => 'Delivered order not found'], 404);
+    }
+
+    $order->update(['is_archived' => 1]);
+
+    return response()->json([
+        'message' => 'Order removed from history'
+    ]);
+}
 }

@@ -40,7 +40,7 @@ Add Product
                                @Method('put')
 
 
- 
+
 
                                 <div class="form-body">
                                     <h4 class="form-section"><i class="la la-cube"></i> Product attributes</h4>
@@ -113,9 +113,8 @@ Add Product
                                 </div>
 
                                 <div class="form-actions">
-                                    <button type="reset" class="btn btn-warning mr-1">
-                                        <i class="ft-x"></i> Cancel
-                                    </button>
+                                     <a class="btn btn-warning mr-1" href="{{route("products.index")}}"> <i class="ft-x" ></i> Cancel
+                                     </a>
                                     <button type="submit" class="btn btn-primary">
                                         <i class="la la-check-square-o"></i> Save
                                     </button>

@@ -65,10 +65,17 @@
 
 
         </ul>
-        <div class="pt-2"></div>
+
   {{--orders   --}}
-         <ul class="menu-content">
+         <ul class="menu-content pt-2">
             <li class="active"><a class="menu-item" href="{{route('orders.index')}}" data-i18n="nav.dash.ecommerce">Orders</a>
+            </li>
+
+
+        </ul>
+  {{--Site Review   --}}
+         <ul class="menu-content pt-2">
+            <li class="active"><a class="menu-item" href="{{route('site-reviews.index')}}" data-i18n="nav.dash.ecommerce">Site Reviews</a>
             </li>
 
 
