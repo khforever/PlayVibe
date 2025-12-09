@@ -19,16 +19,16 @@ use App\Http\Controllers\{
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // --------------------------------------
 //      Auth + Verified Middleware
 // --------------------------------------
 Route::middleware(['auth', 'verified'])->group(function () {
 // dashboard
-    Route::get('/dashboard', DashboardController::class)->name('dashboard');
+    Route::get('/', DashboardController::class)->name('dashboard');
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -57,7 +57,7 @@ table title
                             <label for="remember-me"> Remember Me</label>
                           </fieldset>
                         </div>
-                        <div class="col-md-6 col-12 text-center text-md-right"><a href="recover-password.html" class="card-link">Forgot Password?</a></div>
+                        <div class="col-md-6 col-12 text-center text-md-right"><a href="{{ route('password.request') }}" class="card-link">Forgot Password?</a></div>
                       </div>
                       <button type="submit" class="btn btn-danger btn-block btn-lg"><i class="ft-unlock"></i> Login</button>
                     </form>

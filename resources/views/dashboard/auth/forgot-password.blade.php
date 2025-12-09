@@ -30,10 +30,14 @@
                 </div>
                 <div class="card-content">
                   <div class="card-body">
-                    <form class="form-horizontal" action="login-simple.html" novalidate>
+                    <form class="form-horizontal" method="POST" action="{{ route('password.email') }}">
+                      @csrf
                       <fieldset class="form-group position-relative has-icon-left">
-                        <input type="email" class="form-control form-control-lg input-lg" id="user-email"
-                        placeholder="Your Email Address" required>
+                        <input type="email" class="form-control form-control-lg input-lg" id="user-email" name="email"
+                        placeholder="Your Email Address" value="{{ old('email') }}" required >
+                        <strong class="text-danger">@error('email')
+                          {{ $message }}
+                        @enderror</strong>
                         <div class="form-control-position">
                           <i class="ft-mail"></i>
                         </div>
@@ -43,8 +47,8 @@
                   </div>
                 </div>
                 <div class="card-footer border-0">
-                  <p class="float-sm-left text-center"><a href="login-simple.html" class="card-link">Login</a></p>
-                  <p class="float-sm-right text-center">New to Modern ? <a href="register-simple.html" class="card-link">Create Account</a></p>
+                  <p class="float-sm-left text-center"><a href="{{ route('login') }}" class="card-link">Login</a></p>
+                  <p class="float-sm-right text-center">New to Modern ? <a href="{{ route('register') }}" class="card-link">Create Account</a></p>
                 </div>
               </div>
             </div>
