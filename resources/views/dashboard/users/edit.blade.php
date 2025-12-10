@@ -191,7 +191,7 @@ Edit User
                                         <label>Current Profile Image</label>
                                         <div class="mb-2">
                                             @if($user->image)
-                                                <img src="{{  $user->image }}" alt="User Image"
+                                                <img src="{{ asset('storage/' . $user->image) }}" alt="User Image"
                                                      class="img-thumbnail" style="max-width: 150px; max-height: 150px;">
                                             @else
                                                 <p class="text-muted">No image uploaded</p>
