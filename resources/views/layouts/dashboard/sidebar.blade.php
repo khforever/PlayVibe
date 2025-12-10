@@ -53,8 +53,8 @@
          <ul class="menu-content">
             <li class="active"><a class="menu-item" href="{{route('users.index')}}" data-i18n="nav.dash.ecommerce">Users</a>
             </li>
-            <li><a class="menu-item" href="{{route('users.create')}}" data-i18n="nav.dash.crypto">Add User</a>
-            </li>
+            {{-- <li><a class="menu-item" href="{{route('users.create')}}" data-i18n="nav.dash.crypto">Add User</a>
+            </li> --}}
 
         </ul>
 

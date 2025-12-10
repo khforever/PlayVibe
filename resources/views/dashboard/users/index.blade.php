@@ -45,7 +45,7 @@ Users
                     <div class="card-content collapse show">
                         <div class="card-body card-dashboard">
                             <p class="card-text">All registered users in the system</p>
-                            <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Add User</a>
+                            {{-- <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Add User</a> --}}
 
 
                             <a href="{{ route('users.trash') }}" class="btn btn-warning mb-3">
@@ -61,7 +61,7 @@ Users
                                         <th>Phone</th>
                                         <th>Verified</th>
                                         <th>Show</th>
-                                        <th>Update</th>
+                                        {{-- <th>Update</th> --}}
                                         <th>Delete</th>
 
                                     </tr>
@@ -78,8 +78,8 @@ Users
                                     <tr>
                                         <td>{{ $user->first_name }} {{ $user->last_name }}</td>
                                         <td>
-                                            <img src="{{ asset('storage/' . $user->image) }}" alt="User Image"
-                                                width="80" height="80" class="rounded-circle"
+                                            <img src="{{  $user->image }}" alt="User Image"
+                                                width="50" height="50" class="rounded-circle"
                                                 style="object-fit: cover;">
                                         </td>
                                         <td>{{ $user->email }}</td>
@@ -127,7 +127,7 @@ Users
 
                                             </a>
                                         </td>
-
+{{-- 
                                         <td>
 
 
@@ -230,7 +230,10 @@ Users
                                             </a>
 
 
-                                        </td>
+                                        </td> --}}
+
+
+
                                         {{--
                                         <td>
                                             <a href="{{ route('users.edit', $user->id) }}">

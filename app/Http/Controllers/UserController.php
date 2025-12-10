@@ -40,12 +40,10 @@ class UserController extends Controller
         $data['password'] = Hash::make($data['password']);
 
         User::create($data);
-        // dd($data['image']);
-
 
         return redirect()->route('users.index') ;
 
-
+                // return redirect()->route('users.index')->with('success', 'User created successfully.');
 
     }
 

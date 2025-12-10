@@ -50,7 +50,7 @@ Deleted Users
                             </a>
 
 
-                            <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Add User</a>
+                            {{-- <a href="{{ route('users.create') }}" class="btn btn-primary mb-3">Add User</a> --}}
                             <table class="table table-striped table-bordered column-rendering">
                                 <thead>
                                     <tr>
