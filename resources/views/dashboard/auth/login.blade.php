@@ -52,10 +52,10 @@ table title
                       </fieldset>
                       <div class="form-group row">
                         <div class="col-md-6 col-12 text-center text-md-left">
-                          <fieldset>
+                          {{-- <fieldset>
                             <input type="checkbox" id="remember-me" class="chk-remember" name="remember">
                             <label for="remember-me"> Remember Me</label>
-                          </fieldset>
+                          </fieldset> --}}
                         </div>
                         <div class="col-md-6 col-12 text-center text-md-right"><a href="{{ route('password.request') }}" class="card-link">Forgot Password?</a></div>
                       </div>
