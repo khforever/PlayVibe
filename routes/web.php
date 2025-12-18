@@ -162,6 +162,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('update/{id}', 'update')->name('update');
     });
 
+
+
+////////show 404 page
+Route::fallback(function () {
+    return response()->view('dashboard.errors.404', [], 404);
+});
+
+//////
+
+
 // read all notification
     Route::post('/admin/notifications/read-all', function () {
     auth()->user()->unreadNotifications->markAsRead();

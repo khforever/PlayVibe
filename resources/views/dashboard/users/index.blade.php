@@ -56,7 +56,7 @@ Users
                                     <tr>
 
                                         <th>Full Name</th>
-                                        <th>Image</th>
+                                        {{-- <th>Image</th> --}}
                                         <th>Email</th>
                                         <th>Phone</th>
                                         <th>Verified</th>
@@ -77,11 +77,11 @@ Users
 
                                     <tr>
                                         <td>{{ $user->first_name }} {{ $user->last_name }}</td>
-                                        <td>
+                                        {{-- <td>
                                             <img src="{{  $user->image }}" alt="User Image"
                                                 width="50" height="50" class="rounded-circle"
                                                 style="object-fit: cover;">
-                                        </td>
+                                        </td> --}}
                                         <td>{{ $user->email }}</td>
                                         <td>{{$user->phone}}</td>
 
@@ -127,7 +127,7 @@ Users
 
                                             </a>
                                         </td>
-{{-- 
+{{--
                                         <td>
 
 

@@ -1,7 +1,7 @@
  @extends('layouts.dashboard.app')
 
 @section('title')
-Edit User
+Show User
 @endsection
 
 @section('content')
@@ -9,9 +9,16 @@ Edit User
     <section id="edit-user">
         <div class="row">
             <div class="col-md-8 offset-md-2">
+
+
+                <a href="{{ route('users.index') }}" class="btn btn-primary mb-3">
+                                <i class="fa fa-arrow-left"></i> Back to  Users
+                            </a>
+
+
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Edit User Information</h4>
+                        <h4 class="card-title">Show User Information</h4>
                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                         <div class="heading-elements">
                             <ul class="list-inline mb-0">
@@ -76,7 +83,7 @@ Edit User
                                             </div>
                                         </div>
 
-                                        <div class="col-md-6">
+                                        {{-- <div class="col-md-6">
                                             <div class="form-group">
                                                 <label for="role">User Role</label>
                                                 <select id="role" class="form-control" name="role">
@@ -84,13 +91,13 @@ Edit User
                                                     <option value="User">User</option>
                                                 </select>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </div>
 
 
 
           {{-- Current & New Image --}}
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <label>  Profile Image</label>
                                         <div class="mb-2">
                                             @if($user->image)
@@ -100,7 +107,7 @@ Edit User
                                                 <p class="text-muted">No image uploaded</p>
                                             @endif
                                         </div>
-                                    </div>
+                                    </div> --}}
 
 
 

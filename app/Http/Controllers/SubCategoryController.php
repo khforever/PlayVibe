@@ -33,48 +33,29 @@ class SubCategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+  
+     
+
     public function store(Request $request)
     {
         $data = $request->validate([
 
             'name'=>'required|string',
             'category_id'=>'required|integer|exists:categories,id',
-            'image' =>'required|mimes:png,jpg,jpeg|max:2048',
+            'image' =>'required|mimes:png,jpg,jpeg,webp|max:2048',
 
         ]);
         if($request->hasFile('image')){
             $data['image'] = $this->uploadFile($request->image,'assets/dashboard/subcategory');
         }
-
         SubCategory::create($data);
-
-         if ($request->hasFile('image'))
-            {
-                     $subcategory->addMedia($request->file('image'))
-                     ->toMediaCollection('images');
-            }
-
         return redirect()->route('subcategory.index');
     }
 
-//     public function store(Request $request)
-// {
-//     $data = $request->validate([
-//         'name'        => 'required|string',
-//         'category_id' => 'required|integer|exists:categories,id',
-//         'image'       => 'nullable|mimes:png,jpg,jpeg|max:2048',
-//     ]);
 
-//     $subcategory = SubCategory::create($data);
 
-//     if ($request->hasFile('image')) {
-//         $subcategory->addMedia($request->file('image'))
-//                     ->toMediaCollection('image');
-//     }
 
-//     return redirect()->route('subcategory.index');
-// }
-
+ 
 
     //edit
     public function edit(string $id)
