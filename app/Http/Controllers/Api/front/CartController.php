@@ -14,18 +14,18 @@ use App\Models\Product;
 
 class CartController extends Controller
 {
-    
+
+
 
 
 
 public function addItems(Request $request)
 {
-  
     $validator = Validator::make($request->all(), [
         'items' => 'required|array|min:1',
         'items.*.quantity' => 'required|integer|min:1',
 
-       
+
         'items.*.product_id' => 'required_without:items.*.product_variant_id|exists:products,id',
         'items.*.product_variant_id' => 'required_without:items.*.product_id|exists:product_variants,id',
     ]);
@@ -33,7 +33,7 @@ public function addItems(Request $request)
     if ($validator->fails()) {
         return response()->json([
             'message' => 'Validation failed',
-            'errors' => $validator->errors(),
+            'errors'  => $validator->errors(),
         ], 422);
     }
 
@@ -44,15 +44,15 @@ public function addItems(Request $request)
     ]);
 
     $addedItems = [];
-    $cartTotal = 0;
+    $cartTotal  = 0;
 
     foreach ($request->items as $item) {
 
         $product = null;
         $variant = null;
-        $price = 0;
+        $price   = 0;
 
-       
+
         if (!empty($item['product_variant_id'])) {
 
             $variant = ProductVariant::with('product')->find($item['product_variant_id']);
@@ -64,7 +64,9 @@ public function addItems(Request $request)
             }
 
             $product = $variant->product;
-            $price = $product->price;  
+            $price   = $product->price;
+
+
 
             $cartItem = CartItem::updateOrCreate(
                 [
@@ -72,15 +74,16 @@ public function addItems(Request $request)
                     'product_variant_id' => $variant->id,
                 ],
                 [
-                    'product_id' => $product->id,
-                    'quantity' => $item['quantity'],
-                    'price' => $price,
+                    'product_id'  => $product->id,
+                    'quantity'    => $item['quantity'],
+                    'price'       => $price,
                     'total_price' => $price * $item['quantity'],
                 ]
             );
         }
- 
-        else if (!empty($item['product_id'])) {
+
+
+        else {
 
             $product = Product::find($item['product_id']);
 
@@ -96,19 +99,24 @@ public function addItems(Request $request)
                 [
                     'cart_id' => $cart->id,
                     'product_id' => $product->id,
-                    'product_variant_id' => null, 
-                  
+                    'product_variant_id' => null,
                 ],
                 [
-                    'quantity' => $item['quantity'],
-                    'price' => $price,
+                    'quantity'    => $item['quantity'],
+                    'price'       => $price,
                     'total_price' => $price * $item['quantity'],
                 ]
             );
         }
 
-        $addedItems[] = $cartItem;
         $cartTotal += $cartItem->total_price;
+
+
+        $addedItems[] = CartItem::with([
+            'product',
+            'variant',
+            'variant.product'
+        ])->find($cartItem->id);
     }
 
     return response()->json([
@@ -122,25 +130,8 @@ public function addItems(Request $request)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-   
- 
-
-
 public function updateItem(Request $request, string $id)
 {
-   
     $validator = Validator::make($request->all(), [
         'quantity' => 'required|integer|min:1'
     ]);
@@ -148,78 +139,96 @@ public function updateItem(Request $request, string $id)
     if ($validator->fails()) {
         return response()->json([
             'message' => 'Validation failed',
-            'errors' => $validator->errors(),
-            'status' => false
+            'errors'  => $validator->errors(),
+            'status'  => false
         ], 422);
     }
 
-     
-    $item = CartItem::with(['product', 'variant.product'])->find($id);
+    $item = CartItem::with([
+        'product',
+        'variant',
+        'variant.product'
+    ])->find($id);
 
     if (!$item) {
         return response()->json([
             'message' => 'Cart item not found',
-            'status' => false
+            'status'  => false
         ], 404);
     }
 
-   
-    if ($item->variant) {
-        
-        $price = $item->variant->product->price;
-    } else {
-      
-        $price = $item->product->price;
-    }
- 
-    $item->quantity = $request->quantity;
-    $item->price = $price; 
-    
-    
-     $item->total_price = $price * $request->quantity;
+
+    $product = $item->variant
+        ? $item->variant->product
+        : $item->product;
+
+    $price = $product->price;
+
+    $item->quantity    = $request->quantity;
+    $item->price       = $price;
+    $item->total_price = $price * $request->quantity;
 
     if (!$item->save()) {
         return response()->json([
             'message' => 'Failed to update cart item',
-            'status' => false
+            'status'  => false
         ], 500);
     }
 
+
+    $item->load([
+        'product',
+        'variant',
+        'variant.product'
+    ]);
+
     return response()->json([
         'message' => 'Item updated successfully',
-        'status' => true,
-        'item' => $item
+        'status'  => true,
+        'item'    => $item
     ], 200);
 }
 
 
 
 
- 
-
- 
- public function removeItem(string $id)
+public function removeItem(string $id)
 {
-     $item = CartItem::with('cart')->find($id);
+    $item = CartItem::with([
+        'cart.items.product',
+        'cart.items.variant',
+        'cart.items.variant.product'
+    ])->find($id);
 
     if (!$item) {
         return response()->json([
             'message' => 'Cart item not found',
-            'status' => false
+            'status'  => false
         ], 404);
     }
 
-   
+    $cart = $item->cart;
+
     if (!$item->delete()) {
         return response()->json([
             'message' => 'Failed to delete cart item',
-            'status' => false
+            'status'  => false
         ], 500);
     }
 
+     $cart->load([
+        'items.product',
+        'items.variant',
+        'items.variant.product'
+    ]);
+
+    $cartTotal = $cart->items->sum('total_price');
+
     return response()->json([
         'message' => 'Item removed successfully',
-        'status' => true
+        'status'  => true,
+        'total_cart_price' => $cartTotal,
+        'items' => $cart->items
     ], 200);
 }
 
@@ -230,29 +239,39 @@ public function updateItem(Request $request, string $id)
 
 
 
-
- 
-public function index(Request $request)
+public function getCartItems(Request $request)
 {
     $userId = $request->user()->id;
 
-   
-    $cart = Cart::firstOrCreate(['user_id' => $userId]);
+    $cart = Cart::with([
+        'items.product',
+        'items.variant',
+        'items.variant.product'
+    ])->where('user_id', $userId)->first();
 
-  
-    $items = $cart->items()->with('product')->get();
+    if (!$cart || $cart->items->isEmpty()) {
+        return response()->json([
+            'message' => 'Cart is empty',
+            'status'  => true,
+            'total_cart_price' => 0,
+            'items' => []
+        ], 200);
+    }
 
-   
-    $total = $items->sum(function ($item) {
-        return $item->product ? $item->product->price * $item->quantity : 0;
-    });
+    $totalCartPrice = $cart->items->sum('total_price');
+
 
     return response()->json([
+        'message' => 'Cart items retrieved successfully',
+        'status'  => true,
         'cart_id' => $cart->id,
-        'total'   => $total,
-        'items'   => $items,
-    ]);
+        'total_cart_price' => $totalCartPrice,
+        'items' => $cart->items
+    ], 200);
 }
+
+
+
 
 
 

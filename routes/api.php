@@ -75,7 +75,7 @@ Route::prefix('attributes')->controller(AttributeController::class)->group(funct
 
 //cart controller
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/cart', [CartController::class, 'index']);
+    Route::get('/cart', [CartController::class, 'getCartItems']);
     Route::post('/cart/add', [CartController::class, 'addItems']);
     Route::put('/cart/item/{id}', [CartController::class, 'updateItem']);
     Route::delete('/cart/item/{id}', [CartController::class, 'removeItem']);
@@ -137,6 +137,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/favourites', [FavouriteController::class, 'index']);
     Route::post('/favourites/toggle/{product_id}', [FavouriteController::class, 'toggle']);
     Route::get('/favourites/{product_id}', [FavouriteController::class, 'show']);
-   
+
 
 });
