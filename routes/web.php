@@ -165,9 +165,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
 
 ////////show 404 page
-Route::fallback(function () {
-    return response()->view('dashboard.errors.404', [], 404);
-});
+// Route::fallback(function () {
+//     return response()->view('dashboard.errors.404', [], 404);
+// });
 
 //////
 
