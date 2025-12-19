@@ -11,15 +11,144 @@ use Exception;
 
 use Illuminate\Support\Facades\Validator;
 use App\Models\Product;
+use App\Models\Favourite;
 
 class CartController extends Controller
 {
 
 
-
-
-
 public function addItems(Request $request)
+{
+    $validator = Validator::make($request->all(), [
+        'items' => 'required|array|min:1',
+        'items.*.quantity' => 'required|integer|min:1',
+        'items.*.product_id' => 'required_without:items.*.product_variant_id|exists:products,id',
+        'items.*.product_variant_id' => 'required_without:items.*.product_id|exists:product_variants,id',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'status'  => false,
+            'message' => 'Validation failed',
+            'errors'  => $validator->errors(),
+        ], 422);
+    }
+
+    $user = $request->user();
+
+
+    $cart = Cart::where('user_id', $user->id)->latest()->first();
+
+    if (!$cart) {
+        $cart = Cart::create([
+            'user_id' => $user->id
+        ]);
+    }
+
+    $addedItems = [];
+    $cartTotal  = 0;
+
+    foreach ($request->items as $item) {
+
+        $product = null;
+        $variant = null;
+
+
+        if (!empty($item['product_variant_id'])) {
+
+            $variant = ProductVariant::with('product')->find($item['product_variant_id']);
+
+            if (!$variant || !$variant->product) {
+                return response()->json([
+                    'status'  => false,
+                    'message' => 'Variant or product not found'
+                ], 404);
+            }
+
+            $product = $variant->product;
+            $price   = $product->price;
+
+            $cartItem = CartItem::updateOrCreate(
+                [
+                    'cart_id' => $cart->id,
+                    'product_variant_id' => $variant->id,
+                ],
+                [
+                    'product_id'  => $product->id,
+                    'quantity'    => $item['quantity'],
+                    'price'       => $price,
+                    'total_price' => $price * $item['quantity'],
+                ]
+            );
+        }
+
+
+        else {
+
+            $product = Product::find($item['product_id']);
+
+            if (!$product) {
+                return response()->json([
+                    'status'  => false,
+                    'message' => 'Product not found'
+                ], 404);
+            }
+
+            $price = $product->price;
+
+            $cartItem = CartItem::updateOrCreate(
+                [
+                    'cart_id' => $cart->id,
+                    'product_id' => $product->id,
+                    'product_variant_id' => null,
+                ],
+                [
+                    'quantity'    => $item['quantity'],
+                    'price'       => $price,
+                    'total_price' => $price * $item['quantity'],
+                ]
+            );
+        }
+
+
+        $cartItem = CartItem::with([
+            'product' => function ($q) {
+                $q->with([
+                    'images',
+                    'attributes',
+                    'subCategory',
+                    'variants.color',
+                    'variants.size'
+                ]);
+            },
+            'variant',
+            'variant.product.images',
+            'variant.product.subCategory'
+        ])->find($cartItem->id);
+
+
+        if ($cartItem->product) {
+            $cartItem->product->is_favourite = Favourite::where('user_id', $user->id)
+                ->where('product_id', $cartItem->product->id)
+                ->exists();
+        }
+
+        $cartTotal += $cartItem->total_price;
+        $addedItems[] = $cartItem;
+    }
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Items added successfully',
+        'cart_id' => $cart->id,
+        'total_cart_price' => $cartTotal,
+        'items' => $addedItems
+    ], 201);
+}
+
+
+
+public function addItems2(Request $request)
 {
     $validator = Validator::make($request->all(), [
         'items' => 'required|array|min:1',
@@ -234,12 +363,80 @@ public function removeItem(string $id)
 
 
 
-
-
-
-
-
 public function getCartItems(Request $request)
+{
+    $user = $request->user();
+
+
+    $cart = Cart::where('user_id', $user->id)
+        ->latest()
+        ->first();
+
+    if (!$cart) {
+        return response()->json([
+            'status' => true,
+            'message' => 'Cart is empty',
+            'cart_id' => null,
+            'total_cart_price' => 0,
+            'items' => []
+        ], 200);
+    }
+
+
+    $cart->load([
+        'items' => function ($q) {
+            $q->with([
+                'product' => function ($q) {
+                    $q->with([
+                        'images',
+                        'attributes',
+                        'subCategory',
+                        'variants.color',
+                        'variants.size'
+                    ]);
+                },
+                'variant',
+                'variant.product.images',
+                'variant.product.subCategory'
+            ]);
+        }
+    ]);
+
+    if ($cart->items->isEmpty()) {
+        return response()->json([
+            'status' => true,
+            'message' => 'Cart is empty',
+            'cart_id' => $cart->id,
+            'total_cart_price' => 0,
+            'items' => []
+        ], 200);
+    }
+
+    
+    foreach ($cart->items as $item) {
+        if ($item->product) {
+            $item->product->is_favourite = Favourite::where('user_id', $user->id)
+                ->where('product_id', $item->product->id)
+                ->exists();
+        }
+    }
+
+    $totalCartPrice = $cart->items->sum('total_price');
+
+    return response()->json([
+        'status' => true,
+        'message' => 'Cart items retrieved successfully',
+        'cart_id' => $cart->id,
+        'total_cart_price' => $totalCartPrice,
+        'items' => $cart->items
+    ], 200);
+}
+
+
+
+
+
+public function getCartItems2(Request $request)
 {
     $userId = $request->user()->id;
 
